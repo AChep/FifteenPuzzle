@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="imageview_longpressed_holo" type="drawable">#CC0099CC</item>
+    <item name="imageview_pressed_holo_dark" type="drawable">#9933B5E5</item> 
+    <item name="imageview_focused_holo_dark" type="drawable">#4D33B5E5</item> 
+    <item name="imageview_disabled_holo_dark" type="drawable">#80000000</item> 
+</resources>

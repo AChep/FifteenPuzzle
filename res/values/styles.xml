@@ -1,0 +1,11 @@
+<resources>
+
+    <style name="BaseTheme" parent="android:Theme"></style>
+
+    <style name="GameActivity" parent="BaseTheme">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@drawable/activity_background</item>
+    </style>
+    <style name="Settings" parent="BaseTheme"></style>
+
+</resources>

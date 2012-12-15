@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="action_bar_divider">#10FFFFFF</color>
+    <color name="action_bar_background">#000000</color>
+    <color name="action_bar_sub_background">#40000000</color>
+    
+    <color name="activity_background">#042029</color>
+
+</resources>
