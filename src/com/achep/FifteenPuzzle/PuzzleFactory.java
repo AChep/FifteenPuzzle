@@ -60,6 +60,9 @@ public class PuzzleFactory {
 		return bitmap;
 	}
 
+	// TODO: Delete it
+	// TEST COMMIT FROM LINUX =)
+
 	public static Bitmap createChipBitmap(int number, Bitmap bitmapBase) {
 		Bitmap bitmap = Bitmap.createBitmap(bitmapBase);
 		Canvas canvas = new Canvas(bitmap);
