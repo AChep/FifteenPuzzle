@@ -1,7 +1,6 @@
 package com.achep.FifteenPuzzle;
 
-import com.achep.FifteenPuzzle.GameLogic.OnPuzzleSolvedListener;
-import com.achep.FifteenPuzzle.GameView.OnInitializedListener;
+import com.achep.FifteenPuzzle.GameView.ActivityInterface;
 import com.achep.FifteenPuzzle.preferences.Settings;
 import com.achep.FifteenPuzzle.stats.DBHelper;
 
@@ -26,7 +25,7 @@ import android.widget.PopupWindow;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-public class GameActivity extends Activity implements OnPuzzleSolvedListener {
+public class GameActivity extends Activity implements ActivityInterface {
 
 	private GameView mGameView;
 	private ImageView mShuffleButton;
@@ -43,13 +42,8 @@ public class GameActivity extends Activity implements OnPuzzleSolvedListener {
 		setContentView(R.layout.activity_game);
 
 		mGameView = (GameView) findViewById(R.id.game_view);
-		mGameView.setOnInitializedListener(new OnInitializedListener() {
+		mGameView.setActivityInterface(this);
 
-			@Override
-			public void OnInitialized(GameLogic gameLogic) {
-				gameLogic.setOnPuzzleSolvedListener(GameActivity.this);
-			}
-		});
 		mTitleText = (TextView) findViewById(R.id.title);
 		mShuffleButton = (ImageView) findViewById(R.id.shuffle);
 		mShuffleButton.setOnClickListener(new OnClickListener() {
@@ -81,23 +75,22 @@ public class GameActivity extends Activity implements OnPuzzleSolvedListener {
 		mHandler.post(new Runnable() {
 
 			private long timeOld = -1;
+			private String titleLabel = getResources().getString(
+					R.string.game_time)
+					+ ": ";
 
 			@Override
 			public void run() {
 				if (!mDraw)
 					return;
 
-				if (mGameView.needsUpdate())
-					mGameView.invalidate();
-				long time = mGameView.getGameLogic().getTime();
-				if (time != -1) {
-					time = Utils.div(time, 1000);
-					if (time != timeOld) {
-						mTitleText.setText(getResources().getString(
-								R.string.game_time)
-								+ ": " + Utils.getFormatedTime(time));
-						timeOld = time;
-					}
+				if (mGameView.isChanged())
+					mGameView.postInvalidate();
+				long time = mGameView.getGameTimeMillis();
+				time = Utils.div(time, 1000);
+				if (time != timeOld) {
+					mTitleText.setText(titleLabel + Utils.getFormatedTime(time));
+					timeOld = time;
 				}
 
 				mHandler.postDelayed(this, 15);
@@ -110,9 +103,18 @@ public class GameActivity extends Activity implements OnPuzzleSolvedListener {
 		super.onDetachedFromWindow();
 		mDraw = false;
 	}
+	
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		
+		mGameView.recycleBitmaps();
+	}
 
 	@Override
-	public void OnPuzzleSolved(int time, int steps, int length) {
+	public void onGameOver(int steps, long timeMillis, int length) {
+		int time = (int) Utils.div(timeMillis, 1000);
+		
 		final LayoutInflater inflater = (LayoutInflater) this
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		LinearLayout ll = (LinearLayout) inflater.inflate(
@@ -134,15 +136,15 @@ public class GameActivity extends Activity implements OnPuzzleSolvedListener {
 			}
 		});
 
+		final SharedPreferences dsprefs = PreferenceManager
+				.getDefaultSharedPreferences(this);
+		String userName = dsprefs.getString(Settings.Keys.PREF_USER_NAME,
+				getResources().getString(R.string.settings_nickname_default));
+
+		// Put scores to database
 		DBHelper dbOpenHelper = new DBHelper(GameActivity.this);
 		SQLiteDatabase db = dbOpenHelper.getWritableDatabase();
 		ContentValues cv = new ContentValues();
-
-		final SharedPreferences dsprefs = PreferenceManager
-				.getDefaultSharedPreferences(this);
-
-		String userName = dsprefs.getString(Settings.Keys.PREF_USER_NAME,
-				getResources().getString(R.string.settings_nickname_default));
 
 		cv.put(DBHelper.NICKNAME, userName);
 		cv.put(DBHelper.LENGTH, length);
@@ -160,12 +162,11 @@ public class GameActivity extends Activity implements OnPuzzleSolvedListener {
 			super.onPreExecute();
 			mShuffleButton.setVisibility(View.GONE);
 			mShuffleProgress.setVisibility(View.VISIBLE);
-			mGameView.setTouchAvailabel(false);
 		}
 
 		@Override
 		protected String doInBackground(String... aurl) {
-			mGameView.getGameLogic().start();
+			mGameView.newGame();
 			return null;
 		}
 
@@ -173,7 +174,6 @@ public class GameActivity extends Activity implements OnPuzzleSolvedListener {
 		protected void onPostExecute(String str) {
 			mShuffleButton.setVisibility(View.VISIBLE);
 			mShuffleProgress.setVisibility(View.GONE);
-			mGameView.setTouchAvailabel(true);
 		}
 	}
 

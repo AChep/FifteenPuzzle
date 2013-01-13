@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012 AChep@xda <artemchep@gmail.com>
+ * Copyright (C) 2012-2013 AChep@xda <artemchep@gmail.com>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -111,18 +111,13 @@ class Coords {
 		return convert2dToLine(convertRealTo2d(coordsReal, chipSize), length);
 	}
 
-	public static int[] roundReal(int[] coords, int length, int chipSize) {
-		for (int y0 = 0; y0 < length; y0++) {
-			for (int x0 = 0; x0 < length; x0++) {
-				// Get perfect position
-				int[] real = convert2dToReal(new int[] { x0, y0 }, chipSize);
-				if (Math.abs(coords[0] - real[0]) < chipSize / 2 + 2
-						&& Math.abs(coords[1] - real[1]) < chipSize / 2 + 2) {
-					// If that's looks like real one - return
-					return new int[] { real[0], real[1] };
-				}
-			}
-		}
-		return null;
+	public static int[] roundRealTo2d(int[] coords, int length, int chipSize) {
+		if (coords[0] < 0 || coords[1] < 0)
+			return null;
+		int[] coords2d = convertRealTo2d(new int[] { coords[0] + chipSize / 2,
+				coords[1] + chipSize / 2 }, chipSize);
+		if (coords2d[0] >= length || coords2d[1] >= length)
+			return null;
+		return coords2d;
 	}
 }

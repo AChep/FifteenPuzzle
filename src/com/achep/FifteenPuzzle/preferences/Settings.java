@@ -27,6 +27,8 @@ import android.preference.PreferenceActivity;
 public class Settings extends PreferenceActivity implements
 		OnPreferenceChangeListener {
 
+	public static final String SHARED_PREFERENCES_FILE = "preferences2";
+
 	public static class Keys {
 		public final static String SPREF_PUZZLE_LENGTH = "spref_puzzle_length";
 		public final static String PREF_USER_NAME = "pref_user_name";
