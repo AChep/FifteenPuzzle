@@ -16,8 +16,6 @@
 
 package com.achep.FifteenPuzzle;
 
-import java.util.Arrays;
-
 public class Utils {
 
 	public static int alignToRange(int value, int min, int max) {
@@ -40,84 +38,77 @@ public class Utils {
 		return Utils.fixTwoZero(Utils.div(s, 60) % 60) + ":"
 				+ Utils.fixTwoZero(s % 60);
 	}
-
-	public static int[] findElement(int[] array, int[] value) {
-		int[] id = new int[value.length];
-		int length = value.length;
-		Arrays.fill(id, -1); // cause exception if missed
-
-		// let's find the elements!
-		for (int i = 0; i < array.length; i++) {
-			for (int j = 0; j < value.length; j++) {
-				if (array[i] == value[j]) {
-					id[j] = i;
-
-					// Kinda optimization
-					length--;
-					if (length == 0)
-						break;
-				}
-			}
-			if (length == 0)
-				break; // Cheers!
-		}
-
-		// Okay, happy end
-		return id;
-	}
 }
 
 class Coords {
-	public static int[] convertLineTo2d(int[] coordsLine, int length) {
-		int[] coords2d = new int[coordsLine.length * 2];
+
+	/**
+	 * Output array requires length >= 2x
+	 */
+	public static void convertLineTo2d(int[] coordsLine, int length,
+			int[] coords2d) {
 		for (int i = 0; i < coordsLine.length; i++) {
 			coords2d[i * 2] = coordsLine[i] % length;
 			coords2d[i * 2 + 1] = (int) Utils.div(coordsLine[i], length);
 		}
-		return coords2d;
 	}
 
-	public static int[] convert2dToLine(int[] coords2d, int length) {
-		int[] coordsLine = new int[coords2d.length / 2];
+	/**
+	 * Output array requires length >= 0.5x
+	 */
+	public static void convert2dToLine(int[] coords2d, int length,
+			int[] coordsLine) {
 		for (int i = 0; i < coordsLine.length; i++) {
 			coordsLine[i] = coords2d[i * 2 + 1] * length + coords2d[i * 2];
 		}
-		return coordsLine;
 	}
 
-	public static int[] convertRealTo2d(int[] coordsReal, int chipSize) {
-		int[] coords2d = new int[coordsReal.length];
+	/**
+	 * Output array requires length >= 1x
+	 */
+	public static void convertRealTo2d(int[] coordsReal, int chipSize,
+			int[] coords2d) {
 		for (int i = 0; i < coordsReal.length; i++) {
 			coords2d[i] = (coordsReal[i] - chipSize / 2) / (chipSize + 1);
 		}
-		return coords2d;
 	}
 
-	public static int[] convert2dToReal(int[] coords2d, int chipSize) {
-		int[] coordsReal = new int[coords2d.length];
+	/**
+	 * Output array requires length >= 1x
+	 */
+	public static void convert2dToReal(int[] coords2d, int chipSize,
+			int[] coordsReal) {
 		for (int i = 0; i < coords2d.length; i++) {
 			coordsReal[i] = chipSize / 2 + coords2d[i] * chipSize + coords2d[i];
 		}
-		return coordsReal;
 	}
 
-	public static int[] convertLineToReal(int[] coordsLine, int length,
-			int chipSize) {
-		return convert2dToReal(convertLineTo2d(coordsLine, length), chipSize);
+	/**
+	 * Output array requires length >= 2x
+	 */
+	public static void convertLineToReal(int[] coordsLine, int length,
+			int chipSize, int[] coordsReal) {
+		convertLineTo2d(coordsLine, length, coordsReal);
+		convert2dToReal(coordsReal, chipSize, coordsReal);
 	}
 
-	public static int[] convertRealToLine(int[] coordsReal, int length,
-			int chipSize) {
-		return convert2dToLine(convertRealTo2d(coordsReal, chipSize), length);
+	/**
+	 * Output array requires length >= 0.5x
+	 */
+	public static void convertRealToLine(int[] coordsReal, int length,
+			int chipSize, int[] coordsLine) {
+		convertRealTo2d(coordsReal, chipSize, coordsReal);
+		convert2dToLine(coordsReal, length, coordsLine);
 	}
 
-	public static int[] roundRealTo2d(int[] coords, int length, int chipSize) {
-		if (coords[0] < 0 || coords[1] < 0)
-			return null;
-		int[] coords2d = convertRealTo2d(new int[] { coords[0] + chipSize / 2,
-				coords[1] + chipSize / 2 }, chipSize);
-		if (coords2d[0] >= length || coords2d[1] >= length)
-			return null;
-		return coords2d;
+	/**
+	 * Output array requires length >= 1x
+	 */
+	public static void roundRealTo2d(int[] coords, int chipSize,
+			int[] coords2d) {
+		for (int i = 0; i < coords.length; i++) {
+			coords2d[i] = coords[i] + chipSize / 2;
+		}
+		convertRealTo2d(coords2d, chipSize, coords2d);
 	}
 }
