@@ -45,22 +45,14 @@ class Coords {
 	/**
 	 * Output array requires length >= 2x
 	 */
-	public static void convertLineTo2d(int[] coordsLine, int length,
+	public static void convertLineTo2d(int coordsLine, int length,
 			int[] coords2d) {
-		for (int i = 0; i < coordsLine.length; i++) {
-			coords2d[i * 2] = coordsLine[i] % length;
-			coords2d[i * 2 + 1] = (int) Utils.div(coordsLine[i], length);
-		}
+		coords2d[0] = coordsLine % length;
+		coords2d[1] = (coordsLine - coords2d[0]) / length;
 	}
 
-	/**
-	 * Output array requires length >= 0.5x
-	 */
-	public static void convert2dToLine(int[] coords2d, int length,
-			int[] coordsLine) {
-		for (int i = 0; i < coordsLine.length; i++) {
-			coordsLine[i] = coords2d[i * 2 + 1] * length + coords2d[i * 2];
-		}
+	public static int convert2dToLine(int[] coords2d, int length) {
+		return coords2d[1] * length + coords2d[0];
 	}
 
 	/**
@@ -68,9 +60,10 @@ class Coords {
 	 */
 	public static void convertRealTo2d(int[] coordsReal, int chipSize,
 			int[] coords2d) {
-		for (int i = 0; i < coordsReal.length; i++) {
-			coords2d[i] = (coordsReal[i] - chipSize / 2) / (chipSize + 1);
-		}
+		final int halfChipSize = chipSize / 2;
+		chipSize++;
+		coords2d[0] = (coordsReal[0] - halfChipSize) / chipSize;
+		coords2d[1] = (coordsReal[1] - halfChipSize) / chipSize;
 	}
 
 	/**
@@ -78,15 +71,15 @@ class Coords {
 	 */
 	public static void convert2dToReal(int[] coords2d, int chipSize,
 			int[] coordsReal) {
-		for (int i = 0; i < coords2d.length; i++) {
-			coordsReal[i] = chipSize / 2 + coords2d[i] * chipSize + coords2d[i];
-		}
+		final int halfChipSize = chipSize / 2;
+		coordsReal[0] = halfChipSize + coords2d[0] * chipSize + coords2d[0];
+		coordsReal[1] = halfChipSize + coords2d[1] * chipSize + coords2d[1];
 	}
 
 	/**
 	 * Output array requires length >= 2x
 	 */
-	public static void convertLineToReal(int[] coordsLine, int length,
+	public static void convertLineToReal(int coordsLine, int length,
 			int chipSize, int[] coordsReal) {
 		convertLineTo2d(coordsLine, length, coordsReal);
 		convert2dToReal(coordsReal, chipSize, coordsReal);
@@ -95,20 +88,20 @@ class Coords {
 	/**
 	 * Output array requires length >= 0.5x
 	 */
-	public static void convertRealToLine(int[] coordsReal, int length,
-			int chipSize, int[] coordsLine) {
-		convertRealTo2d(coordsReal, chipSize, coordsReal);
-		convert2dToLine(coordsReal, length, coordsLine);
+	public static int convertRealToLine(int[] coordsReal, int length,
+			int chipSize) {
+		final int[] coords2d = new int[2];
+		convertRealTo2d(coordsReal, chipSize, coords2d);
+		return convert2dToLine(coords2d, length);
 	}
 
 	/**
 	 * Output array requires length >= 1x
 	 */
-	public static void roundRealTo2d(int[] coords, int chipSize,
-			int[] coords2d) {
-		for (int i = 0; i < coords.length; i++) {
-			coords2d[i] = coords[i] + chipSize / 2;
-		}
+	public static void roundRealTo2d(int[] coords, int chipSize, int[] coords2d) {
+		final int halfChipSize = chipSize / 2;
+		coords2d[0] = coords[0] + halfChipSize;
+		coords2d[1] = coords[1] + halfChipSize;
 		convertRealTo2d(coords2d, chipSize, coords2d);
 	}
 }

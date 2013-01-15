@@ -141,16 +141,12 @@ public class GameView extends View implements
 		mChips = new Chip[mTrack.length - 1];
 		mMotionData = new int[MOTION_DATA_MAX + mLength];
 
-		final int[] coordsLine = new int[1];
-		final int[] coordsPerfect = new int[2];
+		final int[] coordsStartPosition = new int[2];
 		for (int i = 0; i < mChips.length; i++) {
+			Coords.convertLineToReal(i, mLength, mChipSize, coordsStartPosition);
+
 			mTrack[i] = i;
-			coordsLine[0] = i;
-
-			Coords.convertLineToReal(coordsLine, mLength, mChipSize,
-					coordsPerfect);
-
-			mChips[i] = new Chip(coordsPerfect, i);
+			mChips[i] = new Chip(coordsStartPosition, i);
 		}
 
 		// Space
@@ -160,17 +156,15 @@ public class GameView extends View implements
 	}
 
 	public void recycleBitmaps() {
-		for (int i = 0; i < mChipsBitmaps.length; i++) {
-			mChipsBitmaps[i].recycle();
-		}
+		mChipsBitmaps[0].recycle();
+		mChipsBitmaps[1].recycle();
 	}
 
 	@Override
 	public void onDraw(Canvas canvas) {
-		int halfChipSize = mChipSize / 2;
-		for (int i = 0; i < mChips.length; i++) {
+		final int halfChipSize = mChipSize / 2;
+		for (int i = 0; i < mChips.length; i++)
 			mChips[i].draw(canvas, halfChipSize);
-		}
 		mIsChanged = false;
 	}
 
@@ -178,25 +172,26 @@ public class GameView extends View implements
 	public boolean onTouchEvent(MotionEvent event) {
 		if (!mTouchable)
 			return false;
-		mTouchCoordsReal[0] = Math.round(event.getX() - mChipsPadding[0]);
-		mTouchCoordsReal[1] = Math.round(event.getY() - mChipsPadding[1]);
-		switch (event.getAction()) {
-		case MotionEvent.ACTION_DOWN:
+		mTouchCoordsReal[0] = Math.round(event.getX()) - mChipsPadding[0];
+		mTouchCoordsReal[1] = Math.round(event.getY()) - mChipsPadding[1];
+
+		final int action = event.getAction();
+		if (action == MotionEvent.ACTION_DOWN) {
+			// DOWN DOWN DOWN DOWN
+			// DOWN DOWN DOWN DOWN
+			// DOWN DOWN DOWN DOWN
+			// DOWN DOWN DOWN DOWN
+
 			if (mTouchCoordsReal[0] < 0 || mTouchCoordsReal[1] < 0)
-				// No one of the chips are clicked
 				return false;
-			int[] chip2dPos = new int[2];
+			final int[] chip2dPos = new int[2];
 			Coords.roundRealTo2d(mTouchCoordsReal, mChipSize, chip2dPos);
 			if (chip2dPos[0] >= mLength || chip2dPos[1] >= mLength)
-				// No one of the chips are clicked
 				return false;
 
-			int[] space2dPos = new int[2];
-			int[] chipLinePos = new int[1];
-			Coords.convertLineTo2d(new int[] { mTrackSpace }, mLength,
-					space2dPos);
-			Coords.convert2dToLine(chip2dPos, mLength, chipLinePos);
-			Coords.convertLineTo2d(chipLinePos, mLength, chip2dPos);
+			final int[] space2dPos = new int[2];
+			final int chipLinePos = Coords.convert2dToLine(chip2dPos, mLength);
+			Coords.convertLineTo2d(mTrackSpace, mLength, space2dPos);
 
 			// BEGIN
 			int xyconst = chip2dPos[0];
@@ -211,48 +206,52 @@ public class GameView extends View implements
 					mMotionData[MOTION_DATA_ORIENTATION] = MOTION_DATA_ORIENTATION_HORIZONTAL;
 				else
 					return false;
-
 			}
+			
+			mMotionData[MOTION_DATA_CHIP] = mTrack[chipLinePos];
 
-			mMotionData[MOTION_DATA_CHIP] = mTrack[chipLinePos[0]];
-
-			int[] dataRange = new int[2];
+			final int[] chipsCoordsRange = new int[2];
 			if (space2dPos[mMotionData[MOTION_DATA_ORIENTATION]]
 					- chip2dPos[mMotionData[MOTION_DATA_ORIENTATION]] > 0) {
-				dataRange[0] = chip2dPos[mMotionData[MOTION_DATA_ORIENTATION]];
-				dataRange[1] = dataRange[0] + 1;
+				chipsCoordsRange[0] = chip2dPos[mMotionData[MOTION_DATA_ORIENTATION]];
+				chipsCoordsRange[1] = chipsCoordsRange[0] + 1;
 			} else { // We can move it to -1
-				dataRange[1] = chip2dPos[mMotionData[MOTION_DATA_ORIENTATION]];
-				dataRange[0] = dataRange[1] - 1;
+				chipsCoordsRange[1] = chip2dPos[mMotionData[MOTION_DATA_ORIENTATION]];
+				chipsCoordsRange[0] = chipsCoordsRange[1] - 1;
 			}
-			Coords.convert2dToReal(dataRange, mChipSize, dataRange);
-			mMotionData[MOTION_DATA_MIN] = dataRange[0];
-			mMotionData[MOTION_DATA_MAX] = dataRange[1];
+			Coords.convert2dToReal(chipsCoordsRange, mChipSize,
+					chipsCoordsRange);
+			mMotionData[MOTION_DATA_MIN] = chipsCoordsRange[0];
+			mMotionData[MOTION_DATA_MAX] = chipsCoordsRange[1];
 
 			int length = 0;
-			int[] coordsLine_ = new int[1];
-			int[] coords2d_ = new int[2];
+			final int[] chipsCoords2d = new int[2];
+			final int[] chipsCoords2dMode;
+			if (mMotionData[MOTION_DATA_ORIENTATION] == MOTION_DATA_ORIENTATION_VERTICAL)
+				chipsCoords2dMode = new int[] { 0, 1 };
+			else
+				chipsCoords2dMode = new int[] { 1, 0 };
+			chipsCoords2d[chipsCoords2dMode[0]] = xyconst;
 			for (int i = 0; i < mLength; i++) {
-				if (mMotionData[MOTION_DATA_ORIENTATION] == MOTION_DATA_ORIENTATION_VERTICAL) {
-					coords2d_[0] = xyconst;
-					coords2d_[1] = i;
-				} else {
-					coords2d_[0] = i;
-					coords2d_[1] = xyconst;
-				}
-				Coords.convert2dToLine(coords2d_, mLength, coordsLine_);
+				chipsCoords2d[chipsCoords2dMode[1]] = i;
+				final int coordsLine = Coords.convert2dToLine(chipsCoords2d,
+						mLength);
 
-				if (mTrack[coordsLine_[0]] != mSpaceIndex) {
+				if (mTrack[coordsLine] != mSpaceIndex) {
 					length++;
-					mMotionData[MOTION_DATA_MAX + length] = mTrack[coordsLine_[0]];
+					mMotionData[MOTION_DATA_MAX + length] = mTrack[coordsLine];
 				}
 			}
 
 			// Push it to drawing
 			event.setAction(MotionEvent.ACTION_MOVE);
 			onTouchEvent(event);
-			break;
-		case MotionEvent.ACTION_MOVE: // On moving
+		} else if (action == MotionEvent.ACTION_MOVE) {
+			// MOVE MOVE MOVE MOVE
+			// MOVE MOVE MOVE MOVE
+			// MOVE MOVE MOVE MOVE
+			// MOVE MOVE MOVE MOVE
+
 			// If nothing is selected or not possible to move it
 			if (mMotionData[MOTION_DATA_ORIENTATION] == MOTION_DATA_NOTHING)
 				return false; // Just stop it
@@ -273,8 +272,13 @@ public class GameView extends View implements
 					mMotionData[MOTION_DATA_ORIENTATION]);
 			fixChipsOverlay(mMotionData[MOTION_DATA_CHIP],
 					mMotionData[MOTION_DATA_ORIENTATION]); // Fix mixed puzzles
-			break;
-		case MotionEvent.ACTION_UP: // On up
+
+		} else if (action == MotionEvent.ACTION_UP) {
+			// UP UP UP UP UP UP UP
+			// UP UP UP UP UP UP UP
+			// UP UP UP UP UP UP UP
+			// UP UP UP UP UP UP UP
+
 			// If nothing is selected or not possible to move it
 			if (mMotionData[MOTION_DATA_ORIENTATION] == MOTION_DATA_NOTHING)
 				return false; // Just stop it
@@ -283,46 +287,44 @@ public class GameView extends View implements
 
 			// We're should detect space chip by false here
 			boolean[] changed = new boolean[mLength];
-			// Get const coord id from line type
-			int orientationInversed = mMotionData[MOTION_DATA_ORIENTATION] == 1 ? 0
-					: 1;
-			// Const coordinate of line
-			xyconst = -1;
 
-			int[] coordsLine__ = new int[1];
-			int[] coords2d__ = new int[2];
-			int[] coordsReal__ = new int[2];
+			// Get const coord id from line type
+			final int orientationInversed = mMotionData[MOTION_DATA_ORIENTATION] == 1 ? 0
+					: 1;
+			int xyconst = 0;
+
+			final int[] chipCoords2 = new int[2];
 			for (int i = 1; i < mLength; i++) {
 				// Get chips id from moves data
 				int chipId = mMotionData[i + MOTION_DATA_MAX];
 
 				Coords.roundRealTo2d(mChips[chipId].getCoordsLink(), mChipSize,
-						coords2d__);
-				Coords.convert2dToReal(coords2d__, mChipSize, coordsReal__);
-				Coords.convert2dToLine(coords2d__, mLength, coordsLine__);
+						chipCoords2);
+				final int chipCoordsLine = Coords.convert2dToLine(chipCoords2,
+						mLength);
 
-				changed[coords2d__[mMotionData[MOTION_DATA_ORIENTATION]]] = true;
-				if (mTrack[coordsLine__[0]] != chipId)
+				changed[chipCoords2[mMotionData[MOTION_DATA_ORIENTATION]]] = true;
+				if (mTrack[chipCoordsLine] != chipId)
 					theSame = false;
-				mTrack[coordsLine__[0]] = chipId; // track it
-				continueScroll(chipId, coordsReal__.clone());
-				// getChip(chipId).setCoords(coordsRealRounded); // set coords
-				xyconst = coords2d__[orientationInversed]; // set const xy
+				mTrack[chipCoordsLine] = chipId; // track it
+				xyconst = chipCoords2[orientationInversed]; // set const xy
+
+				Coords.convert2dToReal(chipCoords2, mChipSize, chipCoords2);
+				continueScroll(chipId, chipCoords2.clone());
 			}
 			for (int i = 0; i < mLength; i++) {
-				// Stop if it's not space chip
 				if (changed[i])
 					continue;
 
 				if (mMotionData[MOTION_DATA_ORIENTATION] == MOTION_DATA_ORIENTATION_VERTICAL) {
-					coords2d__[0] = xyconst;
-					coords2d__[1] = i;
+					chipCoords2[0] = xyconst;
+					chipCoords2[1] = i;
 				} else {
-					coords2d__[0] = i;
-					coords2d__[1] = xyconst;
+					chipCoords2[0] = i;
+					chipCoords2[1] = xyconst;
 				}
-				Coords.convert2dToLine(coords2d__, mLength, coordsLine__);
-				mTrackSpace = coordsLine__[0];
+
+				mTrackSpace = Coords.convert2dToLine(chipCoords2, mLength);
 				mTrack[mTrackSpace] = mSpaceIndex;
 				break;
 			}
@@ -337,7 +339,6 @@ public class GameView extends View implements
 					}
 				}
 			}
-			break;
 		}
 		return true;
 	}
@@ -454,8 +455,6 @@ public class GameView extends View implements
 		int shuffling = trackLength * trackLength;
 
 		final int[] switchChip2d = new int[2];
-		final int[] space = new int[1];
-		final int[] switchChip = new int[1];
 		for (int i = 0; i < shuffling; i++) {
 			// Get random coords
 			switch (random.nextInt(4)) {
@@ -494,22 +493,21 @@ public class GameView extends View implements
 			default:
 				continue;
 			}
-			Coords.convert2dToLine(space2d, length, space);
-			Coords.convert2dToLine(switchChip2d, length, switchChip);
+			final int spaceLine = Coords.convert2dToLine(space2d, length);
+			final int switchChip = Coords.convert2dToLine(switchChip2d, length);
 
 			// Space chip now knows as selected one
 			space2d[0] = switchChip2d[0];
 			space2d[1] = switchChip2d[1];
 
 			// Swap tracking array
-			int k = mTrack[space[0]];
-			mTrack[space[0]] = mTrack[switchChip[0]];
-			mTrack[switchChip[0]] = k;
+			int k = mTrack[spaceLine];
+			mTrack[spaceLine] = mTrack[switchChip];
+			mTrack[switchChip] = k;
 		}
 
 		// Restore chip's positions by track data
-		final int[] coordsLine_ = new int[1];
-		final int[] coordsReal_ = new int[2];
+		final int[] chipsCoordsReal = new int[2];
 		for (int i = 0; i < trackLength; i++) {
 			// Filter space chip
 			if (mTrack[i] == mSpaceIndex) {
@@ -517,10 +515,8 @@ public class GameView extends View implements
 				continue;
 			}
 			// Set chip's coords
-			coordsLine_[0] = i;
-			Coords.convertLineToReal(coordsLine_, length, mChipSize,
-					coordsReal_);
-			mChips[mTrack[i]].setCoords(coordsReal_);
+			Coords.convertLineToReal(i, length, mChipSize, chipsCoordsReal);
+			mChips[mTrack[i]].setCoords(chipsCoordsReal);
 		}
 	}
 
