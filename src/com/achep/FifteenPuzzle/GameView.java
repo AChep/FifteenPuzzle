@@ -67,7 +67,7 @@ public class GameView extends View implements
 	private int mGameSteps;
 	private long mGameStartTime;
 	private long mGameOverTime;
-	private boolean mGameOver = true;
+	private boolean mGameOver;
 
 	private ActivityInterface mActivityInterface;
 	private boolean mIsChanged;
@@ -153,6 +153,8 @@ public class GameView extends View implements
 		mSpaceIndex = mChips.length;
 		mTrack[mSpaceIndex] = mSpaceIndex;
 		mTrackSpace = mSpaceIndex;
+		
+		mGameOver = true;
 	}
 
 	public void recycleBitmaps() {
@@ -207,7 +209,7 @@ public class GameView extends View implements
 				else
 					return false;
 			}
-			
+
 			mMotionData[MOTION_DATA_CHIP] = mTrack[chipLinePos];
 
 			final int[] chipsCoordsRange = new int[2];
@@ -423,6 +425,10 @@ public class GameView extends View implements
 	public long getGameTimeMillis() {
 		return mGameOver ? mGameOverTime : SystemClock.uptimeMillis()
 				- mGameStartTime;
+	}
+
+	public boolean getGameStatus() {
+		return mGameOver;
 	}
 
 	public void newGame() {

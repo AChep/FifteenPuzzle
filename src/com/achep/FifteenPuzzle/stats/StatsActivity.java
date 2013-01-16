@@ -1,7 +1,8 @@
 package com.achep.FifteenPuzzle.stats;
 
+import java.util.ArrayList;
+
 import com.achep.FifteenPuzzle.R;
-import com.achep.FifteenPuzzle.Utils;
 import com.achep.FifteenPuzzle.preferences.PrefPuzzleLengthPicker;
 import com.achep.FifteenPuzzle.preferences.Settings;
 
@@ -17,23 +18,52 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 public class StatsActivity extends Activity {
 
-	private TextView[] mTableText = new TextView[3];
+	// Action bar
 	private ImageView mClearButton;
 	private ProgressBar mProgressBar;
+
+	private ListView mListView;
+	private String[][] mDatabase;
+
+	private TextView mTimeSortTextView;
+	private TextView mStepsSortTextView;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_stats);
 
-		mTableText[0] = (TextView) findViewById(R.id.nick);
-		mTableText[1] = (TextView) findViewById(R.id.time);
-		mTableText[2] = (TextView) findViewById(R.id.steps);
+		mListView = (ListView) findViewById(R.id.list_view);
+		mTimeSortTextView = (TextView) findViewById(R.id.time_sort);
+		mTimeSortTextView.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (mDatabase == null)
+					return;
+
+				mListView.setAdapter(new ListViewArrayAdapter(
+						StatsActivity.this, mDatabase[0], mDatabase[1],
+						mDatabase[2]));
+			}
+		});
+		mStepsSortTextView = (TextView) findViewById(R.id.steps_sort);
+		mStepsSortTextView.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (mDatabase == null)
+					return;
+
+				mListView.setAdapter(new ListViewArrayAdapter(
+						StatsActivity.this, mDatabase[0], mDatabase[1],
+						mDatabase[2]));
+			}
+		});
 		mProgressBar = (ProgressBar) findViewById(R.id.progressbar);
 		mClearButton = (ImageView) findViewById(R.id.clear);
 		mClearButton.setOnClickListener(new OnClickListener() {
@@ -58,7 +88,7 @@ public class StatsActivity extends Activity {
 												.getWritableDatabase();
 										DBHelper.dropTable(db);
 										db.close();
-										
+
 										// Finish activity
 										StatsActivity.this.finish();
 									}
@@ -78,64 +108,67 @@ public class StatsActivity extends Activity {
 			}
 		});
 
-		new LoadStats().execute("");
+		new LoadDatabaseStats().execute();
 	}
 
-	private class LoadStats extends AsyncTask<String, String, String[]> {
+	private class LoadDatabaseStats extends AsyncTask<Void, Void, String[][]> {
 
 		@Override
-		protected void onPreExecute() {
-			super.onPreExecute();
-		}
-
-		@Override
-		protected String[] doInBackground(String... aurl) {
-			final DBHelper dbHelper = new DBHelper(StatsActivity.this);
-			final SQLiteDatabase db = dbHelper.getWritableDatabase();
-			final SharedPreferences prefs = getSharedPreferences(
-					"preferences2", 0);
-
-			final int length = prefs.getInt(Settings.Keys.SPREF_PUZZLE_LENGTH,
+		protected String[][] doInBackground(Void... a) {
+			SharedPreferences prefs = getSharedPreferences("preferences2", 0);
+			int length = prefs.getInt(Settings.Keys.SPREF_PUZZLE_LENGTH,
 					PrefPuzzleLengthPicker.DEFAULT);
 
+			DBHelper dbHelper = new DBHelper(StatsActivity.this);
+			SQLiteDatabase db = dbHelper.getWritableDatabase();
 			Cursor c = db.query(DBHelper.TABLE_NAME, null, DBHelper.LENGTH
 					+ " = " + length, null, null, null, DBHelper.TIME);
-			String[] str = null;
+
+			ArrayList<String>[] database = new ArrayList[3];
 			if (c != null) {
-				str = new String[] { "", "", "" };
+				database[0] = new ArrayList<String>();
+				database[1] = new ArrayList<String>();
+				database[2] = new ArrayList<String>();
 				if (c.moveToFirst()) {
 					do {
-						int i = 0;
 						for (String cn : c.getColumnNames()) {
-							if (cn.equals(DBHelper.LENGTH)
-									|| cn.equals(DBHelper.ID)) {
-								continue;
+							if (cn.equals(DBHelper.NICKNAME)) {
+								database[0].add(c.getString(c
+										.getColumnIndex(cn)));
+							} else if (cn.equals(DBHelper.TIME)) {
+								database[1].add(c.getString(c
+										.getColumnIndex(cn)));
+							} else if (cn.equals(DBHelper.STEPS)) {
+								database[2].add(c.getString(c
+										.getColumnIndex(cn)));
 							}
-							if (i == 1) {
-								str[i] = str[i].concat(Utils.getFormatedTime(c
-										.getInt(c.getColumnIndex(cn))) + "\n");
-							} else
-								str[i] = str[i].concat(c.getString(c
-										.getColumnIndex(cn)) + "\n");
-							i++;
 						}
 					} while (c.moveToNext());
 				}
 				c.close();
 			}
-
 			db.close();
-			return str;
+
+			String[][] databaseStr = new String[3][];
+			databaseStr[0] = database[0]
+					.toArray(new String[database[0].size()]);
+			databaseStr[1] = database[1]
+					.toArray(new String[database[1].size()]);
+			databaseStr[2] = database[2]
+					.toArray(new String[database[2].size()]);
+
+			return databaseStr;
 		}
 
 		@Override
-		protected void onPostExecute(String[] str) {
+		protected void onPostExecute(String[][] str) {
 			mProgressBar.setVisibility(View.GONE);
 			mClearButton.setVisibility(View.VISIBLE);
 
-			mTableText[0].setText(str[0]);
-			mTableText[1].setText(str[1]);
-			mTableText[2].setText(str[2]);
+			mDatabase = str;
+			mListView.setAdapter(new ListViewArrayAdapter(StatsActivity.this,
+					mDatabase[0], mDatabase[1], mDatabase[2]));
 		}
 	}
+
 }

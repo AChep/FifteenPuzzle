@@ -74,7 +74,7 @@ public class GameActivity extends Activity implements ActivityInterface {
 		mDraw = true;
 		mHandler.post(new Runnable() {
 
-			private long timeOld = -1;
+			private long timeOld = 0;
 			private String titleLabel = getResources().getString(
 					R.string.game_time)
 					+ ": ";
