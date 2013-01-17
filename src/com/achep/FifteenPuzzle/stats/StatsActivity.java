@@ -1,8 +1,25 @@
+/*
+ * Copyright (C) 2012-2013 AChep@xda <artemchep@gmail.com>
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.achep.FifteenPuzzle.stats;
 
 import java.util.ArrayList;
 
 import com.achep.FifteenPuzzle.R;
+import com.achep.FifteenPuzzle.Utils;
 import com.achep.FifteenPuzzle.preferences.PrefPuzzleLengthPicker;
 import com.achep.FifteenPuzzle.preferences.Settings;
 
@@ -29,7 +46,7 @@ public class StatsActivity extends Activity {
 	private ProgressBar mProgressBar;
 
 	private ListView mListView;
-	private String[][] mDatabase;
+	private StatsData mStatsData;
 
 	private TextView mTimeSortTextView;
 	private TextView mStepsSortTextView;
@@ -44,24 +61,22 @@ public class StatsActivity extends Activity {
 		mTimeSortTextView.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if (mDatabase == null)
+				if (mStatsData == null)
 					return;
 
-				mListView.setAdapter(new ListViewArrayAdapter(
-						StatsActivity.this, mDatabase[0], mDatabase[1],
-						mDatabase[2]));
+				mStatsData.sort(StatsData.SORT_BY_TIME);
+				setListViewAdapter(StatsData.SORT_BY_TIME);
 			}
 		});
 		mStepsSortTextView = (TextView) findViewById(R.id.steps_sort);
 		mStepsSortTextView.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if (mDatabase == null)
+				if (mStatsData == null)
 					return;
 
-				mListView.setAdapter(new ListViewArrayAdapter(
-						StatsActivity.this, mDatabase[0], mDatabase[1],
-						mDatabase[2]));
+				mStatsData.sort(StatsData.SORT_BY_STEPS);
+				setListViewAdapter(StatsData.SORT_BY_STEPS);
 			}
 		});
 		mProgressBar = (ProgressBar) findViewById(R.id.progressbar);
@@ -111,10 +126,16 @@ public class StatsActivity extends Activity {
 		new LoadDatabaseStats().execute();
 	}
 
-	private class LoadDatabaseStats extends AsyncTask<Void, Void, String[][]> {
+	private void setListViewAdapter(int sort) {
+		mListView.setAdapter(new ListViewArrayAdapter(this, mStatsData
+				.getUsernames(), mStatsData.getTimeSecs(), mStatsData
+				.getSteps(), sort));
+	}
+
+	private class LoadDatabaseStats extends AsyncTask<Void, Void, Void> {
 
 		@Override
-		protected String[][] doInBackground(Void... a) {
+		protected Void doInBackground(Void... void_) {
 			SharedPreferences prefs = getSharedPreferences("preferences2", 0);
 			int length = prefs.getInt(Settings.Keys.SPREF_PUZZLE_LENGTH,
 					PrefPuzzleLengthPicker.DEFAULT);
@@ -124,23 +145,20 @@ public class StatsActivity extends Activity {
 			Cursor c = db.query(DBHelper.TABLE_NAME, null, DBHelper.LENGTH
 					+ " = " + length, null, null, null, DBHelper.TIME);
 
-			ArrayList<String>[] database = new ArrayList[3];
+			ArrayList<String> nicknames = new ArrayList<String>();
+			ArrayList<Integer> times = new ArrayList<Integer>();
+			ArrayList<Integer> steps = new ArrayList<Integer>();
 			if (c != null) {
-				database[0] = new ArrayList<String>();
-				database[1] = new ArrayList<String>();
-				database[2] = new ArrayList<String>();
 				if (c.moveToFirst()) {
 					do {
 						for (String cn : c.getColumnNames()) {
 							if (cn.equals(DBHelper.NICKNAME)) {
-								database[0].add(c.getString(c
-										.getColumnIndex(cn)));
+								nicknames
+										.add(c.getString(c.getColumnIndex(cn)));
 							} else if (cn.equals(DBHelper.TIME)) {
-								database[1].add(c.getString(c
-										.getColumnIndex(cn)));
+								times.add(c.getInt(c.getColumnIndex(cn)));
 							} else if (cn.equals(DBHelper.STEPS)) {
-								database[2].add(c.getString(c
-										.getColumnIndex(cn)));
+								steps.add(c.getInt(c.getColumnIndex(cn)));
 							}
 						}
 					} while (c.moveToNext());
@@ -149,26 +167,76 @@ public class StatsActivity extends Activity {
 			}
 			db.close();
 
-			String[][] databaseStr = new String[3][];
-			databaseStr[0] = database[0]
-					.toArray(new String[database[0].size()]);
-			databaseStr[1] = database[1]
-					.toArray(new String[database[1].size()]);
-			databaseStr[2] = database[2]
-					.toArray(new String[database[2].size()]);
-
-			return databaseStr;
+			length = nicknames.size();
+			int[] timesInt = new int[length];
+			int[] stepsInt = new int[length];
+			for (int i = 0; i < length; i++) {
+				timesInt[i] = times.get(i);
+				stepsInt[i] = steps.get(i);
+			}
+			mStatsData = new StatsData(nicknames.toArray(new String[length]),
+					timesInt, stepsInt);
+			return null;
 		}
 
 		@Override
-		protected void onPostExecute(String[][] str) {
+		protected void onPostExecute(Void void_) {
 			mProgressBar.setVisibility(View.GONE);
 			mClearButton.setVisibility(View.VISIBLE);
 
-			mDatabase = str;
-			mListView.setAdapter(new ListViewArrayAdapter(StatsActivity.this,
-					mDatabase[0], mDatabase[1], mDatabase[2]));
+			setListViewAdapter(StatsData.SORT_BY_TIME);
 		}
 	}
 
+}
+
+class StatsData {
+
+	public static final int SORT_BY_TIME = 0;
+	public static final int SORT_BY_STEPS = 1;
+
+	private String[] mUsernames;
+	private int[] mTimeSecs;
+	private int[] mSteps;
+
+	public StatsData(String[] usernames, int[] timeSecs, int[] steps) {
+		mUsernames = usernames;
+		mTimeSecs = timeSecs;
+		mSteps = steps;
+	}
+
+	public void sort(int type) {
+		int[] changes;
+		if (type == SORT_BY_TIME) {
+			changes = Utils.sort(mTimeSecs);
+
+			String[] usernames = mUsernames.clone();
+			int[] steps = mSteps.clone();
+			for (int i = 0; i < changes.length; i++) {
+				mUsernames[i] = usernames[changes[i]];
+				mSteps[i] = steps[changes[i]];
+			}
+		} else if (type == SORT_BY_STEPS) {
+			changes = Utils.sort(mSteps);
+
+			String[] usernames = mUsernames.clone();
+			int[] time = mTimeSecs.clone();
+			for (int i = 0; i < changes.length; i++) {
+				mUsernames[i] = usernames[changes[i]];
+				mTimeSecs[i] = time[changes[i]];
+			}
+		}
+	}
+
+	public String[] getUsernames() {
+		return mUsernames;
+	}
+
+	public int[] getTimeSecs() {
+		return mTimeSecs;
+	}
+
+	public int[] getSteps() {
+		return mSteps;
+	}
 }

@@ -6,7 +6,7 @@
         android:summary="@string/settings_statistic2"
         android:title="@string/settings_statistic"
         this:icon="@drawable/ic_settings_stats" >
-        <intent android:action="com.achep.FifteenPuzzle.stats.StatsActivity" />
+        <intent android:action="com.achep.FifteenPuzzle.StatsActivity" />
     </com.achep.FifteenPuzzle.preferences.PrefIcon>
 
     <PreferenceCategory android:title="@string/settings_category" >

@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.achep.FifteenPuzzle"
-    android:versionCode="4"
-    android:versionName="2.12" >
+    android:versionCode="5"
+    android:versionName="2.2" >
 
     <uses-sdk
         android:minSdkVersion="8"
@@ -34,7 +34,7 @@
             android:launchMode="singleInstance"
             android:theme="@style/GameActivity" >
             <intent-filter>
-                <action android:name="com.achep.FifteenPuzzle.stats.StatsActivity" />
+                <action android:name="com.achep.FifteenPuzzle.StatsActivity" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>

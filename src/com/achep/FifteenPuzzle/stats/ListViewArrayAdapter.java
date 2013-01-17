@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012 AChep@xda <artemchep@gmail.com>
+ * Copyright (C) 2012-2013 AChep@xda <artemchep@gmail.com>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,20 +27,32 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 public class ListViewArrayAdapter extends ArrayAdapter<String> {
+
+	private static final int TEXT_COLOR_NORMAL = 0xffaaaaaa;
+	private static final int TEXT_COLOR_HIGHLIGHTED = 0xff40dd20;
+
 	private final Activity context;
 
 	private final String[] mUsernames;
 	private final String[] mTimes;
 	private final String[] mSteps;
 
+	private final int mSortType;
+
 	public ListViewArrayAdapter(Activity context, String[] usernames,
-			String[] times, String[] steps) {
+			int[] times, int[] steps, int sort) {
 		super(context, R.layout.list_view_adapter_stats, usernames);
 		this.context = context;
 
 		mUsernames = usernames;
-		mTimes = times;
-		mSteps = steps;
+		mSortType = sort;
+
+		mTimes = new String[times.length];
+		mSteps = new String[times.length];
+		for (int i = 0; i < times.length; i++) {
+			mTimes[i] = Utils.getFormatedTime(times[i]);
+			mSteps[i] = Integer.toString(steps[i]);
+		}
 	}
 
 	private static class ViewHolder {
@@ -69,9 +81,15 @@ public class ListViewArrayAdapter extends ArrayAdapter<String> {
 		}
 
 		holder.titleTextView.setText(mUsernames[position]);
-		holder.summary1TextView.setText(Utils.getFormatedTime(Integer
-				.parseInt(mTimes[position])));
+		holder.summary1TextView.setText(mTimes[position]);
 		holder.summary2TextView.setText(mSteps[position]);
+
+		holder.summary1TextView
+				.setTextColor(mSortType == StatsData.SORT_BY_TIME ? TEXT_COLOR_HIGHLIGHTED
+						: TEXT_COLOR_NORMAL);
+		holder.summary2TextView
+				.setTextColor(mSortType == StatsData.SORT_BY_STEPS ? TEXT_COLOR_HIGHLIGHTED
+						: TEXT_COLOR_NORMAL);
 		return rowView;
 	}
 }
