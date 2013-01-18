@@ -10,6 +10,7 @@
     <string name="pref_number_picker_base_reset">Reset value</string>
     
     <string name="stats">Statistic</string>
+    <string name="stats_graph_title">Graph of results.</string>
     <string name="settings_statistic2">Your best game scores!</string>
     <string name="settings_statistic">Statistic</string>
     <string name="settings_statistic_drop_title">Remove all statistic.</string>

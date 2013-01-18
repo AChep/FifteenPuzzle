@@ -43,6 +43,7 @@ public class StatsActivity extends Activity {
 
 	// Action bar
 	private ImageView mClearButton;
+	private ImageView mGraphButton;
 	private ProgressBar mProgressBar;
 
 	private ListView mListView;
@@ -80,6 +81,24 @@ public class StatsActivity extends Activity {
 			}
 		});
 		mProgressBar = (ProgressBar) findViewById(R.id.progressbar);
+		mGraphButton = (ImageView) findViewById(R.id.graph);
+		mGraphButton.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				GraphsView gv = new GraphsView(StatsActivity.this);
+
+				gv.addPoints(mStatsData.getTimeSecs(), 0xffff8020);
+				gv.addPoints(mStatsData.getSteps(), 0xffc060ff);
+
+				new AlertDialog.Builder(StatsActivity.this)
+						.setIcon(android.R.drawable.ic_dialog_info)
+						.setTitle(R.string.stats_graph_title)
+						.setView(gv)
+						.setNegativeButton(android.R.string.cancel, null)
+						.show();
+			}
+		});
 		mClearButton = (ImageView) findViewById(R.id.clear);
 		mClearButton.setOnClickListener(new OnClickListener() {
 
@@ -183,6 +202,7 @@ public class StatsActivity extends Activity {
 		protected void onPostExecute(Void void_) {
 			mProgressBar.setVisibility(View.GONE);
 			mClearButton.setVisibility(View.VISIBLE);
+			mGraphButton.setVisibility(View.VISIBLE);
 
 			setListViewAdapter(StatsData.SORT_BY_TIME);
 		}
@@ -194,6 +214,10 @@ class StatsData {
 
 	public static final int SORT_BY_TIME = 0;
 	public static final int SORT_BY_STEPS = 1;
+
+	public static final int USER_INFO_PLAYED_GAMES = 0;
+	public static final int USER_INFO_TOTAL_TIME = 1;
+	public static final int USER_INFO_TOTAL_STEPS = 2;
 
 	private String[] mUsernames;
 	private int[] mTimeSecs;
@@ -226,6 +250,29 @@ class StatsData {
 				mTimeSecs[i] = time[changes[i]];
 			}
 		}
+	}
+
+	public int[] getUserInfo(String username) {
+		int playedGames = 0;
+		int totalTime = 0;
+		int totalSteps = 0;
+
+		int usernameLength = username.length();
+		for (int i = 0; i < mUsernames.length; i++) {
+			if (usernameLength != mUsernames[i].length()
+					|| !username.equals(mUsernames[i]))
+				continue;
+
+			playedGames++;
+			totalTime += mTimeSecs[i];
+			totalSteps += mSteps[i];
+		}
+
+		int[] userinfo = new int[3];
+		userinfo[USER_INFO_PLAYED_GAMES] = playedGames;
+		userinfo[USER_INFO_TOTAL_TIME] = totalTime;
+		userinfo[USER_INFO_TOTAL_STEPS] = totalSteps;
+		return userinfo;
 	}
 
 	public String[] getUsernames() {

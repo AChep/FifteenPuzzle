@@ -67,6 +67,15 @@
                 android:scaleType="center" />
 
             <ImageView
+                android:id="@+id/graph"
+                android:layout_width="@dimen/action_bar_height"
+                android:layout_height="fill_parent"
+                android:background="@drawable/image_view_selector"
+                android:scaleType="center"
+                android:src="@drawable/ic_actionbar_graph"
+                android:visibility="gone" />
+
+            <ImageView
                 android:id="@+id/clear"
                 android:layout_width="@dimen/action_bar_height"
                 android:layout_height="fill_parent"

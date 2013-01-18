@@ -7,6 +7,7 @@
     <string name="game_congraz_message">Вы собрали этот пазл!</string>
     <string name="pref_number_picker_base_reset">Сбросить значение</string>
     <string name="stats">Статистика</string>
+    <string name="stats_graph_title">График результатов.</string>
     <string name="settings_statistic2">Ваши лучшие рекорды!</string>
     <string name="settings_statistic">Статистика</string>
     <string name="settings_statistic_drop_title">Очистить статистику.</string>
