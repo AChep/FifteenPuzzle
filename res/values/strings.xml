@@ -10,6 +10,9 @@
     <string name="pref_number_picker_base_reset">Reset value</string>
     
     <string name="stats">Statistic</string>
+    <string name="stats_time">@string/game_time</string>
+    <string name="stats_steps">@string/game_steps</string>
+    <string name="stats_username_and_date">Username\nDate</string>
     <string name="stats_graph_title">Graph of results.</string>
     <string name="settings_statistic2">Your best game scores!</string>
     <string name="settings_statistic">Statistic</string>
@@ -23,9 +26,7 @@
     <string name="settings_nickname3">Enter your new user name</string>
     <string name="settings_nickname2">Current user name is</string>
     <string name="settings_nickname">User name</string>
-    <string name="settings_puzzle_length2">Pick the number of chips at line\nRequires app reboot!</string>
+    <string name="settings_puzzle_length2">Pick the number of chips at line</string>
     <string name="settings_puzzle_length">Number of chips</string>
-    <string name="settings_color_scheme2">Select the one of availabel themes\nRequires app reboot!</string>
-    <string name="settings_color_scheme">Color scheme</string>
 
 </resources>

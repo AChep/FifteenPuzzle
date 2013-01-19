@@ -19,7 +19,6 @@ package com.achep.FifteenPuzzle.stats;
 import java.util.ArrayList;
 
 import com.achep.FifteenPuzzle.R;
-import com.achep.FifteenPuzzle.Utils;
 import com.achep.FifteenPuzzle.preferences.PrefPuzzleLengthPicker;
 import com.achep.FifteenPuzzle.preferences.Settings;
 
@@ -28,6 +27,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
@@ -39,7 +39,7 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-public class StatsActivity extends Activity {
+public class StatsActivity extends Activity implements OnClickListener {
 
 	// Action bar
 	private ImageView mClearButton;
@@ -49,8 +49,9 @@ public class StatsActivity extends Activity {
 	private ListView mListView;
 	private StatsData mStatsData;
 
-	private TextView mTimeSortTextView;
-	private TextView mStepsSortTextView;
+	private TextView mTimeSort;
+	private TextView mStepsSort;
+	private TextView mDateSort;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -58,28 +59,13 @@ public class StatsActivity extends Activity {
 		setContentView(R.layout.activity_stats);
 
 		mListView = (ListView) findViewById(R.id.list_view);
-		mTimeSortTextView = (TextView) findViewById(R.id.time_sort);
-		mTimeSortTextView.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (mStatsData == null)
-					return;
+		mTimeSort = (TextView) findViewById(R.id.time_sort);
+		mTimeSort.setOnClickListener(this);
+		mStepsSort = (TextView) findViewById(R.id.steps_sort);
+		mStepsSort.setOnClickListener(this);
+		mDateSort = (TextView) findViewById(R.id.date_sort);
+		mDateSort.setOnClickListener(this);
 
-				mStatsData.sort(StatsData.SORT_BY_TIME);
-				setListViewAdapter(StatsData.SORT_BY_TIME);
-			}
-		});
-		mStepsSortTextView = (TextView) findViewById(R.id.steps_sort);
-		mStepsSortTextView.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (mStatsData == null)
-					return;
-
-				mStatsData.sort(StatsData.SORT_BY_STEPS);
-				setListViewAdapter(StatsData.SORT_BY_STEPS);
-			}
-		});
 		mProgressBar = (ProgressBar) findViewById(R.id.progressbar);
 		mGraphButton = (ImageView) findViewById(R.id.graph);
 		mGraphButton.setOnClickListener(new OnClickListener() {
@@ -88,13 +74,15 @@ public class StatsActivity extends Activity {
 			public void onClick(View v) {
 				GraphsView gv = new GraphsView(StatsActivity.this);
 
-				gv.addPoints(mStatsData.getTimeSecs(), 0xffff8020);
-				gv.addPoints(mStatsData.getSteps(), 0xffc060ff);
+				Resources res = getResources();
+				gv.addPoints(mStatsData.getTimeSecs(), 0xffff0000,
+						res.getString(R.string.stats_time));
+				gv.addPoints(mStatsData.getSteps(), 0xff00ff00,
+						res.getString(R.string.stats_steps));
 
 				new AlertDialog.Builder(StatsActivity.this)
 						.setIcon(android.R.drawable.ic_dialog_info)
-						.setTitle(R.string.stats_graph_title)
-						.setView(gv)
+						.setTitle(R.string.stats_graph_title).setView(gv)
 						.setNegativeButton(android.R.string.cancel, null)
 						.show();
 			}
@@ -145,10 +133,28 @@ public class StatsActivity extends Activity {
 		new LoadDatabaseStats().execute();
 	}
 
+	@Override
+	public void onClick(View v) {
+		if (mStatsData == null)
+			return;
+
+		int sort = 0;
+		if (v.equals(mTimeSort)) {
+			sort = StatsData.SORT_BY_TIME;
+		} else if (v.equals(mStepsSort)) {
+			sort = StatsData.SORT_BY_STEPS;
+		} else if (v.equals(mDateSort)) {
+			sort = StatsData.SORT_BY_DATE;
+		} else
+			return;
+
+		new SortStats().execute(sort);
+	}
+
 	private void setListViewAdapter(int sort) {
 		mListView.setAdapter(new ListViewArrayAdapter(this, mStatsData
 				.getUsernames(), mStatsData.getTimeSecs(), mStatsData
-				.getSteps(), sort));
+				.getSteps(), mStatsData.getDates(), sort));
 	}
 
 	private class LoadDatabaseStats extends AsyncTask<Void, Void, Void> {
@@ -162,11 +168,12 @@ public class StatsActivity extends Activity {
 			DBHelper dbHelper = new DBHelper(StatsActivity.this);
 			SQLiteDatabase db = dbHelper.getWritableDatabase();
 			Cursor c = db.query(DBHelper.TABLE_NAME, null, DBHelper.LENGTH
-					+ " = " + length, null, null, null, DBHelper.TIME);
+					+ " = " + length, null, null, null, null);
 
 			ArrayList<String> nicknames = new ArrayList<String>();
 			ArrayList<Integer> times = new ArrayList<Integer>();
 			ArrayList<Integer> steps = new ArrayList<Integer>();
+			ArrayList<Integer> date = new ArrayList<Integer>();
 			if (c != null) {
 				if (c.moveToFirst()) {
 					do {
@@ -178,6 +185,8 @@ public class StatsActivity extends Activity {
 								times.add(c.getInt(c.getColumnIndex(cn)));
 							} else if (cn.equals(DBHelper.STEPS)) {
 								steps.add(c.getInt(c.getColumnIndex(cn)));
+							} else if (cn.equals(DBHelper.DATE_MINS)) {
+								date.add(c.getInt(c.getColumnIndex(cn)));
 							}
 						}
 					} while (c.moveToNext());
@@ -189,12 +198,17 @@ public class StatsActivity extends Activity {
 			length = nicknames.size();
 			int[] timesInt = new int[length];
 			int[] stepsInt = new int[length];
+			int[] dateInt = new int[length];
 			for (int i = 0; i < length; i++) {
 				timesInt[i] = times.get(i);
 				stepsInt[i] = steps.get(i);
+				dateInt[i] = date.get(i);
 			}
 			mStatsData = new StatsData(nicknames.toArray(new String[length]),
-					timesInt, stepsInt);
+					timesInt, stepsInt, dateInt);
+			mStatsData.sort(StatsData.SORT_BY_DATE);
+			mStatsData.sort(StatsData.SORT_BY_STEPS);
+			mStatsData.sort(StatsData.SORT_BY_TIME);
 			return null;
 		}
 
@@ -208,12 +222,37 @@ public class StatsActivity extends Activity {
 		}
 	}
 
+	private class SortStats extends AsyncTask<Integer, Void, Integer> {
+
+		@Override
+		protected void onPreExecute() {
+			mProgressBar.setVisibility(View.VISIBLE);
+			mClearButton.setVisibility(View.GONE);
+			mGraphButton.setVisibility(View.GONE);
+		}
+
+		@Override
+		protected Integer doInBackground(Integer... type) {
+			mStatsData.sort(type[0]);
+			return type[0];
+		}
+
+		@Override
+		protected void onPostExecute(Integer type) {
+			mProgressBar.setVisibility(View.GONE);
+			mClearButton.setVisibility(View.VISIBLE);
+			mGraphButton.setVisibility(View.VISIBLE);
+			setListViewAdapter(type);
+		}
+	}
+
 }
 
 class StatsData {
 
 	public static final int SORT_BY_TIME = 0;
 	public static final int SORT_BY_STEPS = 1;
+	public static final int SORT_BY_DATE = 2;
 
 	public static final int USER_INFO_PLAYED_GAMES = 0;
 	public static final int USER_INFO_TOTAL_TIME = 1;
@@ -222,32 +261,82 @@ class StatsData {
 	private String[] mUsernames;
 	private int[] mTimeSecs;
 	private int[] mSteps;
+	private int[] mDates;
 
-	public StatsData(String[] usernames, int[] timeSecs, int[] steps) {
+	public StatsData(String[] usernames, int[] timeSecs, int[] steps,
+			int[] dates) {
 		mUsernames = usernames;
 		mTimeSecs = timeSecs;
 		mSteps = steps;
+		mDates = dates;
+	}
+
+	private int[] sort(int[] values) {
+		// Write changes log
+		int[] changes = new int[values.length];
+
+		// Initialize new sorted array
+		int[] sorted = new int[values.length];
+		int handle = sorted.length - 1;
+
+		// Sorting
+		int max = Integer.MAX_VALUE;
+		do {
+			int maxNew = 0;
+			for (int i = 0; i < values.length; i++)
+				if (values[i] > maxNew && values[i] < max)
+					maxNew = values[i];
+			max = maxNew;
+			for (int i = values.length - 1; i >= 0; i--) {
+				if (values[i] == max) {
+					sorted[handle] = max;
+					changes[handle] = i;
+
+					handle--;
+				}
+			}
+		} while (handle >= 0);
+
+		// Apply changes
+		for (int i = 0; i < values.length; i++)
+			values[i] = sorted[i];
+		return changes;
 	}
 
 	public void sort(int type) {
 		int[] changes;
 		if (type == SORT_BY_TIME) {
-			changes = Utils.sort(mTimeSecs);
+			changes = sort(mTimeSecs);
 
 			String[] usernames = mUsernames.clone();
 			int[] steps = mSteps.clone();
+			int[] dates = mDates.clone();
 			for (int i = 0; i < changes.length; i++) {
 				mUsernames[i] = usernames[changes[i]];
 				mSteps[i] = steps[changes[i]];
+				mDates[i] = dates[changes[i]];
 			}
 		} else if (type == SORT_BY_STEPS) {
-			changes = Utils.sort(mSteps);
+			changes = sort(mSteps);
 
 			String[] usernames = mUsernames.clone();
 			int[] time = mTimeSecs.clone();
+			int[] dates = mDates.clone();
 			for (int i = 0; i < changes.length; i++) {
 				mUsernames[i] = usernames[changes[i]];
 				mTimeSecs[i] = time[changes[i]];
+				mDates[i] = dates[changes[i]];
+			}
+		} else if (type == SORT_BY_DATE) {
+			changes = sort(mDates);
+
+			String[] usernames = mUsernames.clone();
+			int[] time = mTimeSecs.clone();
+			int[] steps = mSteps.clone();
+			for (int i = 0; i < changes.length; i++) {
+				mUsernames[i] = usernames[changes[i]];
+				mTimeSecs[i] = time[changes[i]];
+				mSteps[i] = steps[changes[i]];
 			}
 		}
 	}
@@ -285,5 +374,9 @@ class StatsData {
 
 	public int[] getSteps() {
 		return mSteps;
+	}
+
+	public int[] getDates() {
+		return mDates;
 	}
 }

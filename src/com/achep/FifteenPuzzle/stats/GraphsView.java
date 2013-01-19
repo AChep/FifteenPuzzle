@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012-2013 AChep@xda <artemchep@gmail.com>
+ * Copyright (C) 2013 AChep@xda <artemchep@gmail.com>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,6 +28,7 @@ public class GraphsView extends View {
 
 	private ArrayList<Integer[]> mPointsList;
 	private ArrayList<Integer> mColorsList;
+	private ArrayList<String> mLabelsList;
 	private int mMaxValue;
 
 	private Paint mPaint;
@@ -44,12 +45,14 @@ public class GraphsView extends View {
 		super(context, attrs, styles);
 		mPaint = new Paint();
 		mPaint.setAntiAlias(true);
+		mPaint.setTextSize(16);
 
 		mPointsList = new ArrayList<Integer[]>();
 		mColorsList = new ArrayList<Integer>();
+		mLabelsList = new ArrayList<String>();
 	}
 
-	public void addPoints(int[] points, int color) {
+	public void addPoints(int[] points, int color, String label) {
 		if (points == null || points.length == 0)
 			return;
 
@@ -62,13 +65,14 @@ public class GraphsView extends View {
 
 		mPointsList.add(points2);
 		mColorsList.add(color);
+		mLabelsList.add(label);
 	}
 
 	@Override
 	public void onDraw(Canvas canvas) {
 		int width = getMeasuredWidth();
 		int height = getMeasuredHeight();
-		if (width == 0 || height == 0)
+		if (width == 0 || height == 0 || mMaxValue == 0)
 			return;
 
 		// Build background
@@ -76,7 +80,7 @@ public class GraphsView extends View {
 		mPaint.setColor(0x90909090);
 		float step = (float) height / mMaxValue * 10;
 		for (int i = 0; i <= width; i += step)
-			canvas.drawLine(i, 0, i, height, mPaint);		
+			canvas.drawLine(i, 0, i, height, mPaint);
 		for (int i = height; i >= 0; i -= step)
 			canvas.drawLine(0, i, width, i, mPaint);
 
@@ -88,17 +92,22 @@ public class GraphsView extends View {
 
 			final Integer[] values = mPointsList.get(i);
 			for (int j = 1; j < values.length; j++) {
-				final float startX = (float) (j - 1) / (values.length - 1)
-						* width;
-				final float stopX = (float) j / (values.length - 1) * width;
-
 				final float startY = (float) (mMaxValue - values[j - 1])
 						/ mMaxValue * height;
 				final float stopY = (float) (mMaxValue - values[j]) / mMaxValue
 						* height;
 
-				canvas.drawLine(startX, startY, stopX, stopY, mPaint);
+				canvas.drawLine(getPointX(j - 1, values.length, width), startY,
+						getPointX(j, values.length, width), stopY, mPaint);
 			}
+
+			int y = height - 17 * (i + 1);
+			canvas.drawCircle(10, y - mPaint.getTextSize() / 2 + 4, 3f, mPaint);
+			canvas.drawText(mLabelsList.get(i), 20, y, mPaint);
 		}
+	}
+
+	private float getPointX(int i, int length, int width) {
+		return (float) i / (length - 1) * width;
 	}
 }

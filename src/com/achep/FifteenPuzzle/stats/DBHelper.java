@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012 AChep@xda <artemchep@gmail.com>
+ * Copyright (C) 2012-2013 AChep@xda <artemchep@gmail.com>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DBHelper extends SQLiteOpenHelper {
 
-	private static final int DB_VERSION = 1;
+	private static final int DB_VERSION = 2;
 	private static final String DB_NAME = "data";
 
 	public static final String TABLE_NAME = "statistic";
@@ -31,10 +31,12 @@ public class DBHelper extends SQLiteOpenHelper {
 	public static final String LENGTH = "length";
 	public static final String TIME = "time";
 	public static final String STEPS = "steps";
+	public static final String DATE_MINS = "date";
+	
 	private static final String CREATE_TABLE = "create table " + TABLE_NAME
 			+ " ( " + ID + " integer primary key autoincrement, " + NICKNAME
 			+ " TEXT, " + LENGTH + " INTEGER, " + TIME + " INTEGER, " + STEPS
-			+ " INTEGER)";
+			+ " INTEGER, " + DATE_MINS + " INTEGER)";
 
 	public DBHelper(Context context) {
 		super(context, DB_NAME, null, DB_VERSION);
@@ -47,8 +49,10 @@ public class DBHelper extends SQLiteOpenHelper {
 
 	@Override
 	public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-		sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
-		onCreate(sqLiteDatabase);
+		if (i == 1) {
+			sqLiteDatabase.execSQL("ALTER TABLE " + TABLE_NAME + " ADD COLUMN "
+					+ DATE_MINS + " INTEGER DEFAULT 0;");
+		}
 	}
 
 	public static void dropTable(SQLiteDatabase sqLiteDatabase) {

@@ -7,6 +7,9 @@
     <string name="game_congraz_message">Вы собрали этот пазл!</string>
     <string name="pref_number_picker_base_reset">Сбросить значение</string>
     <string name="stats">Статистика</string>
+    <string name="stats_time">@string/game_time</string>
+    <string name="stats_steps">@string/game_steps</string>
+    <string name="stats_username_and_date">Имя пользователя\nДата</string>
     <string name="stats_graph_title">График результатов.</string>
     <string name="settings_statistic2">Ваши лучшие рекорды!</string>
     <string name="settings_statistic">Статистика</string>
@@ -18,9 +21,7 @@
     <string name="settings_nickname3">Введите новое имя пользователя</string>
     <string name="settings_nickname2">Текущее имя пользователя:</string>
     <string name="settings_nickname">Имя пользователя</string>
-    <string name="settings_puzzle_length2">Выберите количество пазлов по линии\nНеобходимо перезапустить игру!</string>
+    <string name="settings_puzzle_length2">Выберите количество пазлов по линии</string>
     <string name="settings_puzzle_length">Количество фишек</string>
-    <string name="settings_color_scheme2">Выберите одну из доступных цветовых схем\nНеобходимо перезапустить игру!</string>
-    <string name="settings_color_scheme">Цветовая схема</string>
 
 </resources>

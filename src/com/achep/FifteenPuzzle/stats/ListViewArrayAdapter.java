@@ -16,6 +16,11 @@
 
 package com.achep.FifteenPuzzle.stats;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+import java.util.TimeZone;
+
 import com.achep.FifteenPuzzle.R;
 import com.achep.FifteenPuzzle.Utils;
 
@@ -34,29 +39,43 @@ public class ListViewArrayAdapter extends ArrayAdapter<String> {
 	private final Activity context;
 
 	private final String[] mUsernames;
+	private final String[] mDates;
 	private final String[] mTimes;
 	private final String[] mSteps;
 
 	private final int mSortType;
 
+	@SuppressWarnings("deprecation")
 	public ListViewArrayAdapter(Activity context, String[] usernames,
-			int[] times, int[] steps, int sort) {
+			int[] times, int[] steps, int[] dates, int sort) {
 		super(context, R.layout.list_view_adapter_stats, usernames);
 		this.context = context;
 
 		mUsernames = usernames;
 		mSortType = sort;
 
+		SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy, hh:mm",
+				Locale.getDefault());
+		sdf.setTimeZone(TimeZone.getDefault());
+
 		mTimes = new String[times.length];
 		mSteps = new String[times.length];
+		mDates = new String[times.length];
 		for (int i = 0; i < times.length; i++) {
 			mTimes[i] = Utils.getFormatedTime(times[i]);
 			mSteps[i] = Integer.toString(steps[i]);
+
+			if (dates[i] != 0) {
+				Date date = new Date(0);
+				date.setMinutes(dates[i]);
+				mDates[i] = sdf.format(date);
+			}
 		}
 	}
 
 	private static class ViewHolder {
 		public TextView titleTextView;
+		public TextView dateTextView;
 		public TextView summary1TextView;
 		public TextView summary2TextView;
 	}
@@ -71,6 +90,7 @@ public class ListViewArrayAdapter extends ArrayAdapter<String> {
 					true);
 			holder = new ViewHolder();
 			holder.titleTextView = (TextView) rowView.findViewById(R.id.title);
+			holder.dateTextView = (TextView) rowView.findViewById(R.id.date);
 			holder.summary1TextView = (TextView) rowView
 					.findViewById(R.id.summary1);
 			holder.summary2TextView = (TextView) rowView
@@ -83,13 +103,19 @@ public class ListViewArrayAdapter extends ArrayAdapter<String> {
 		holder.titleTextView.setText(mUsernames[position]);
 		holder.summary1TextView.setText(mTimes[position]);
 		holder.summary2TextView.setText(mSteps[position]);
+		if (mDates[position] != null) {
+			holder.dateTextView.setText(mDates[position]);
+			holder.dateTextView.setVisibility(View.VISIBLE);
+		} else
+			holder.dateTextView.setVisibility(View.GONE);
 
-		holder.summary1TextView
-				.setTextColor(mSortType == StatsData.SORT_BY_TIME ? TEXT_COLOR_HIGHLIGHTED
-						: TEXT_COLOR_NORMAL);
-		holder.summary2TextView
-				.setTextColor(mSortType == StatsData.SORT_BY_STEPS ? TEXT_COLOR_HIGHLIGHTED
-						: TEXT_COLOR_NORMAL);
+		if (mSortType == StatsData.SORT_BY_DATE) {
+			holder.dateTextView.setTextColor(TEXT_COLOR_HIGHLIGHTED);
+		} else if (mSortType == StatsData.SORT_BY_TIME) {
+			holder.summary1TextView.setTextColor(TEXT_COLOR_HIGHLIGHTED);
+		} else if (mSortType == StatsData.SORT_BY_STEPS) {
+			holder.summary2TextView.setTextColor(TEXT_COLOR_HIGHLIGHTED);
+		}
 		return rowView;
 	}
 }

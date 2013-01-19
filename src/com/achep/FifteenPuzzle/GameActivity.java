@@ -14,6 +14,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -103,18 +104,18 @@ public class GameActivity extends Activity implements ActivityInterface {
 		super.onDetachedFromWindow();
 		mDraw = false;
 	}
-	
+
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		
+
 		mGameView.recycleBitmaps();
 	}
 
 	@Override
 	public void onGameOver(int steps, long timeMillis, int length) {
 		int time = (int) Utils.div(timeMillis, 1000);
-		
+
 		final LayoutInflater inflater = (LayoutInflater) this
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		LinearLayout ll = (LinearLayout) inflater.inflate(
@@ -150,6 +151,13 @@ public class GameActivity extends Activity implements ActivityInterface {
 		cv.put(DBHelper.LENGTH, length);
 		cv.put(DBHelper.TIME, time);
 		cv.put(DBHelper.STEPS, steps);
+		cv.put(DBHelper.DATE_MINS, (int) Utils.div(
+				Utils.div(System.currentTimeMillis(), 1000), 60));
+		Log.i("",
+				"time="
+						+ (int) Utils.div(
+								Utils.div(System.currentTimeMillis(), 1000), 60));
+		Log.i("", "time=" + System.currentTimeMillis() / 60000);
 
 		db.insert(DBHelper.TABLE_NAME, null, cv);
 		db.close();

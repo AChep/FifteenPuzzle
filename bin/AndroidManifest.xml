@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.achep.FifteenPuzzle"
-    android:versionCode="6"
-    android:versionName="2.21" >
+    android:versionCode="7"
+    android:versionName="2.22" >
 
     <uses-sdk
         android:minSdkVersion="8"
