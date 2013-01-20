@@ -45,7 +45,7 @@ public class GraphsView extends View {
 		super(context, attrs, styles);
 		mPaint = new Paint();
 		mPaint.setAntiAlias(true);
-		mPaint.setTextSize(16);
+		mPaint.setTextSize(16 * getResources().getDisplayMetrics().density);
 
 		mPointsList = new ArrayList<Integer[]>();
 		mColorsList = new ArrayList<Integer>();
@@ -101,8 +101,9 @@ public class GraphsView extends View {
 						getPointX(j, values.length, width), stopY, mPaint);
 			}
 
-			int y = height - 17 * (i + 1);
-			canvas.drawCircle(10, y - mPaint.getTextSize() / 2 + 4, 3f, mPaint);
+			float textSize = mPaint.getTextSize();
+			float y = height - (textSize  + 2) * (i + 1);
+			canvas.drawCircle(10, y - textSize / 2 + 4, textSize / 8, mPaint);
 			canvas.drawText(mLabelsList.get(i), 20, y, mPaint);
 		}
 	}

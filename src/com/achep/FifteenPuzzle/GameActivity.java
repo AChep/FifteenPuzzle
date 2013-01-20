@@ -3,6 +3,7 @@ package com.achep.FifteenPuzzle;
 import com.achep.FifteenPuzzle.GameView.ActivityInterface;
 import com.achep.FifteenPuzzle.preferences.Settings;
 import com.achep.FifteenPuzzle.stats.DBHelper;
+import com.achep.FifteenPuzzle.updater.AsyncCheckVersion;
 
 import android.app.Activity;
 import android.content.ContentValues;
@@ -14,7 +15,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -66,7 +66,8 @@ public class GameActivity extends Activity implements ActivityInterface {
 		});
 
 		mHandler = new Handler();
-
+		
+		new AsyncCheckVersion().execute(this);
 	}
 
 	@Override
@@ -153,11 +154,6 @@ public class GameActivity extends Activity implements ActivityInterface {
 		cv.put(DBHelper.STEPS, steps);
 		cv.put(DBHelper.DATE_MINS, (int) Utils.div(
 				Utils.div(System.currentTimeMillis(), 1000), 60));
-		Log.i("",
-				"time="
-						+ (int) Utils.div(
-								Utils.div(System.currentTimeMillis(), 1000), 60));
-		Log.i("", "time=" + System.currentTimeMillis() / 60000);
 
 		db.insert(DBHelper.TABLE_NAME, null, cv);
 		db.close();

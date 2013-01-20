@@ -1,7 +1,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.achep.FifteenPuzzle"
-    android:versionCode="7"
-    android:versionName="2.22" >
+    android:versionCode="8"
+    android:versionName="2.3" >
+
+    <!-- Auto Updater Permissions -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <uses-sdk
         android:minSdkVersion="8"
@@ -39,6 +44,11 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".updater.AutoUpdater"
+            android:label="@string/auto_updater"
+            android:launchMode="singleInstance"
+            android:theme="@style/GameActivity" />
     </application>
 
 </manifest>

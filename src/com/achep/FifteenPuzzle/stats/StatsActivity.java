@@ -38,6 +38,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class StatsActivity extends Activity implements OnClickListener {
 
@@ -95,8 +96,8 @@ public class StatsActivity extends Activity implements OnClickListener {
 				// Build confirm dialog
 				new AlertDialog.Builder(StatsActivity.this)
 						.setIcon(android.R.drawable.ic_dialog_alert)
-						.setTitle(R.string.settings_statistic_drop_title)
-						.setMessage(R.string.settings_statistic_drop_message)
+						.setTitle(R.string.stats_drop_title)
+						.setMessage(R.string.stats_drop_message)
 						.setPositiveButton(android.R.string.ok,
 								new DialogInterface.OnClickListener() {
 
@@ -110,6 +111,14 @@ public class StatsActivity extends Activity implements OnClickListener {
 												.getWritableDatabase();
 										DBHelper.dropTable(db);
 										db.close();
+
+										// Make message
+										Toast.makeText(
+												StatsActivity.this,
+												getResources()
+														.getString(
+																R.string.stats_dropped_sucessfully_toast),
+												Toast.LENGTH_LONG).show();
 
 										// Finish activity
 										StatsActivity.this.finish();
@@ -130,6 +139,7 @@ public class StatsActivity extends Activity implements OnClickListener {
 			}
 		});
 
+		// Async data loading...
 		new LoadDatabaseStats().execute();
 	}
 
@@ -161,7 +171,8 @@ public class StatsActivity extends Activity implements OnClickListener {
 
 		@Override
 		protected Void doInBackground(Void... void_) {
-			SharedPreferences prefs = getSharedPreferences("preferences2", 0);
+			SharedPreferences prefs = getSharedPreferences(
+					Settings.SHARED_PREFERENCES_FILE, 0);
 			int length = prefs.getInt(Settings.Keys.SPREF_PUZZLE_LENGTH,
 					PrefPuzzleLengthPicker.DEFAULT);
 
@@ -206,6 +217,7 @@ public class StatsActivity extends Activity implements OnClickListener {
 			}
 			mStatsData = new StatsData(nicknames.toArray(new String[length]),
 					timesInt, stepsInt, dateInt);
+			
 			mStatsData.sort(StatsData.SORT_BY_DATE);
 			mStatsData.sort(StatsData.SORT_BY_STEPS);
 			mStatsData.sort(StatsData.SORT_BY_TIME);
@@ -216,7 +228,9 @@ public class StatsActivity extends Activity implements OnClickListener {
 		protected void onPostExecute(Void void_) {
 			mProgressBar.setVisibility(View.GONE);
 			mClearButton.setVisibility(View.VISIBLE);
-			mGraphButton.setVisibility(View.VISIBLE);
+			
+			if (mStatsData.getLength() >= 2)
+				mGraphButton.setVisibility(View.VISIBLE);
 
 			setListViewAdapter(StatsData.SORT_BY_TIME);
 		}
@@ -241,7 +255,10 @@ public class StatsActivity extends Activity implements OnClickListener {
 		protected void onPostExecute(Integer type) {
 			mProgressBar.setVisibility(View.GONE);
 			mClearButton.setVisibility(View.VISIBLE);
-			mGraphButton.setVisibility(View.VISIBLE);
+			
+			if (mStatsData.getLength() >= 2)
+				mGraphButton.setVisibility(View.VISIBLE);
+			
 			setListViewAdapter(type);
 		}
 	}
@@ -279,7 +296,7 @@ class StatsData {
 		int[] sorted = new int[values.length];
 		int handle = sorted.length - 1;
 
-		// Sorting
+		// Stable sorting
 		int max = Integer.MAX_VALUE;
 		do {
 			int maxNew = 0;
@@ -378,5 +395,9 @@ class StatsData {
 
 	public int[] getDates() {
 		return mDates;
+	}
+
+	public int getLength() {
+		return mUsernames.length;
 	}
 }

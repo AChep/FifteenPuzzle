@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012-2013 AChep@xda <artemchep@gmail.com>
+ * Copyright (C) 2013 AChep@xda <artemchep@gmail.com>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,7 +33,6 @@ import android.widget.TextView;
 
 public class ListViewArrayAdapter extends ArrayAdapter<String> {
 
-	private static final int TEXT_COLOR_NORMAL = 0xffaaaaaa;
 	private static final int TEXT_COLOR_HIGHLIGHTED = 0xff40dd20;
 
 	private final Activity context;

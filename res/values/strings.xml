@@ -9,17 +9,31 @@
     
     <string name="pref_number_picker_base_reset">Reset value</string>
     
+    <!-- Updater -->
+    <string name="auto_updater">Auto-Updater</string>
+    <string name="auto_updater_changelog">Changelog\:</string>
+    <string name="auto_updater_downloading_dialog">Downloading...</string>
+    <string name="auto_updater_downloading_error1">Failed to open connection.</string>
+    <string name="auto_updater_downloading_error2">Failed to open input steam.</string>
+    <string name="auto_updater_downloading_error3">Failed to create output file.</string>
+    <string name="auto_updater_downloading_error4">Downloading failed.</string>
+    <string name="auto_updater_downloading_error_connection">Please, enable Internet connection first.</string>
+    <string name="auto_updater_notification_summary">Download new version there!</string>
+    
+    <!-- Statistic -->
     <string name="stats">Statistic</string>
     <string name="stats_time">@string/game_time</string>
     <string name="stats_steps">@string/game_steps</string>
     <string name="stats_username_and_date">Username\nDate</string>
-    <string name="stats_graph_title">Graph of results.</string>
+    <string name="stats_graph_title">Graph of results</string>
+    <string name="stats_drop_title">Clear statistic</string>
+    <string name="stats_drop_message">This action will clear results of all games! Data can not be restored!</string>
+    <string name="stats_dropped_sucessfully_toast">Base of scores has been dropped successfully.</string>
+    
+    <string name="settings">Settings</string>    
+    
     <string name="settings_statistic2">Your best game scores!</string>
     <string name="settings_statistic">Statistic</string>
-    <string name="settings_statistic_drop_title">Remove all statistic.</string>
-    <string name="settings_statistic_drop_message">Are you sure to clear results base? Aftermath of this action can\'t be restored!</string>
-    
-    <string name="settings">Settings</string>
     
     <string name="settings_category">Settings</string>
     <string name="settings_nickname_default">Magician</string>

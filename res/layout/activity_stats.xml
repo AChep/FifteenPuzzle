@@ -95,7 +95,6 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_margin="20dip"
-        android:background="@drawable/list_view_background_dark"
         android:orientation="vertical" >
 
         <LinearLayout
@@ -143,7 +142,8 @@
         <ListView
             android:id="@+id/list_view"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent" />
+            android:layout_height="fill_parent"
+            android:background="@drawable/list_view_background_dark" />
     </LinearLayout>
 
 </LinearLayout>

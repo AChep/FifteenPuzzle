@@ -6,15 +6,31 @@
     <string name="game_congraz_title">Поздравляем!</string>
     <string name="game_congraz_message">Вы собрали этот пазл!</string>
     <string name="pref_number_picker_base_reset">Сбросить значение</string>
+        
+    <!-- Updater -->
+    <string name="auto_updater">Авто-обновление</string>
+    <string name="auto_updater_changelog">Список изменений\:</string>
+    <string name="auto_updater_downloading_dialog">Идет загрузка...</string>
+    <string name="auto_updater_downloading_error1">Ошибка открытия соединения.</string>
+    <string name="auto_updater_downloading_error2">Ошибка открытия входящего потока.</string>
+    <string name="auto_updater_downloading_error3">Ошибка создания файла.</string>
+    <string name="auto_updater_downloading_error4">Ошибка загрузки.</string>
+    <string name="auto_updater_downloading_error_connection">Пожалуйста, сначала включите Интернет соединение.</string>
+    <string name="auto_updater_notification_summary">Загрузите новую версия здесь!</string>
+    
+    <!-- Statistic -->
     <string name="stats">Статистика</string>
     <string name="stats_time">@string/game_time</string>
     <string name="stats_steps">@string/game_steps</string>
     <string name="stats_username_and_date">Имя пользователя\nДата</string>
-    <string name="stats_graph_title">График результатов.</string>
+    <string name="stats_graph_title">График результатов</string>
+    <string name="stats_drop_title">Очистить статистику</string>
+    <string name="stats_drop_message">Это действие удалит результаты всех Ваших игр! Данные не могут быть восстановлены!</string>
+    <string name="stats_dropped_sucessfully_toast">Таблица рекордов была успешно удалена.</string>
+    
+    
     <string name="settings_statistic2">Ваши лучшие рекорды!</string>
     <string name="settings_statistic">Статистика</string>
-    <string name="settings_statistic_drop_title">Очистить статистику.</string>
-    <string name="settings_statistic_drop_message">Вы уверены, что вы хотите очистить все Ваши результаты? Это действие будет невозможно отменить!</string>
     <string name="settings">Настройки</string>
     <string name="settings_category">Настройки</string>
     <string name="settings_nickname_default">Маг</string>
