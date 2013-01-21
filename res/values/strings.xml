@@ -5,7 +5,7 @@
     <string name="game_time">Time</string>
     <string name="game_steps">Steps</string>
     <string name="game_congraz_title">Congratulations!</string>
-    <string name="game_congraz_message">You\'re solved it!</string>
+    <string name="game_congraz_message">You\'ve solved it!</string>
     
     <string name="pref_number_picker_base_reset">Reset value</string>
     
@@ -14,11 +14,11 @@
     <string name="auto_updater_changelog">Changelog\:</string>
     <string name="auto_updater_downloading_dialog">Downloading...</string>
     <string name="auto_updater_downloading_error1">Failed to open connection.</string>
-    <string name="auto_updater_downloading_error2">Failed to open input steam.</string>
+    <string name="auto_updater_downloading_error2">Failed to open input stream.</string>
     <string name="auto_updater_downloading_error3">Failed to create output file.</string>
-    <string name="auto_updater_downloading_error4">Downloading failed.</string>
-    <string name="auto_updater_downloading_error_connection">Please, enable Internet connection first.</string>
-    <string name="auto_updater_notification_summary">Download new version there!</string>
+    <string name="auto_updater_downloading_error4">Download failed.</string>
+    <string name="auto_updater_downloading_error_connection">Please enable your Internet connection first.</string>
+    <string name="auto_updater_notification_summary">Download the new version here!</string>
     
     <!-- Statistic -->
     <string name="stats">Statistic</string>
@@ -27,20 +27,20 @@
     <string name="stats_username_and_date">Username\nDate</string>
     <string name="stats_graph_title">Graph of results</string>
     <string name="stats_drop_title">Clear statistic</string>
-    <string name="stats_drop_message">This action will clear results of all games! Data can not be restored!</string>
-    <string name="stats_dropped_sucessfully_toast">Base of scores has been dropped successfully.</string>
+    <string name="stats_drop_message">This action will clear all results! Data can not be restored!</string>
+    <string name="stats_dropped_sucessfully_toast">Scores\' database has been dropped successfully.</string>
     
     <string name="settings">Settings</string>    
     
     <string name="settings_statistic2">Your best game scores!</string>
-    <string name="settings_statistic">Statistic</string>
+    <string name="settings_statistic">Statistics</string>
     
     <string name="settings_category">Settings</string>
     <string name="settings_nickname_default">Magician</string>
     <string name="settings_nickname3">Enter your new user name</string>
     <string name="settings_nickname2">Current user name is</string>
     <string name="settings_nickname">User name</string>
-    <string name="settings_puzzle_length2">Pick the number of chips at line</string>
+    <string name="settings_puzzle_length2">Pick the number of chips per line</string>
     <string name="settings_puzzle_length">Number of chips</string>
 
 </resources>
