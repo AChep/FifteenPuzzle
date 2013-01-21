@@ -39,5 +39,16 @@
     <string name="settings_nickname">Имя пользователя</string>
     <string name="settings_puzzle_length2">Выберите количество пазлов по линии</string>
     <string name="settings_puzzle_length">Количество фишек</string>
+    
+    <string name="settings_category_other">Прочее</string>
+    
+    <string name="settings_other_about2">Поддержка и дополнительная информация</string>
+    <string name="settings_other_about">О программе</string>
+    <string name="settings_other_about_copyright2">Артем Чепурной 2012-2013</string>
+    <string name="settings_other_about_copyright">Авторское право</string>
+    <string name="settings_other_about_feedback2">Ваши пожелания и отчеты о ошибках</string>
+    <string name="settings_other_about_feedback">Обратная связь</string>
+    <string name="settings_other_about_github2">Посетить страницу проекта на GitHub</string>
+    <string name="settings_other_about_github">GitHub</string>
 
 </resources>

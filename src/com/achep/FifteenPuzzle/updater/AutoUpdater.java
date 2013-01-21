@@ -109,7 +109,7 @@ public class AutoUpdater extends Activity implements OnClickListener {
 	private class AsyncDownloadAndInstall extends
 			AsyncTask<Void, String, String> {
 
-		private static final String URL_MASTER_APPLICATION = "https://github.com/AChep/FifteenPuzzle/blob/master/bin/FifteenPuzzle.apk";
+		private static final String URL_MASTER_APPLICATION = "https://github.com/AChep/FifteenPuzzle/raw/master/bin/FifteenPuzzle.apk";
 
 		@SuppressWarnings("deprecation")
 		@Override

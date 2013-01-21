@@ -18,11 +18,14 @@ package com.achep.FifteenPuzzle.preferences;
 
 import com.achep.FifteenPuzzle.R;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.preference.EditTextPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
+import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceActivity;
+import android.widget.Toast;
 
 public class Settings extends PreferenceActivity implements
 		OnPreferenceChangeListener {
@@ -32,7 +35,9 @@ public class Settings extends PreferenceActivity implements
 
 	public static class Keys {
 		public final static String SPREF_PUZZLE_LENGTH = "spref_puzzle_length";
+
 		public final static String PREF_USER_NAME = "pref_user_name";
+		public final static String PREF_ABOUT_FEEDBACK = "pref_about_feedback";
 	}
 
 	private EditTextPreference mPrefUserName;
@@ -46,6 +51,38 @@ public class Settings extends PreferenceActivity implements
 		mPrefUserName = (EditTextPreference) findPreference(Keys.PREF_USER_NAME);
 		mPrefUserName.setOnPreferenceChangeListener(this);
 		updateUserNamePreference(mPrefUserName.getText());
+
+		Preference prefFeedback = (Preference) findPreference(Keys.PREF_ABOUT_FEEDBACK);
+		prefFeedback
+				.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+
+					@Override
+					public boolean onPreferenceClick(Preference preference) {
+						// TODO: Add something real XD
+						Intent i = new Intent(Intent.ACTION_SEND);
+						i.setType("message/rfc822");
+						i.putExtra(Intent.EXTRA_EMAIL,
+								new String[] { "artemchep@gmail.com" });
+						i.putExtra(Intent.EXTRA_SUBJECT, "FifteenPuzzle (suggestions & reports): ");
+						StringBuilder body = new StringBuilder();
+						body.append("Device model: "+android.os.Build.MODEL+"\n");
+						body.append("Android version: "+android.os.Build.VERSION.CODENAME+"\n");
+						body.append("CPU: "+android.os.Build.CPU_ABI+"\n\nDear developer,\n");
+						i.putExtra(Intent.EXTRA_TEXT, body.toString());
+						try {
+							startActivity(Intent.createChooser(i,
+									"Send mail..."));
+						} catch (android.content.ActivityNotFoundException ex) {
+							Toast.makeText(
+									Settings.this,
+									getResources()
+											.getString(
+													R.string.settings_other_about_feedback_failed),
+									Toast.LENGTH_SHORT).show();
+						}
+						return true;
+					}
+				});
 	}
 
 	@Override

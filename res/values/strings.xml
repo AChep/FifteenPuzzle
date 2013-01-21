@@ -42,5 +42,17 @@
     <string name="settings_nickname">User name</string>
     <string name="settings_puzzle_length2">Pick the number of chips per line</string>
     <string name="settings_puzzle_length">Number of chips</string>
+    
+    <string name="settings_category_other">Other</string>
+    
+    <string name="settings_other_about2">Feedback and additional information</string>
+    <string name="settings_other_about">About</string>
+    <string name="settings_other_about_copyright2">Artem Chepurnoy 2012-2013</string>
+    <string name="settings_other_about_copyright">Copyright</string>
+    <string name="settings_other_about_feedback_failed">There are no email clients installed.</string>
+    <string name="settings_other_about_feedback2">Post your suggestions and bug-reports</string>
+    <string name="settings_other_about_feedback">Feedback</string>
+    <string name="settings_other_about_github2">Visit project page at GitHub</string>
+    <string name="settings_other_about_github">GitHub</string>
 
 </resources>

@@ -56,7 +56,7 @@ public class AsyncCheckVersion extends AsyncTask<Context, Void, String> {
 		int versionCodeNew = Integer.parseInt(manifest.substring(0, a));
 		try {
 			if (mContext.getPackageManager().getPackageInfo(
-					mContext.getPackageName(), 0).versionCode < versionCodeNew)
+					mContext.getPackageName(), 0).versionCode >= versionCodeNew)
 				return null;
 		} catch (NameNotFoundException e) {
 			return null;

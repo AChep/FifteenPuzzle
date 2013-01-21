@@ -22,5 +22,29 @@
             android:summary="@string/settings_puzzle_length2"
             android:title="@string/settings_puzzle_length" />
     </PreferenceCategory>
+    <PreferenceCategory android:title="@string/settings_category_other" >
+        <PreferenceScreen
+            android:summary="@string/settings_other_about2"
+            android:title="@string/settings_other_about" >
+            <Preference
+                android:summary="@string/settings_other_about_copyright2"
+                android:title="@string/settings_other_about_copyright" >
+                <intent
+                    android:action="android.intent.action.VIEW"
+                    android:data="http://forum.xda-developers.com/member.php?u=3685328" />
+            </Preference>
+            <Preference
+                android:key="pref_about_feedback"
+                android:summary="@string/settings_other_about_feedback2"
+                android:title="@string/settings_other_about_feedback" />
+            <Preference
+                android:summary="@string/settings_other_about_github2"
+                android:title="@string/settings_other_about_github" >
+                <intent
+                    android:action="android.intent.action.VIEW"
+                    android:data="https://github.com/AChep/FifteenPuzzle" />
+            </Preference>
+        </PreferenceScreen>
+    </PreferenceCategory>
 
 </PreferenceScreen>
