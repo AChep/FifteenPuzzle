@@ -77,7 +77,7 @@ public class GraphsView extends View {
 
 		// Build background
 		mPaint.setStrokeWidth(1f);
-		mPaint.setColor(0x90909090);
+		mPaint.setColor(0x90707070);
 		float step = (float) height / mMaxValue * 10;
 		for (int i = 0; i <= width; i += step)
 			canvas.drawLine(i, 0, i, height, mPaint);
@@ -102,7 +102,7 @@ public class GraphsView extends View {
 			}
 
 			float textSize = mPaint.getTextSize();
-			float y = height - (textSize  + 2) * (i + 1);
+			float y = height - (textSize  * 1.2f) * (i + 1);
 			canvas.drawCircle(10, y - textSize / 2 + 4, textSize / 8, mPaint);
 			canvas.drawText(mLabelsList.get(i), 20, y, mPaint);
 		}

@@ -27,23 +27,31 @@
             android:summary="@string/settings_other_about2"
             android:title="@string/settings_other_about" >
             <Preference
+                android:enabled="false"
+                android:key="pref_about_current_version"
+                android:title="@string/settings_other_about_version" />
+
+            <com.achep.FifteenPuzzle.preferences.PrefIcon
                 android:summary="@string/settings_other_about_copyright2"
-                android:title="@string/settings_other_about_copyright" >
+                android:title="@string/settings_other_about_copyright"
+                this:icon="@drawable/ic_settings_copyright" >
                 <intent
                     android:action="android.intent.action.VIEW"
                     android:data="http://forum.xda-developers.com/member.php?u=3685328" />
-            </Preference>
-            <Preference
+            </com.achep.FifteenPuzzle.preferences.PrefIcon>
+            <com.achep.FifteenPuzzle.preferences.PrefIcon
                 android:key="pref_about_feedback"
                 android:summary="@string/settings_other_about_feedback2"
-                android:title="@string/settings_other_about_feedback" />
-            <Preference
+                android:title="@string/settings_other_about_feedback"
+                this:icon="@drawable/ic_settings_cloud" />
+            <com.achep.FifteenPuzzle.preferences.PrefIcon
                 android:summary="@string/settings_other_about_github2"
-                android:title="@string/settings_other_about_github" >
+                android:title="@string/settings_other_about_github"
+                this:icon="@drawable/ic_settings_github" >
                 <intent
                     android:action="android.intent.action.VIEW"
                     android:data="https://github.com/AChep/FifteenPuzzle" />
-            </Preference>
+            </com.achep.FifteenPuzzle.preferences.PrefIcon>
         </PreferenceScreen>
     </PreferenceCategory>
 

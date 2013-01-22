@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012 AChep@xda <artemchep@gmail.com>
+ * Copyright (C) 2012-2013 AChep@xda <artemchep@gmail.com>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@ package com.achep.FifteenPuzzle.preferences;
 import com.achep.FifteenPuzzle.R;
 
 import android.content.Intent;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
 import android.preference.EditTextPreference;
 import android.preference.Preference;
@@ -37,6 +38,8 @@ public class Settings extends PreferenceActivity implements
 		public final static String SPREF_PUZZLE_LENGTH = "spref_puzzle_length";
 
 		public final static String PREF_USER_NAME = "pref_user_name";
+
+		public final static String PREF_ABOUT_CURRENT_VERSION = "pref_about_current_version";
 		public final static String PREF_ABOUT_FEEDBACK = "pref_about_feedback";
 	}
 
@@ -52,22 +55,35 @@ public class Settings extends PreferenceActivity implements
 		mPrefUserName.setOnPreferenceChangeListener(this);
 		updateUserNamePreference(mPrefUserName.getText());
 
+		Preference prefCurrentVersion = (Preference) findPreference(Keys.PREF_ABOUT_CURRENT_VERSION);
+		try {
+			prefCurrentVersion
+					.setSummary(getResources().getString(R.string.app_name)
+							+ " "
+							+ getPackageManager().getPackageInfo(
+									getPackageName(), 0).versionName);
+		} catch (NameNotFoundException e) {
+		}
 		Preference prefFeedback = (Preference) findPreference(Keys.PREF_ABOUT_FEEDBACK);
 		prefFeedback
 				.setOnPreferenceClickListener(new OnPreferenceClickListener() {
 
 					@Override
 					public boolean onPreferenceClick(Preference preference) {
-						// TODO: Add something real XD
 						Intent i = new Intent(Intent.ACTION_SEND);
 						i.setType("message/rfc822");
 						i.putExtra(Intent.EXTRA_EMAIL,
 								new String[] { "artemchep@gmail.com" });
-						i.putExtra(Intent.EXTRA_SUBJECT, "FifteenPuzzle (suggestions & reports): ");
+						i.putExtra(Intent.EXTRA_SUBJECT,
+								"Fifteen Puzzles (suggestions & reports): ");
 						StringBuilder body = new StringBuilder();
-						body.append("Device model: "+android.os.Build.MODEL+"\n");
-						body.append("Android version: "+android.os.Build.VERSION.CODENAME+"\n");
-						body.append("CPU: "+android.os.Build.CPU_ABI+"\n\nDear developer,\n");
+						body.append("Device model: "
+								+ android.os.Build.MANUFACTURER + " "
+								+ android.os.Build.PRODUCT + "\n");
+						body.append("Android version: "
+								+ android.os.Build.VERSION.SDK + "\n");
+						body.append("CPU: " + android.os.Build.CPU_ABI
+								+ "\n\nDear developer, ");
 						i.putExtra(Intent.EXTRA_TEXT, body.toString());
 						try {
 							startActivity(Intent.createChooser(i,
