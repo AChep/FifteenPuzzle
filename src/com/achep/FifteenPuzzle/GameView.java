@@ -38,11 +38,14 @@ public class GameView extends View implements
 
 	private static final int MOTION_DATA_ORIENTATION = 0;
 	private static final int MOTION_DATA_CHIP = 1;
-	private static final int MOTION_DATA_MIN = 2;
-	private static final int MOTION_DATA_MAX = 3;
+	private static final int MOTION_DATA_DIRECTION = 2;
+	private static final int MOTION_DATA_MIN = 3;
+	private static final int MOTION_DATA_MAX = 4;
 
 	private static final int MOTION_DATA_ORIENTATION_VERTICAL = 1;
 	private static final int MOTION_DATA_ORIENTATION_HORIZONTAL = 0;
+	private static final int MOTION_DATA_DIRECTION_RIGHT = 1;
+	private static final int MOTION_DATA_DIRECTION_LEFT = -1;
 	private static final int MOTION_DATA_NOTHING = -1;
 
 	private int mLength;
@@ -61,6 +64,10 @@ public class GameView extends View implements
 
 	private boolean mTouchable = true;
 	private int[] mTouchCoordsReal = new int[2];
+
+	private long mTouchDownTime;
+	private int[] mTouchDownCoordsReal = new int[2];
+	private boolean mQuickSwipe;
 
 	private int[] mMotionData;
 
@@ -153,7 +160,7 @@ public class GameView extends View implements
 		mSpaceIndex = mChips.length;
 		mTrack[mSpaceIndex] = mSpaceIndex;
 		mTrackSpace = mSpaceIndex;
-		
+
 		mGameOver = true;
 	}
 
@@ -217,9 +224,13 @@ public class GameView extends View implements
 					- chip2dPos[mMotionData[MOTION_DATA_ORIENTATION]] > 0) {
 				chipsCoordsRange[0] = chip2dPos[mMotionData[MOTION_DATA_ORIENTATION]];
 				chipsCoordsRange[1] = chipsCoordsRange[0] + 1;
+
+				mMotionData[MOTION_DATA_DIRECTION] = MOTION_DATA_DIRECTION_RIGHT;
 			} else { // We can move it to -1
 				chipsCoordsRange[1] = chip2dPos[mMotionData[MOTION_DATA_ORIENTATION]];
 				chipsCoordsRange[0] = chipsCoordsRange[1] - 1;
+
+				mMotionData[MOTION_DATA_DIRECTION] = MOTION_DATA_DIRECTION_LEFT;
 			}
 			Coords.convert2dToReal(chipsCoordsRange, mChipSize,
 					chipsCoordsRange);
@@ -245,6 +256,11 @@ public class GameView extends View implements
 				}
 			}
 
+			mTouchDownTime = System.currentTimeMillis();
+			mTouchDownCoordsReal[0] = mTouchCoordsReal[0];
+			mTouchDownCoordsReal[1] = mTouchCoordsReal[1];
+			mQuickSwipe = true;
+
 			// Push it to drawing
 			event.setAction(MotionEvent.ACTION_MOVE);
 			onTouchEvent(event);
@@ -257,6 +273,10 @@ public class GameView extends View implements
 			// If nothing is selected or not possible to move it
 			if (mMotionData[MOTION_DATA_ORIENTATION] == MOTION_DATA_NOTHING)
 				return false; // Just stop it
+
+			if (Math.abs(mTouchDownCoordsReal[0] - mTouchCoordsReal[0]) > 10
+					|| Math.abs(mTouchDownCoordsReal[1] - mTouchCoordsReal[1]) > 10)
+				mQuickSwipe = false;
 
 			// Fix of the swapping puzzle on slowly phones
 			int xy = Utils.alignToRange(
@@ -295,19 +315,25 @@ public class GameView extends View implements
 					: 1;
 			int xyconst = 0;
 
+			// Quick click as swipe
+			boolean quickSwipe = mQuickSwipe
+					&& System.currentTimeMillis() - mTouchDownTime <= 200;
+
 			final int[] chipCoords2 = new int[2];
+			final int[] trackStable = mTrack.clone();
 			for (int i = 1; i < mLength; i++) {
 				// Get chips id from moves data
 				int chipId = mMotionData[i + MOTION_DATA_MAX];
 
 				Coords.roundRealTo2d(mChips[chipId].getCoordsLink(), mChipSize,
 						chipCoords2);
-				final int chipCoordsLine = Coords.convert2dToLine(chipCoords2,
+				int chipCoordsLine = Coords.convert2dToLine(chipCoords2,
 						mLength);
 
-				changed[chipCoords2[mMotionData[MOTION_DATA_ORIENTATION]]] = true;
-				if (mTrack[chipCoordsLine] != chipId)
+				if (trackStable[chipCoordsLine] != chipId)
 					theSame = false;
+				changed[chipCoords2[mMotionData[MOTION_DATA_ORIENTATION]]] = true;
+
 				mTrack[chipCoordsLine] = chipId; // track it
 				xyconst = chipCoords2[orientationInversed]; // set const xy
 
