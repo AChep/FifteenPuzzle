@@ -10,6 +10,9 @@
     <!-- ActionBar -->
     <string name="action_bar_new_game">Новая игра</string>
     <string name="action_bar_settings">Настройки</string>
+    <string name="action_bar_download_new_version">Загрузить новую версию</string>
+    <string name="action_bar_statistic_graph">Показать график</string>
+    <string name="action_bar_statistic_clear">Очистить статистику</string>
         
     <!-- Updater -->
     <string name="auto_updater">Авто-обновление</string>

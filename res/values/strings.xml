@@ -12,6 +12,9 @@
     <!-- ActionBar -->
     <string name="action_bar_new_game">New game</string>
     <string name="action_bar_settings">Settings</string>
+    <string name="action_bar_download_new_version">Download new version</string>
+    <string name="action_bar_statistic_graph">Show graph</string>
+    <string name="action_bar_statistic_clear">Clear statistic</string>
     
     <!-- Updater -->
     <string name="auto_updater">Auto-Updater</string>

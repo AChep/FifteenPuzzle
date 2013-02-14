@@ -39,6 +39,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnLongClickListener;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -69,6 +70,14 @@ public class AutoUpdater extends Activity implements OnClickListener {
 			newVersion.setText(mVersionName);
 
 			mDownloadButton = (ImageView) findViewById(R.id.download);
+			mDownloadButton.setOnLongClickListener(new OnLongClickListener() {
+
+				@Override
+				public boolean onLongClick(View v) {
+					makeToast(R.string.action_bar_download_new_version);
+					return true;
+				}
+			});
 			mBackButton = (RelativeLayout) findViewById(R.id.back);
 			mChangelog = (TextView) findViewById(R.id.content);
 			mProgressBar = (ProgressBar) findViewById(R.id.progressbar);
@@ -83,6 +92,11 @@ public class AutoUpdater extends Activity implements OnClickListener {
 			mDownloadButton.setVisibility(View.VISIBLE);
 		} else
 			finish();
+	}
+
+	private void makeToast(int stringId) {
+		Toast.makeText(this, getResources().getString(stringId),
+				Toast.LENGTH_SHORT).show();
 	}
 
 	@Override

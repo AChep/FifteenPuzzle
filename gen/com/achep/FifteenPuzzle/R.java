@@ -87,61 +87,64 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int preference_number_picker_base=0x7f030007;
     }
     public static final class string {
+        public static final int action_bar_download_new_version=0x7f070008;
         /**  ActionBar 
  ActionBar 
          */
         public static final int action_bar_new_game=0x7f070006;
         public static final int action_bar_settings=0x7f070007;
+        public static final int action_bar_statistic_clear=0x7f07000a;
+        public static final int action_bar_statistic_graph=0x7f070009;
         public static final int app_name=0x7f070000;
         /**  Updater 
  Updater 
          */
-        public static final int auto_updater=0x7f070008;
-        public static final int auto_updater_changelog=0x7f070009;
-        public static final int auto_updater_downloading_dialog=0x7f07000a;
-        public static final int auto_updater_downloading_error1=0x7f07000b;
-        public static final int auto_updater_downloading_error2=0x7f07000c;
-        public static final int auto_updater_downloading_error3=0x7f07000d;
-        public static final int auto_updater_downloading_error4=0x7f07000e;
-        public static final int auto_updater_downloading_error_connection=0x7f07000f;
-        public static final int auto_updater_notification_summary=0x7f070010;
+        public static final int auto_updater=0x7f07000b;
+        public static final int auto_updater_changelog=0x7f07000c;
+        public static final int auto_updater_downloading_dialog=0x7f07000d;
+        public static final int auto_updater_downloading_error1=0x7f07000e;
+        public static final int auto_updater_downloading_error2=0x7f07000f;
+        public static final int auto_updater_downloading_error3=0x7f070010;
+        public static final int auto_updater_downloading_error4=0x7f070011;
+        public static final int auto_updater_downloading_error_connection=0x7f070012;
+        public static final int auto_updater_notification_summary=0x7f070013;
         public static final int game_congraz_message=0x7f070004;
         public static final int game_congraz_title=0x7f070003;
         public static final int game_steps=0x7f070002;
         public static final int game_time=0x7f070001;
         public static final int pref_number_picker_base_reset=0x7f070005;
-        public static final int settings=0x7f070019;
-        public static final int settings_category=0x7f07001c;
-        public static final int settings_category_other=0x7f070023;
-        public static final int settings_nickname=0x7f070020;
-        public static final int settings_nickname2=0x7f07001f;
-        public static final int settings_nickname3=0x7f07001e;
-        public static final int settings_nickname_default=0x7f07001d;
-        public static final int settings_other_about=0x7f070025;
-        public static final int settings_other_about2=0x7f070024;
-        public static final int settings_other_about_copyright=0x7f070028;
-        public static final int settings_other_about_copyright2=0x7f070027;
-        public static final int settings_other_about_feedback=0x7f07002b;
-        public static final int settings_other_about_feedback2=0x7f07002a;
-        public static final int settings_other_about_feedback_failed=0x7f070029;
-        public static final int settings_other_about_github=0x7f07002d;
-        public static final int settings_other_about_github2=0x7f07002c;
-        public static final int settings_other_about_version=0x7f070026;
-        public static final int settings_puzzle_length=0x7f070022;
-        public static final int settings_puzzle_length2=0x7f070021;
-        public static final int settings_statistic=0x7f07001b;
-        public static final int settings_statistic2=0x7f07001a;
+        public static final int settings=0x7f07001c;
+        public static final int settings_category=0x7f07001f;
+        public static final int settings_category_other=0x7f070026;
+        public static final int settings_nickname=0x7f070023;
+        public static final int settings_nickname2=0x7f070022;
+        public static final int settings_nickname3=0x7f070021;
+        public static final int settings_nickname_default=0x7f070020;
+        public static final int settings_other_about=0x7f070028;
+        public static final int settings_other_about2=0x7f070027;
+        public static final int settings_other_about_copyright=0x7f07002b;
+        public static final int settings_other_about_copyright2=0x7f07002a;
+        public static final int settings_other_about_feedback=0x7f07002e;
+        public static final int settings_other_about_feedback2=0x7f07002d;
+        public static final int settings_other_about_feedback_failed=0x7f07002c;
+        public static final int settings_other_about_github=0x7f070030;
+        public static final int settings_other_about_github2=0x7f07002f;
+        public static final int settings_other_about_version=0x7f070029;
+        public static final int settings_puzzle_length=0x7f070025;
+        public static final int settings_puzzle_length2=0x7f070024;
+        public static final int settings_statistic=0x7f07001e;
+        public static final int settings_statistic2=0x7f07001d;
         /**  Statistic 
  Statistic 
          */
-        public static final int stats=0x7f070011;
-        public static final int stats_drop_message=0x7f070017;
-        public static final int stats_drop_title=0x7f070016;
-        public static final int stats_dropped_sucessfully_toast=0x7f070018;
-        public static final int stats_graph_title=0x7f070015;
-        public static final int stats_steps=0x7f070013;
-        public static final int stats_time=0x7f070012;
-        public static final int stats_username_and_date=0x7f070014;
+        public static final int stats=0x7f070014;
+        public static final int stats_drop_message=0x7f07001a;
+        public static final int stats_drop_title=0x7f070019;
+        public static final int stats_dropped_sucessfully_toast=0x7f07001b;
+        public static final int stats_graph_title=0x7f070018;
+        public static final int stats_steps=0x7f070016;
+        public static final int stats_time=0x7f070015;
+        public static final int stats_username_and_date=0x7f070017;
     }
     public static final class style {
         /** 

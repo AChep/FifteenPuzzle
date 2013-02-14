@@ -34,6 +34,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnLongClickListener;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -88,6 +89,14 @@ public class StatsActivity extends Activity implements OnClickListener {
 						.show();
 			}
 		});
+		mGraphButton.setOnLongClickListener(new OnLongClickListener() {
+
+			@Override
+			public boolean onLongClick(View v) {
+				makeToast(R.string.action_bar_statistic_graph);
+				return true;
+			}
+		});
 		mClearButton = (ImageView) findViewById(R.id.clear);
 		mClearButton.setOnClickListener(new OnClickListener() {
 
@@ -129,6 +138,14 @@ public class StatsActivity extends Activity implements OnClickListener {
 						.show();
 			}
 		});
+		mClearButton.setOnLongClickListener(new OnLongClickListener() {
+
+			@Override
+			public boolean onLongClick(View v) {
+				makeToast(R.string.action_bar_statistic_clear);
+				return true;
+			}
+		});
 		// Set back button pop-up pattern
 		findViewById(R.id.back).setOnClickListener(new OnClickListener() {
 
@@ -141,6 +158,11 @@ public class StatsActivity extends Activity implements OnClickListener {
 
 		// Async data loading...
 		new LoadDatabaseStats().execute();
+	}
+
+	private void makeToast(int stringId) {
+		Toast.makeText(this, getResources().getString(stringId),
+				Toast.LENGTH_SHORT).show();
 	}
 
 	@Override
@@ -217,7 +239,7 @@ public class StatsActivity extends Activity implements OnClickListener {
 			}
 			mStatsData = new StatsData(nicknames.toArray(new String[length]),
 					timesInt, stepsInt, dateInt);
-			
+
 			mStatsData.sort(StatsData.SORT_BY_DATE);
 			mStatsData.sort(StatsData.SORT_BY_STEPS);
 			mStatsData.sort(StatsData.SORT_BY_TIME);
@@ -228,7 +250,7 @@ public class StatsActivity extends Activity implements OnClickListener {
 		protected void onPostExecute(Void void_) {
 			mProgressBar.setVisibility(View.GONE);
 			mClearButton.setVisibility(View.VISIBLE);
-			
+
 			if (mStatsData.getLength() >= 2)
 				mGraphButton.setVisibility(View.VISIBLE);
 
@@ -255,10 +277,10 @@ public class StatsActivity extends Activity implements OnClickListener {
 		protected void onPostExecute(Integer type) {
 			mProgressBar.setVisibility(View.GONE);
 			mClearButton.setVisibility(View.VISIBLE);
-			
+
 			if (mStatsData.getLength() >= 2)
 				mGraphButton.setVisibility(View.VISIBLE);
-			
+
 			setListViewAdapter(type);
 		}
 	}
