@@ -6,6 +6,10 @@
     <string name="game_congraz_title">Поздравляем!</string>
     <string name="game_congraz_message">Вы собрали этот пазл!</string>
     <string name="pref_number_picker_base_reset">Сбросить значение</string>
+    
+    <!-- ActionBar -->
+    <string name="action_bar_new_game">Новая игра</string>
+    <string name="action_bar_settings">Настройки</string>
         
     <!-- Updater -->
     <string name="auto_updater">Авто-обновление</string>

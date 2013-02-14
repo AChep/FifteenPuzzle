@@ -19,12 +19,14 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnLongClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class GameActivity extends Activity implements ActivityInterface {
 
@@ -54,6 +56,14 @@ public class GameActivity extends Activity implements ActivityInterface {
 				new ShuffleChips().execute("");
 			}
 		});
+		mShuffleButton.setOnLongClickListener(new OnLongClickListener() {
+
+			@Override
+			public boolean onLongClick(View v) {
+				makeToast(R.string.action_bar_new_game);
+				return true;
+			}
+		});
 		mShuffleProgress = (ProgressBar) findViewById(R.id.progressbar);
 		final ImageView settingsButton = (ImageView) findViewById(R.id.settings);
 		settingsButton.setOnClickListener(new OnClickListener() {
@@ -64,10 +74,23 @@ public class GameActivity extends Activity implements ActivityInterface {
 						.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
 			}
 		});
+		settingsButton.setOnLongClickListener(new OnLongClickListener() {
+
+			@Override
+			public boolean onLongClick(View v) {
+				makeToast(R.string.action_bar_settings);
+				return true;
+			}
+		});
 
 		mHandler = new Handler();
-		
+
 		new AsyncCheckVersion().execute(this);
+	}
+
+	private void makeToast(int stringId) {
+		Toast.makeText(this, getResources().getString(stringId),
+				Toast.LENGTH_SHORT).show();
 	}
 
 	@Override

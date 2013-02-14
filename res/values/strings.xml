@@ -9,6 +9,10 @@
     
     <string name="pref_number_picker_base_reset">Reset value</string>
     
+    <!-- ActionBar -->
+    <string name="action_bar_new_game">New game</string>
+    <string name="action_bar_settings">Settings</string>
+    
     <!-- Updater -->
     <string name="auto_updater">Auto-Updater</string>
     <string name="auto_updater_changelog">Changelog\:</string>
