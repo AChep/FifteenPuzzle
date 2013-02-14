@@ -30,6 +30,8 @@ import com.achep.FifteenPuzzle.preferences.Settings;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnCancelListener;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
@@ -52,6 +54,8 @@ public class AutoUpdater extends Activity implements OnClickListener {
 	private ProgressDialog mProgressDialog;
 
 	private String mVersionName;
+
+	private AsyncDownloadAndInstall mAsyncDownloadAndInstall;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -89,7 +93,14 @@ public class AutoUpdater extends Activity implements OnClickListener {
 			mProgressDialog.setMessage(getResources().getString(
 					R.string.auto_updater_downloading_dialog));
 			mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-			mProgressDialog.setCancelable(false);
+			mProgressDialog.setCancelable(true);
+			mProgressDialog.setOnCancelListener(new OnCancelListener() {
+
+				@Override
+				public void onCancel(DialogInterface dialog) {
+					mAsyncDownloadAndInstall.cancel(true);
+				}
+			});
 			mProgressDialog.show();
 			return mProgressDialog;
 		default:
@@ -100,7 +111,8 @@ public class AutoUpdater extends Activity implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		if (v == mDownloadButton) {
-			new AsyncDownloadAndInstall().execute();
+			mAsyncDownloadAndInstall = new AsyncDownloadAndInstall();
+			mAsyncDownloadAndInstall.execute();
 		} else if (v == mBackButton) {
 			finish();
 		}

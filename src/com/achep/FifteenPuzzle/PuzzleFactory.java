@@ -35,8 +35,8 @@ public class PuzzleFactory {
 		final int radius = size / 5;
 
 		Bitmap[] bitmaps = new Bitmap[2];
-		bitmaps[0] = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888);
-		bitmaps[1] = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888);
+		bitmaps[0] = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_4444);
+		bitmaps[1] = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_4444);
 
 		Canvas[] canvass = new Canvas[2];
 		canvass[0] = new Canvas(bitmaps[0]);
@@ -98,4 +98,5 @@ public class PuzzleFactory {
 			int xy) {
 		canvas.drawCircle(xy, xy, radius, paint);
 	}
+
 }
