@@ -9,7 +9,6 @@ import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
 
-import com.achep.FifteenPuzzle.GameActivity;
 import com.achep.FifteenPuzzle.NotificationsIds;
 import com.achep.FifteenPuzzle.R;
 import com.achep.FifteenPuzzle.Utils;
@@ -23,7 +22,6 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -170,7 +168,7 @@ public class DownloadService extends Service {
 				startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
 
 				// We're updated now!
-				showSuccessNotify();
+				cancelNotify();
 			}
 
 			// Die, potato!
@@ -245,7 +243,7 @@ public class DownloadService extends Service {
 		pushNotify(mDownloadingNotify);
 	}
 
-	@SuppressLint("NewApi")
+	/*@SuppressLint("NewApi")
 	@SuppressWarnings("deprecation")
 	private void showSuccessNotify() {
 		Notification n;
@@ -284,7 +282,7 @@ public class DownloadService extends Service {
 
 		cancelNotify();
 		pushNotify(n);
-	}
+	}*/
 
 	private void pushNotify(Notification n) {
 		mNotificationManager.notify(NotificationsIds.DOWNLOAD_SERVICE, n);
