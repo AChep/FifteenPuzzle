@@ -85,7 +85,8 @@ public class AutoUpdater extends Activity implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		if (v == mDownloadButton) {
-			startService(new Intent(this, DownloadService.class));
+			startService(new Intent(this, DownloadService.class)
+					.setAction(mVersionName));
 		} else if (v == mBackButton) {
 			finish();
 		}
