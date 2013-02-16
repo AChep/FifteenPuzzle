@@ -8,4 +8,6 @@
         <!-- API 11 theme customizations can go here. -->
     </style>
 
+    <style name="Widget_ProgressBar_Horizontal" parent="android:Widget.Holo.ProgressBar.Horizontal"></style>
+
 </resources>

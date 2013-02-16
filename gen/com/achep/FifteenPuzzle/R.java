@@ -30,50 +30,57 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int ic_actionbar_download=0x7f020003;
         public static final int ic_actionbar_graph=0x7f020004;
         public static final int ic_actionbar_refresh=0x7f020005;
-        public static final int ic_actionbar_settings=0x7f020006;
-        public static final int ic_actionbar_user=0x7f020007;
-        public static final int ic_launcher=0x7f020008;
-        public static final int ic_settings_about=0x7f020009;
-        public static final int ic_settings_cloud=0x7f02000a;
-        public static final int ic_settings_copyright=0x7f02000b;
-        public static final int ic_settings_github=0x7f02000c;
-        public static final int ic_settings_stats=0x7f02000d;
-        public static final int ic_statusbar_new_version=0x7f02000e;
-        public static final int image_view_selector=0x7f02000f;
-        public static final int image_view_selector_background_transition=0x7f020010;
-        public static final int imageview_disabled_holo_dark=0x7f020015;
-        public static final int imageview_focused_holo_dark=0x7f020014;
-        public static final int imageview_longpressed_holo=0x7f020012;
-        public static final int imageview_pressed_holo_dark=0x7f020013;
-        public static final int list_view_background_dark=0x7f020011;
+        public static final int ic_actionbar_retry=0x7f020006;
+        public static final int ic_actionbar_settings=0x7f020007;
+        public static final int ic_actionbar_user=0x7f020008;
+        public static final int ic_launcher=0x7f020009;
+        public static final int ic_settings_about=0x7f02000a;
+        public static final int ic_settings_cloud=0x7f02000b;
+        public static final int ic_settings_copyright=0x7f02000c;
+        public static final int ic_settings_github=0x7f02000d;
+        public static final int ic_settings_stats=0x7f02000e;
+        public static final int ic_statusbar_new_version=0x7f02000f;
+        public static final int image_view_selector=0x7f020010;
+        public static final int image_view_selector_background_transition=0x7f020011;
+        public static final int imageview_disabled_holo_dark=0x7f020018;
+        public static final int imageview_focused_holo_dark=0x7f020017;
+        public static final int imageview_longpressed_holo=0x7f020015;
+        public static final int imageview_pressed_holo_dark=0x7f020016;
+        public static final int list_view_background_dark=0x7f020012;
+        public static final int notification_icon_background=0x7f020013;
+        public static final int notification_icon_background_tile=0x7f020014;
     }
     public static final class id {
         public static final int back=0x7f090000;
+        public static final int button=0x7f090015;
         public static final int clear=0x7f09000c;
         public static final int content=0x7f090004;
         public static final int date=0x7f090013;
         public static final int date_sort=0x7f09000d;
         public static final int dismiss=0x7f09000a;
         public static final int download=0x7f090002;
+        public static final int eta=0x7f090017;
         public static final int game_view=0x7f090008;
         public static final int graph=0x7f09000b;
         public static final int icon=0x7f090014;
         public static final int iconpref=0x01010000;
         public static final int list_view=0x7f090010;
-        public static final int max=0x7f090017;
-        public static final int min=0x7f090015;
+        public static final int max=0x7f09001b;
+        public static final int min=0x7f090019;
         public static final int progressbar=0x7f090001;
-        public static final int reset=0x7f090019;
+        public static final int progresstext=0x7f090018;
+        public static final int reset=0x7f09001d;
         public static final int rezult=0x7f090009;
-        public static final int seek_bar=0x7f090018;
+        public static final int seek_bar=0x7f09001c;
         public static final int settings=0x7f090007;
         public static final int shuffle=0x7f090006;
         public static final int steps_sort=0x7f09000f;
         public static final int summary1=0x7f090011;
         public static final int summary2=0x7f090012;
+        public static final int text=0x7f090016;
         public static final int time_sort=0x7f09000e;
         public static final int title=0x7f090005;
-        public static final int value=0x7f090016;
+        public static final int value=0x7f09001a;
         public static final int version=0x7f090003;
     }
     public static final class layout {
@@ -83,68 +90,78 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int activity_stats=0x7f030003;
         public static final int dialog_username_stats=0x7f030004;
         public static final int list_view_adapter_stats=0x7f030005;
-        public static final int preference_icon=0x7f030006;
-        public static final int preference_number_picker_base=0x7f030007;
+        public static final int notification_download_service_error=0x7f030006;
+        public static final int notification_download_service_progress=0x7f030007;
+        public static final int preference_icon=0x7f030008;
+        public static final int preference_number_picker_base=0x7f030009;
     }
     public static final class string {
-        public static final int action_bar_download_new_version=0x7f070008;
+        public static final int action_bar_download_new_version=0x7f07000d;
         /**  ActionBar 
  ActionBar 
          */
-        public static final int action_bar_new_game=0x7f070006;
-        public static final int action_bar_settings=0x7f070007;
-        public static final int action_bar_statistic_clear=0x7f07000a;
-        public static final int action_bar_statistic_graph=0x7f070009;
+        public static final int action_bar_new_game=0x7f07000b;
+        public static final int action_bar_settings=0x7f07000c;
+        public static final int action_bar_statistic_clear=0x7f07000f;
+        public static final int action_bar_statistic_graph=0x7f07000e;
         public static final int app_name=0x7f070000;
         /**  Updater 
  Updater 
          */
-        public static final int auto_updater=0x7f07000b;
-        public static final int auto_updater_changelog=0x7f07000c;
-        public static final int auto_updater_downloading_dialog=0x7f07000d;
-        public static final int auto_updater_downloading_error1=0x7f07000e;
-        public static final int auto_updater_downloading_error2=0x7f07000f;
-        public static final int auto_updater_downloading_error3=0x7f070010;
-        public static final int auto_updater_downloading_error4=0x7f070011;
-        public static final int auto_updater_downloading_error_connection=0x7f070012;
-        public static final int auto_updater_notification_summary=0x7f070013;
+        public static final int auto_updater=0x7f070010;
+        public static final int auto_updater_changelog=0x7f070011;
+        public static final int auto_updater_downloading_dialog=0x7f070012;
+        public static final int auto_updater_downloading_error1=0x7f070013;
+        public static final int auto_updater_downloading_error2=0x7f070014;
+        public static final int auto_updater_downloading_error3=0x7f070015;
+        public static final int auto_updater_downloading_error4=0x7f070016;
+        public static final int auto_updater_downloading_error_connection=0x7f070017;
+        public static final int auto_updater_notification_summary=0x7f070018;
+        /**  Download Service 
+ Download Service 
+         */
+        public static final int download_service_label=0x7f070006;
+        public static final int download_service_notification_downloading_info=0x7f07000a;
+        public static final int download_service_notification_downloading_text=0x7f070009;
+        public static final int download_service_notification_error_text=0x7f070007;
+        public static final int download_service_notification_success_text=0x7f070008;
         public static final int game_congraz_message=0x7f070004;
         public static final int game_congraz_title=0x7f070003;
         public static final int game_steps=0x7f070002;
         public static final int game_time=0x7f070001;
         public static final int pref_number_picker_base_reset=0x7f070005;
-        public static final int settings=0x7f07001c;
-        public static final int settings_category=0x7f07001f;
-        public static final int settings_category_other=0x7f070026;
-        public static final int settings_nickname=0x7f070023;
-        public static final int settings_nickname2=0x7f070022;
-        public static final int settings_nickname3=0x7f070021;
-        public static final int settings_nickname_default=0x7f070020;
-        public static final int settings_other_about=0x7f070028;
-        public static final int settings_other_about2=0x7f070027;
-        public static final int settings_other_about_copyright=0x7f07002b;
-        public static final int settings_other_about_copyright2=0x7f07002a;
-        public static final int settings_other_about_feedback=0x7f07002e;
-        public static final int settings_other_about_feedback2=0x7f07002d;
-        public static final int settings_other_about_feedback_failed=0x7f07002c;
-        public static final int settings_other_about_github=0x7f070030;
-        public static final int settings_other_about_github2=0x7f07002f;
-        public static final int settings_other_about_version=0x7f070029;
-        public static final int settings_puzzle_length=0x7f070025;
-        public static final int settings_puzzle_length2=0x7f070024;
-        public static final int settings_statistic=0x7f07001e;
-        public static final int settings_statistic2=0x7f07001d;
+        public static final int settings=0x7f070021;
+        public static final int settings_category=0x7f070024;
+        public static final int settings_category_other=0x7f07002b;
+        public static final int settings_nickname=0x7f070028;
+        public static final int settings_nickname2=0x7f070027;
+        public static final int settings_nickname3=0x7f070026;
+        public static final int settings_nickname_default=0x7f070025;
+        public static final int settings_other_about=0x7f07002d;
+        public static final int settings_other_about2=0x7f07002c;
+        public static final int settings_other_about_copyright=0x7f070030;
+        public static final int settings_other_about_copyright2=0x7f07002f;
+        public static final int settings_other_about_feedback=0x7f070033;
+        public static final int settings_other_about_feedback2=0x7f070032;
+        public static final int settings_other_about_feedback_failed=0x7f070031;
+        public static final int settings_other_about_github=0x7f070035;
+        public static final int settings_other_about_github2=0x7f070034;
+        public static final int settings_other_about_version=0x7f07002e;
+        public static final int settings_puzzle_length=0x7f07002a;
+        public static final int settings_puzzle_length2=0x7f070029;
+        public static final int settings_statistic=0x7f070023;
+        public static final int settings_statistic2=0x7f070022;
         /**  Statistic 
  Statistic 
          */
-        public static final int stats=0x7f070014;
-        public static final int stats_drop_message=0x7f07001a;
-        public static final int stats_drop_title=0x7f070019;
-        public static final int stats_dropped_sucessfully_toast=0x7f07001b;
-        public static final int stats_graph_title=0x7f070018;
-        public static final int stats_steps=0x7f070016;
-        public static final int stats_time=0x7f070015;
-        public static final int stats_username_and_date=0x7f070017;
+        public static final int stats=0x7f070019;
+        public static final int stats_drop_message=0x7f07001f;
+        public static final int stats_drop_title=0x7f07001e;
+        public static final int stats_dropped_sucessfully_toast=0x7f070020;
+        public static final int stats_graph_title=0x7f07001d;
+        public static final int stats_steps=0x7f07001b;
+        public static final int stats_time=0x7f07001a;
+        public static final int stats_username_and_date=0x7f07001c;
     }
     public static final class style {
         /** 
@@ -152,16 +169,19 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         AppBaseTheme from res/values/styles.xml on API 11+ devices.
     
  API 11 theme customizations can go here. 
-
-        Base application theme for API 14+. This theme completely replaces
-        AppBaseTheme from BOTH res/values/styles.xml and
-        res/values-v11/styles.xml on API 14+ devices.
-    
- API 14 theme customizations can go here. 
          */
         public static final int BaseTheme=0x7f080000;
         public static final int GameActivity=0x7f080001;
         public static final int Settings=0x7f080002;
+        public static final int TextAppearance_StatusBar_EventContent=0x7f080004;
+        public static final int TextAppearance_StatusBar_EventContent_Info=0x7f080005;
+        /**  Status bar notifications styles 
+ Status bar notifications styles 
+         */
+        public static final int TextAppearance_StatusBar_EventContent_Title=0x7f080003;
+        /**  Progress Bar Horizontal 
+         */
+        public static final int Widget_ProgressBar_Horizontal=0x7f080006;
     }
     public static final class xml {
         public static final int settings=0x7f040000;

@@ -6,6 +6,25 @@
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowBackground">@drawable/activity_background</item>
     </style>
+
     <style name="Settings" parent="BaseTheme"></style>
+
+    <!-- Status bar notifications styles -->
+    <style name="TextAppearance_StatusBar_EventContent_Title">
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextAppearance_StatusBar_EventContent">
+        <item name="android:textColor">?android:attr/textColorSecondary</item>
+    </style>
+
+    <style name="TextAppearance_StatusBar_EventContent_Info" parent="TextAppearance_StatusBar_EventContent">
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <!-- Progress Bar Horizontal -->
+
+    <style name="Widget_ProgressBar_Horizontal" parent="android:Widget.ProgressBar.Horizontal"></style>
 
 </resources>

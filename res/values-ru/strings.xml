@@ -7,6 +7,13 @@
     <string name="game_congraz_message">Вы собрали этот пазл!</string>
     <string name="pref_number_picker_base_reset">Сбросить значение</string>
     
+    <!-- Download Service -->
+    <string name="download_service_label">Сервис загрузки обновления</string>
+    <string name="download_service_notification_error_text">Ошибка загрузки новой версии!</string>
+    <string name="download_service_notification_success_text">Приложение успешно обновлено!</string>
+    <string name="download_service_notification_downloading_text">Загрузка новой версии...</string>
+    <string name="download_service_notification_downloading_info">Подготовка...</string>
+    
     <!-- ActionBar -->
     <string name="action_bar_new_game">Новая игра</string>
     <string name="action_bar_settings">Настройки</string>

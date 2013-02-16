@@ -17,6 +17,7 @@
 package com.achep.FifteenPuzzle.preferences;
 
 import com.achep.FifteenPuzzle.R;
+import com.achep.FifteenPuzzle.updater.DownloadService;
 
 import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;

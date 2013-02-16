@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <item name="notification_icon_background" type="drawable">#3333b5e5</item>
+
+</resources>
