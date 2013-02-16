@@ -6,12 +6,11 @@
 
     <ImageView
         android:id="@+id/icon"
-        android:layout_width="@android:dimen/notification_large_icon_width"
-        android:layout_height="@android:dimen/notification_large_icon_height"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:background="@drawable/notification_icon_background"
         android:scaleType="center"
-        android:src="@drawable/ic_launcher" />
+        android:src="@drawable/ic_statusbar_new_version" />
 
     <RelativeLayout
         android:layout_width="fill_parent"

@@ -229,7 +229,7 @@ public class DownloadService extends Service {
 		mDownloadingRVs = new RemoteViews(getPackageName(),
 				R.layout.notification_download_service_progress);
 		mDownloadingRVs.setTextViewText(R.id.title, contentTitle);
-
+		
 		n.contentView = mDownloadingRVs;
 		n.contentIntent = PendingIntent.getActivity(this, 0, new Intent(this,
 				AutoUpdater.class), Intent.FLAG_ACTIVITY_NEW_TASK);
