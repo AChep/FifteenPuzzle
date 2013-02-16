@@ -6,8 +6,8 @@
 
     <ImageView
         android:id="@+id/icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="64dip"
+        android:layout_height="64dip"
         android:layout_alignParentLeft="true"
         android:scaleType="center"
         android:src="@drawable/ic_statusbar_new_version" />

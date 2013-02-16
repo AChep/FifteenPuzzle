@@ -16,6 +16,7 @@
 
 package com.achep.FifteenPuzzle.updater;
 
+import com.achep.FifteenPuzzle.NotificationUtils;
 import com.achep.FifteenPuzzle.R;
 import com.achep.FifteenPuzzle.Utils;
 
@@ -33,8 +34,6 @@ public class AsyncCheckVersion extends AsyncTask<Context, Void, String> {
 
 	private static final String MANIFEST_VERSION_CODE_PART = "android:versionCode=\"";
 	private static final String MANIFEST_VERSION_NAME_PART = "android:versionName=\"";
-
-	private static final int NOTIFICATION_ID = 0;
 
 	private Context mContext;
 
@@ -77,23 +76,26 @@ public class AsyncCheckVersion extends AsyncTask<Context, Void, String> {
 		return versionNameNew;
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	protected void onPostExecute(String versionNameNew) {
 		if (versionNameNew == null)
 			return;
 
-		Notification n = new Notification();
-		n.tickerText = versionNameNew;
-		n.icon = R.drawable.ic_statusbar_new_version;
-		n.flags = Notification.FLAG_AUTO_CANCEL;
-		n.setLatestEventInfo(mContext, versionNameNew, mContext.getResources()
-				.getString(R.string.auto_updater_notification_summary),
-				PendingIntent.getActivity(mContext, 0, new Intent(mContext,
-						AutoUpdater.class).setAction(versionNameNew), 0));
+		Notification n = NotificationUtils.getNotification(
+				mContext,
+				versionNameNew,
+				mContext.getResources().getString(
+						R.string.auto_updater_notification_summary),
+				R.drawable.ic_actionbar_download, PendingIntent.getService(
+						mContext, 0,
+						new Intent(mContext, DownloadService.class)
+								.setAction(versionNameNew), 0), PendingIntent
+						.getActivity(mContext, 0, new Intent(mContext,
+								AutoUpdater.class),
+								Intent.FLAG_ACTIVITY_NEW_TASK));
 
 		NotificationManager nm = (NotificationManager) mContext
 				.getSystemService(Context.NOTIFICATION_SERVICE);
-		nm.notify(NOTIFICATION_ID, n);
+		nm.notify(NotificationUtils.DOWNLOAD_SERVICE, n);
 	}
 }

@@ -9,12 +9,11 @@ import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
 
-import com.achep.FifteenPuzzle.NotificationsIds;
+import com.achep.FifteenPuzzle.NotificationUtils;
 import com.achep.FifteenPuzzle.R;
 import com.achep.FifteenPuzzle.Utils;
 import com.achep.FifteenPuzzle.preferences.Settings;
 
-import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -24,7 +23,6 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.IBinder;
 import android.widget.RemoteViews;
 
@@ -180,42 +178,19 @@ public class DownloadService extends Service {
 		}
 	}
 
-	@SuppressLint("NewApi")
-	@SuppressWarnings("deprecation")
 	private void showErrorNotify() {
-		Notification n = new Notification();
-
-		Resources res = getResources();
-		String contentTitle = mVersionName;
-		String contentText = res
-				.getString(R.string.download_service_notification_error_text);
-
-		int sdk = Build.VERSION.SDK_INT;
-		if (sdk <= Build.VERSION_CODES.GINGERBREAD_MR1) {
-			// Gingerbread and lower
-			n.setLatestEventInfo(this, contentTitle, contentText, null);
-		} else {
-			// Honeycomb and higher
-			RemoteViews rv = new RemoteViews(getPackageName(),
-					R.layout.notification_download_service_error);
-			rv.setTextViewText(R.id.title, contentTitle);
-			rv.setTextViewText(R.id.text, contentText);
-			rv.setImageViewResource(R.id.button, R.drawable.ic_actionbar_retry);
-			rv.setOnClickPendingIntent(R.id.button, PendingIntent.getService(
-					this, 0,
-					new Intent(this, this.getClass()).setAction(mVersionName),
-					0));
-
-			n.contentView = rv;
-		}
-		n.contentIntent = PendingIntent.getActivity(this, 0, new Intent(this,
-				AutoUpdater.class), Intent.FLAG_ACTIVITY_NEW_TASK);
-		n.icon = R.drawable.ic_statusbar_new_version;
-		n.tickerText = contentText;
-		n.flags = Notification.FLAG_AUTO_CANCEL;
-
 		cancelNotify();
-		pushNotify(n);
+		pushNotify(NotificationUtils.getNotification(
+				this,
+				mVersionName,
+				getResources().getString(
+						R.string.download_service_notification_error_text),
+				R.drawable.ic_actionbar_retry, PendingIntent.getService(this,
+						0, new Intent(this, this.getClass())
+								.setAction(mVersionName), 0), PendingIntent
+						.getActivity(this, 0, new Intent(this,
+								AutoUpdater.class),
+								Intent.FLAG_ACTIVITY_NEW_TASK)));
 	}
 
 	private void showDownloadingNotify() {
@@ -229,7 +204,7 @@ public class DownloadService extends Service {
 		mDownloadingRVs = new RemoteViews(getPackageName(),
 				R.layout.notification_download_service_progress);
 		mDownloadingRVs.setTextViewText(R.id.title, contentTitle);
-		
+
 		n.contentView = mDownloadingRVs;
 		n.contentIntent = PendingIntent.getActivity(this, 0, new Intent(this,
 				AutoUpdater.class), Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -243,52 +218,11 @@ public class DownloadService extends Service {
 		pushNotify(mDownloadingNotify);
 	}
 
-	/*@SuppressLint("NewApi")
-	@SuppressWarnings("deprecation")
-	private void showSuccessNotify() {
-		Notification n;
-		Resources res = getResources();
-
-		String contentTitle = mVersionName;
-		String contentText = res
-				.getString(R.string.download_service_notification_success_text);
-		PendingIntent pi = PendingIntent.getActivity(this, 0, new Intent(this,
-				GameActivity.class), Intent.FLAG_ACTIVITY_NEW_TASK);
-
-		int sdk = Build.VERSION.SDK_INT;
-		if (sdk >= Build.VERSION_CODES.HONEYCOMB) {
-			Notification.Builder nb = new Notification.Builder(this);
-			nb.setSmallIcon(R.drawable.ic_statusbar_new_version);
-			nb.setLargeIcon(BitmapFactory.decodeResource(res,
-					R.drawable.ic_launcher));
-			nb.setContentIntent(pi);
-			nb.setContentText(contentText);
-			nb.setContentTitle(contentTitle);
-			nb.setTicker(contentText);
-			nb.setAutoCancel(true);
-			nb.setWhen(System.currentTimeMillis());
-			if (sdk >= Build.VERSION_CODES.JELLY_BEAN) {
-				n = nb.build();
-			} else {
-				n = nb.getNotification();
-			}
-		} else {
-			n = new Notification();
-			n.icon = R.drawable.ic_statusbar_new_version;
-			n.setLatestEventInfo(this, contentTitle, contentText, pi);
-			n.tickerText = contentText;
-			n.flags = Notification.FLAG_AUTO_CANCEL;
-		}
-
-		cancelNotify();
-		pushNotify(n);
-	}*/
-
 	private void pushNotify(Notification n) {
-		mNotificationManager.notify(NotificationsIds.DOWNLOAD_SERVICE, n);
+		mNotificationManager.notify(NotificationUtils.DOWNLOAD_SERVICE, n);
 	}
 
 	private void cancelNotify() {
-		mNotificationManager.cancel(NotificationsIds.DOWNLOAD_SERVICE);
+		mNotificationManager.cancel(NotificationUtils.DOWNLOAD_SERVICE);
 	}
 }
