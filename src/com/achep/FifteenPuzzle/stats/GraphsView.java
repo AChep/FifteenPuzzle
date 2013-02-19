@@ -22,6 +22,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
 
 public class GraphsView extends View {
@@ -69,6 +70,55 @@ public class GraphsView extends View {
 	}
 
 	@Override
+	public boolean onTouchEvent(MotionEvent event) {
+		switch (event.getActionMasked()) {
+		case MotionEvent.ACTION_MOVE:
+			writeCenterPoint(event);
+			scrolling(MotionEvent.ACTION_MOVE);
+			break;
+		default:
+			writeCenterPoint(event);
+			scrolling(MotionEvent.ACTION_DOWN);
+			break;
+		}
+
+		invalidate();
+		return true;
+	}
+
+	// Scrolling
+	private float mScrollStartX;
+	private float mScrollStartY;
+	private float mScrollX;
+	private float mScrollY;
+
+	private void scrolling(int action) {
+		final float x = mCenterPoint[0], y = mCenterPoint[1];
+		switch (action) {
+		case MotionEvent.ACTION_MOVE:
+			mScrollX += x - mScrollStartX;
+			mScrollY += y - mScrollStartY;
+		default:
+			mScrollStartX = x;
+			mScrollStartY = y;
+			break;
+		}
+	}
+
+	private float[] mCenterPoint = new float[2];
+
+	private void writeCenterPoint(MotionEvent event) {
+		float x = 0f, y = 0f;
+		int points = event.getPointerCount();
+		for (int i = 0; i < points; i++) {
+			x += event.getX(i);
+			y += event.getY(i);
+		}
+		mCenterPoint[0] = x;
+		mCenterPoint[1] = y;
+	}
+
+	@Override
 	public void onDraw(Canvas canvas) {
 		int width = getMeasuredWidth();
 		int height = getMeasuredHeight();
@@ -80,9 +130,11 @@ public class GraphsView extends View {
 		mPaint.setColor(0x90707070);
 		float step = (float) height / mMaxValue * 10;
 		for (int i = 0; i <= width; i += step)
-			canvas.drawLine(i, 0, i, height, mPaint);
+			canvasDrawLine(canvas, i, 0, i, height, mPaint);
+		canvasDrawLine(canvas, width, 0, width, height, mPaint);
 		for (int i = height; i >= 0; i -= step)
-			canvas.drawLine(0, i, width, i, mPaint);
+			canvasDrawLine(canvas, 0, i, width, i, mPaint);
+		canvasDrawLine(canvas, 0, 0, width, 0, mPaint);
 
 		// Build graph
 		mPaint.setStrokeWidth(4f);
@@ -97,15 +149,24 @@ public class GraphsView extends View {
 				final float stopY = (float) (mMaxValue - values[j]) / mMaxValue
 						* height;
 
-				canvas.drawLine(getPointX(j - 1, values.length, width), startY,
-						getPointX(j, values.length, width), stopY, mPaint);
+				canvasDrawLine(canvas, getPointX(j - 1, values.length, width),
+						startY, getPointX(j, values.length, width), stopY,
+						mPaint);
 			}
 
 			float textSize = mPaint.getTextSize();
-			float y = height - (textSize  * 1.2f) * (i + 1);
+			float y = height - (textSize * 1.2f) * (i + 1);
 			canvas.drawCircle(10, y - textSize / 2 + 4, textSize / 8, mPaint);
 			canvas.drawText(mLabelsList.get(i), 20, y, mPaint);
 		}
+	}
+
+	private void canvasDrawLine(Canvas canvas, float x, float y, float x2,
+			float y2, Paint paint) {
+		float xpadding = mScrollX;
+		float ypadding = mScrollY;
+		canvas.drawLine(x + xpadding, y + ypadding, x2 + xpadding, y2
+				+ ypadding, paint);
 	}
 
 	private float getPointX(int i, int length, int width) {

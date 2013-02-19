@@ -37,6 +37,10 @@ public class Utils {
 		return (a - a % b) / b;
 	};
 
+	public static double pifagor(float x, float y, float x2, float y2) {
+		return Math.sqrt(Math.pow(x - x2, 2) + Math.pow(y - y2, 2));
+	}
+
 	public static String fixTwoZero(long x) {
 		return x < 10 ? "0" + x : Long.toString(x);
 	}
