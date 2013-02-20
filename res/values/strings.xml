@@ -13,6 +13,7 @@
     <string name="download_service_notification_success_text">App was successfully updated!</string>
     <string name="download_service_notification_downloading_text">Downloading new version...</string>
     <string name="download_service_notification_downloading_info">Preparing...</string>
+    <string name="download_service_install_please_toast">Please, press \"Install\" button to install new version</string>
 
     <!-- ActionBar -->
     <string name="action_bar_new_game">New game</string>
@@ -30,7 +31,7 @@
     <string name="auto_updater_downloading_error3">Failed to create output file.</string>
     <string name="auto_updater_downloading_error4">Download failed.</string>
     <string name="auto_updater_downloading_error_connection">Please enable your Internet connection first.</string>
-    <string name="auto_updater_notification_summary">Download the new version here!</string>
+    <string name="auto_updater_notification_summary">New version of Fifteen Puzzle is available</string>
 
     <!-- Statistic -->
     <string name="stats">Statistic</string>
@@ -41,7 +42,7 @@
     <string name="stats_drop_title">Clear statistic</string>
     <string name="stats_drop_message">This action will clear all results! Data can not be restored!</string>
     <string name="stats_dropped_sucessfully_toast">Scores\' database has been dropped successfully.</string>
-        
+
     <!-- Settings -->
     <string name="settings">Settings</string>
     <string name="settings_statistic2">Your best game scores!</string>

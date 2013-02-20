@@ -11,7 +11,7 @@ import java.net.URLConnection;
 
 import com.achep.FifteenPuzzle.NotificationUtils;
 import com.achep.FifteenPuzzle.R;
-import com.achep.FifteenPuzzle.Utils;
+import com.achep.FifteenPuzzle.Toast;
 import com.achep.FifteenPuzzle.preferences.Settings;
 
 import android.app.Notification;
@@ -76,11 +76,13 @@ public class DownloadService extends Service {
 			if (deltaTime < 1000)
 				return;
 
-			mDownloadingRVs.setTextViewText(
-					R.id.eta,
-					"ETA: "
-							+ Utils.getFormatedTime((long) (100f / progressF
-									* deltaTime - deltaTime)));
+			mDownloadingRVs
+					.setTextViewText(
+							R.id.eta,
+							"ETA: "
+									+ com.achep.FifteenPuzzle.Utils
+											.getFormatedTimeFromMillis((long) (100f
+													/ progressF * deltaTime - deltaTime)));
 			mDownloadingRVs.setTextViewText(R.id.progresstext, progressI + "%");
 			mDownloadingRVs.setProgressBar(R.id.progressbar, 100, progressI,
 					false);
@@ -164,6 +166,10 @@ public class DownloadService extends Service {
 						.getPathToFolder(Settings.SDCARD_FOLDER), mVersionName
 						+ ".apk")), "application/vnd.android.package-archive");
 				startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+
+				// Show toast message
+				Toast.showLong(DownloadService.this,
+						R.string.download_service_install_please_toast);
 
 				// We're updated now!
 				cancelNotify();

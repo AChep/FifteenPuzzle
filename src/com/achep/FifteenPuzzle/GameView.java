@@ -114,7 +114,7 @@ public class GameView extends View implements
 	}
 
 	private void updateParams(int width, int height) {
-		// Init shared preferences var
+		// Initialize shared preferences variable
 		SharedPreferences sp = getContext().getSharedPreferences(
 				Settings.SHARED_PREFERENCES_FILE, 0);
 

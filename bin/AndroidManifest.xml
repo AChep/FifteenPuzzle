@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.achep.FifteenPuzzle"
-    android:versionCode="28"
-    android:versionName="2.511" >
+    android:versionCode="29"
+    android:versionName="2.52" >
 
     <!-- Auto Updater Permissions -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -18,6 +18,7 @@
         android:label="@string/app_name" >
         <activity
             android:name=".GameActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden"
             android:hardwareAccelerated="true"
             android:label="@string/app_name"
             android:launchMode="singleInstance"

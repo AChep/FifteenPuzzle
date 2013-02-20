@@ -17,8 +17,8 @@
 package com.achep.FifteenPuzzle.updater;
 
 import com.achep.FifteenPuzzle.NotificationUtils;
+import com.achep.FifteenPuzzle.Project;
 import com.achep.FifteenPuzzle.R;
-import com.achep.FifteenPuzzle.Utils;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -55,7 +55,8 @@ public class AsyncCheckVersion extends AsyncTask<Context, Void, String> {
 		int versionCodeNew = Integer.parseInt(manifest.substring(0, a));
 		try {
 			if (mContext.getPackageManager().getPackageInfo(
-					mContext.getPackageName(), 0).versionCode >= versionCodeNew)
+					mContext.getPackageName(), 0).versionCode >= versionCodeNew
+					&& !Project.DEBUG)
 				return null;
 		} catch (NameNotFoundException e) {
 			return null;

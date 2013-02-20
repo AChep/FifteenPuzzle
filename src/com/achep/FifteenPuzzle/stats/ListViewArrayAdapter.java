@@ -49,7 +49,7 @@ public class ListViewArrayAdapter extends ArrayAdapter<String> {
 			int[] times, int[] steps, int[] dates, int sort) {
 		super(context, R.layout.list_view_adapter_stats, usernames);
 		this.context = context;
-
+		
 		mUsernames = usernames;
 		mSortType = sort;
 

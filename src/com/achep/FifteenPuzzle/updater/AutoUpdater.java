@@ -17,6 +17,7 @@
 package com.achep.FifteenPuzzle.updater;
 
 import com.achep.FifteenPuzzle.R;
+import com.achep.FifteenPuzzle.Toast;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -24,11 +25,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class AutoUpdater extends Activity implements OnClickListener {
 
@@ -36,6 +38,7 @@ public class AutoUpdater extends Activity implements OnClickListener {
 	private RelativeLayout mBackButton;
 	private TextView mChangelog;
 	private ProgressBar mProgressBar;
+	private ScrollView mChangelogPanel;
 
 	private String mVersionName;
 
@@ -55,13 +58,15 @@ public class AutoUpdater extends Activity implements OnClickListener {
 
 				@Override
 				public boolean onLongClick(View v) {
-					makeToast(R.string.action_bar_download_new_version);
+					Toast.show(AutoUpdater.this,
+							R.string.action_bar_download_new_version);
 					return true;
 				}
 			});
 			mBackButton = (RelativeLayout) findViewById(R.id.back);
 			mChangelog = (TextView) findViewById(R.id.content);
 			mProgressBar = (ProgressBar) findViewById(R.id.progressbar);
+			mChangelogPanel = (ScrollView) findViewById(R.id.content_panel);
 
 			// OnClickListeners
 			mDownloadButton.setOnClickListener(this);
@@ -69,16 +74,15 @@ public class AutoUpdater extends Activity implements OnClickListener {
 
 			// Time cap
 			mChangelog.setText("Function isn't availabel yet.");
+			mChangelogPanel.setVisibility(View.VISIBLE);
+			mChangelogPanel.startAnimation(AnimationUtils.loadAnimation(this,
+					R.anim.widget_list_view_panel_in));
+
 			mProgressBar.setVisibility(View.GONE);
 			mDownloadButton.setVisibility(View.VISIBLE);
 		} else {
 			finish();
 		}
-	}
-
-	private void makeToast(int stringId) {
-		Toast.makeText(this, getResources().getString(stringId),
-				Toast.LENGTH_SHORT).show();
 	}
 
 	@Override

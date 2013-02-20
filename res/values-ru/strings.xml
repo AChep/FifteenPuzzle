@@ -13,6 +13,7 @@
     <string name="download_service_notification_success_text">Приложение успешно обновлено!</string>
     <string name="download_service_notification_downloading_text">Загрузка новой версии...</string>
     <string name="download_service_notification_downloading_info">Подготовка...</string>
+    <string name="download_service_install_please_toast">Пожалуйста, нажмите кнопку \"Установить\" для установки новой версии</string>
 
     <!-- ActionBar -->
     <string name="action_bar_new_game">Новая игра</string>
@@ -30,7 +31,7 @@
     <string name="auto_updater_downloading_error3">Ошибка создания файла.</string>
     <string name="auto_updater_downloading_error4">Ошибка загрузки.</string>
     <string name="auto_updater_downloading_error_connection">Пожалуйста, сначала включите Интернет соединение.</string>
-    <string name="auto_updater_notification_summary">Загрузите новую версия здесь!</string>
+    <string name="auto_updater_notification_summary">Новая версия Пятнашек доступна для загрузки!</string>
 
     <!-- Statistic -->
     <string name="stats">Статистика</string>

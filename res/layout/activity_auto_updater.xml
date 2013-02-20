@@ -71,23 +71,26 @@
         android:id="@+id/version"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="8dip"
+        android:layout_marginLeft="20dip"
         android:textAppearance="?android:textAppearanceLarge"
+        android:textColor="#00de6d"
         android:textSize="32sp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dip"
+        android:layout_marginLeft="20dip"
         android:text="@string/auto_updater_changelog"
         android:textAppearance="?android:textAppearanceSmall"
         android:textColor="#FFF" />
 
     <ScrollView
+        android:id="@+id/content_panel"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_margin="20dip"
-        android:background="@drawable/list_view_background_dark" >
+        android:background="@drawable/list_view_background_dark"
+        android:visibility="invisible" >
 
         <TextView
             android:id="@+id/content"

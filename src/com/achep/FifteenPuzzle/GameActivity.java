@@ -26,7 +26,6 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class GameActivity extends Activity implements ActivityInterface {
 
@@ -60,7 +59,7 @@ public class GameActivity extends Activity implements ActivityInterface {
 
 			@Override
 			public boolean onLongClick(View v) {
-				makeToast(R.string.action_bar_new_game);
+				Toast.show(GameActivity.this, R.string.action_bar_new_game);
 				return true;
 			}
 		});
@@ -78,7 +77,7 @@ public class GameActivity extends Activity implements ActivityInterface {
 
 			@Override
 			public boolean onLongClick(View v) {
-				makeToast(R.string.action_bar_settings);
+				Toast.show(GameActivity.this, R.string.action_bar_settings);
 				return true;
 			}
 		});
@@ -86,11 +85,6 @@ public class GameActivity extends Activity implements ActivityInterface {
 		mHandler = new Handler();
 
 		new AsyncCheckVersion().execute(this);
-	}
-
-	private void makeToast(int stringId) {
-		Toast.makeText(this, getResources().getString(stringId),
-				Toast.LENGTH_SHORT).show();
 	}
 
 	@Override

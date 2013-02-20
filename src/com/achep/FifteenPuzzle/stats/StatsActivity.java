@@ -19,6 +19,7 @@ package com.achep.FifteenPuzzle.stats;
 import java.util.ArrayList;
 
 import com.achep.FifteenPuzzle.R;
+import com.achep.FifteenPuzzle.Toast;
 import com.achep.FifteenPuzzle.preferences.PrefPuzzleLengthPicker;
 import com.achep.FifteenPuzzle.preferences.Settings;
 
@@ -41,7 +42,6 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class StatsActivity extends Activity implements OnClickListener {
 
@@ -95,7 +95,8 @@ public class StatsActivity extends Activity implements OnClickListener {
 
 			@Override
 			public boolean onLongClick(View v) {
-				makeToast(R.string.action_bar_statistic_graph);
+				Toast.show(StatsActivity.this,
+						R.string.action_bar_statistic_graph);
 				return true;
 			}
 		});
@@ -124,12 +125,9 @@ public class StatsActivity extends Activity implements OnClickListener {
 										db.close();
 
 										// Make message
-										Toast.makeText(
+										Toast.showLong(
 												StatsActivity.this,
-												getResources()
-														.getString(
-																R.string.stats_dropped_sucessfully_toast),
-												Toast.LENGTH_LONG).show();
+												R.string.stats_dropped_sucessfully_toast);
 
 										// Finish activity
 										StatsActivity.this.finish();
@@ -144,7 +142,9 @@ public class StatsActivity extends Activity implements OnClickListener {
 
 			@Override
 			public boolean onLongClick(View v) {
-				makeToast(R.string.action_bar_statistic_clear);
+
+				Toast.show(StatsActivity.this,
+						R.string.action_bar_statistic_clear);
 				return true;
 			}
 		});
@@ -160,11 +160,6 @@ public class StatsActivity extends Activity implements OnClickListener {
 
 		// Async data loading...
 		new LoadDatabaseStats().execute();
-	}
-
-	private void makeToast(int stringId) {
-		Toast.makeText(this, getResources().getString(stringId),
-				Toast.LENGTH_SHORT).show();
 	}
 
 	@Override
@@ -259,10 +254,8 @@ public class StatsActivity extends Activity implements OnClickListener {
 			// Show start animation
 			LinearLayout resultsPanel = (LinearLayout) findViewById(R.id.results_panel);
 			resultsPanel.setVisibility(View.VISIBLE);
-			resultsPanel
-					.startAnimation(AnimationUtils.loadAnimation(
-							StatsActivity.this,
-							R.anim.activity_stats_results_panel_in));
+			resultsPanel.startAnimation(AnimationUtils.loadAnimation(
+					StatsActivity.this, R.anim.widget_list_view_panel_in));
 
 			setListViewAdapter(StatsData.SORT_BY_TIME);
 		}
