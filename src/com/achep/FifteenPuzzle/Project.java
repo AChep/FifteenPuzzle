@@ -17,5 +17,5 @@
 package com.achep.FifteenPuzzle;
 
 public class Project {
-	public static final boolean DEBUG = true;
+	public static final boolean DEBUG = false;
 }
