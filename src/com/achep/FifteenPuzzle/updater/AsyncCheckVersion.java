@@ -91,7 +91,7 @@ public class AsyncCheckVersion extends AsyncTask<Context, Void, String> {
 						new Intent(mContext, DownloadService.class)
 								.setAction(versionNameNew), 0), PendingIntent
 						.getActivity(mContext, 0, new Intent(mContext,
-								AutoUpdater.class),
+								AutoUpdater.class).setAction(versionNameNew),
 								Intent.FLAG_ACTIVITY_NEW_TASK));
 
 		NotificationManager nm = (NotificationManager) mContext
