@@ -109,6 +109,7 @@ public class GameView extends View implements
 	public void onSharedPreferenceChanged(SharedPreferences sp, String key) {
 		if (key.equals(Settings.Keys.SPREF_PUZZLE_LENGTH)) {
 			updateParams(getWidth(), getHeight());
+			invalidate();
 		}
 	}
 

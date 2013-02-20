@@ -99,7 +99,8 @@ public class ListViewArrayAdapter extends ArrayAdapter<String> {
 			holder = (ViewHolder) rowView.getTag();
 		}
 
-		holder.titleTextView.setText(mUsernames[position]);
+		holder.titleTextView.setText((position + 1) + ". "
+				+ mUsernames[position]);
 		holder.summary1TextView.setText(mTimes[position]);
 		holder.summary2TextView.setText(mSteps[position]);
 		if (mDates[position] != null) {

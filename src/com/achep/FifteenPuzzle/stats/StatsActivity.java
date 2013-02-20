@@ -35,7 +35,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -253,6 +255,14 @@ public class StatsActivity extends Activity implements OnClickListener {
 
 			if (mStatsData.getLength() >= 2)
 				mGraphButton.setVisibility(View.VISIBLE);
+
+			// Show start animation
+			LinearLayout resultsPanel = (LinearLayout) findViewById(R.id.results_panel);
+			resultsPanel.setVisibility(View.VISIBLE);
+			resultsPanel
+					.startAnimation(AnimationUtils.loadAnimation(
+							StatsActivity.this,
+							R.anim.activity_stats_results_panel_in));
 
 			setListViewAdapter(StatsData.SORT_BY_TIME);
 		}

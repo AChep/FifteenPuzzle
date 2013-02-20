@@ -75,7 +75,7 @@ public class Settings extends PreferenceActivity implements
 						i.putExtra(Intent.EXTRA_EMAIL,
 								new String[] { "artemchep@gmail.com" });
 						i.putExtra(Intent.EXTRA_SUBJECT,
-								"Fifteen Puzzles (suggestions & reports): ");
+								"[APP FEEDBACK] Fifteen Puzzles");
 						StringBuilder body = new StringBuilder();
 						body.append("Device model: "
 								+ android.os.Build.MANUFACTURER + " "

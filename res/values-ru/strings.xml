@@ -6,21 +6,21 @@
     <string name="game_congraz_title">Поздравляем!</string>
     <string name="game_congraz_message">Вы собрали этот пазл!</string>
     <string name="pref_number_picker_base_reset">Сбросить значение</string>
-    
+
     <!-- Download Service -->
     <string name="download_service_label">Сервис загрузки обновления</string>
     <string name="download_service_notification_error_text">Ошибка загрузки новой версии!</string>
     <string name="download_service_notification_success_text">Приложение успешно обновлено!</string>
     <string name="download_service_notification_downloading_text">Загрузка новой версии...</string>
     <string name="download_service_notification_downloading_info">Подготовка...</string>
-    
+
     <!-- ActionBar -->
     <string name="action_bar_new_game">Новая игра</string>
     <string name="action_bar_settings">Настройки</string>
     <string name="action_bar_download_new_version">Загрузить новую версию</string>
     <string name="action_bar_statistic_graph">Показать график</string>
     <string name="action_bar_statistic_clear">Очистить статистику</string>
-        
+
     <!-- Updater -->
     <string name="auto_updater">Авто-обновление</string>
     <string name="auto_updater_changelog">Список изменений\:</string>
@@ -31,18 +31,18 @@
     <string name="auto_updater_downloading_error4">Ошибка загрузки.</string>
     <string name="auto_updater_downloading_error_connection">Пожалуйста, сначала включите Интернет соединение.</string>
     <string name="auto_updater_notification_summary">Загрузите новую версия здесь!</string>
-    
+
     <!-- Statistic -->
     <string name="stats">Статистика</string>
     <string name="stats_time">@string/game_time</string>
     <string name="stats_steps">@string/game_steps</string>
-    <string name="stats_username_and_date">Имя пользователя\nДата</string>
+    <string name="stats_username_and_date">Пользователь\nДата</string>
     <string name="stats_graph_title">График результатов</string>
     <string name="stats_drop_title">Очистить статистику</string>
     <string name="stats_drop_message">Это действие удалит результаты всех Ваших игр! Данные не могут быть восстановлены!</string>
     <string name="stats_dropped_sucessfully_toast">Таблица рекордов была успешно удалена.</string>
-    
-    
+
+    <!-- Settings -->
     <string name="settings_statistic2">Ваши лучшие рекорды!</string>
     <string name="settings_statistic">Статистика</string>
     <string name="settings">Настройки</string>
@@ -53,9 +53,7 @@
     <string name="settings_nickname">Имя пользователя</string>
     <string name="settings_puzzle_length2">Выберите количество пазлов по линии</string>
     <string name="settings_puzzle_length">Количество фишек</string>
-    
     <string name="settings_category_other">Прочее</string>
-    
     <string name="settings_other_about2">Поддержка и дополнительная информация</string>
     <string name="settings_other_about">О программе</string>
     <string name="settings_other_about_version">Текущая версия</string>
