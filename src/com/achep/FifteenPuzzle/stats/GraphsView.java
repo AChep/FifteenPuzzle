@@ -18,6 +18,9 @@ package com.achep.FifteenPuzzle.stats;
 
 import java.util.ArrayList;
 
+import com.achep.FifteenPuzzle.Project;
+import com.achep.FifteenPuzzle.Utils;
+
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -69,16 +72,31 @@ public class GraphsView extends View {
 		mLabelsList.add(label);
 	}
 
+	private boolean mPointsDowngrade;
+
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
+		int points = event.getPointerCount();
 		switch (event.getActionMasked()) {
-		case MotionEvent.ACTION_MOVE:
-			writeCenterPoint(event);
-			scrolling(MotionEvent.ACTION_MOVE);
+		case MotionEvent.ACTION_POINTER_DOWN:
+		case MotionEvent.ACTION_DOWN:
+			writeCenterPointAndRadius(event);
+			scrolling(true);
+			if (points > 1)
+				zooming(true);
 			break;
-		default:
-			writeCenterPoint(event);
-			scrolling(MotionEvent.ACTION_DOWN);
+		case MotionEvent.ACTION_MOVE:
+			writeCenterPointAndRadius(event);
+			scrolling(mPointsDowngrade);
+			if (points > 1)
+				zooming(mPointsDowngrade);
+			mPointsDowngrade = false;
+			break;
+		case MotionEvent.ACTION_POINTER_UP:
+			mPointsDowngrade = true;
+			break;
+		case MotionEvent.ACTION_UP:
+		case MotionEvent.ACTION_CANCEL:
 			break;
 		}
 
@@ -92,30 +110,50 @@ public class GraphsView extends View {
 	private float mScrollX;
 	private float mScrollY;
 
-	private void scrolling(int action) {
+	private void scrolling(boolean touchDown) {
 		final float x = mCenterPoint[0], y = mCenterPoint[1];
-		switch (action) {
-		case MotionEvent.ACTION_MOVE:
+		if (!touchDown) {
 			mScrollX += x - mScrollStartX;
 			mScrollY += y - mScrollStartY;
-		default:
-			mScrollStartX = x;
-			mScrollStartY = y;
-			break;
+		}
+		mScrollStartX = x;
+		mScrollStartY = y;
+	}
+
+	// Zooming
+	private float mZoomStart;
+	private float mZoom = 1f;
+
+	private void zooming(boolean touchDown) {
+		final float radius = mZoomRadius;
+		if (!touchDown) {
+			mZoom = radius / mZoomStart;
+		} else {
+			mZoomStart = radius / mZoom;
 		}
 	}
 
 	private float[] mCenterPoint = new float[2];
+	private float mZoomRadius;
 
-	private void writeCenterPoint(MotionEvent event) {
+	private void writeCenterPointAndRadius(MotionEvent event) {
 		float x = 0f, y = 0f;
 		int points = event.getPointerCount();
 		for (int i = 0; i < points; i++) {
 			x += event.getX(i);
 			y += event.getY(i);
 		}
-		mCenterPoint[0] = x;
-		mCenterPoint[1] = y;
+		mCenterPoint[0] = x / points;
+		mCenterPoint[1] = y / points;
+
+		double radius = 1f;
+		for (int i = 0; i < points; i++) {
+			double length = Utils.pifagor(event.getX(i), event.getY(i),
+					mCenterPoint[0], mCenterPoint[1]);
+			if (length > radius)
+				radius = length;
+		}
+		mZoomRadius = (float) radius;
 	}
 
 	@Override
@@ -159,17 +197,34 @@ public class GraphsView extends View {
 			canvas.drawCircle(10, y - textSize / 2 + 4, textSize / 8, mPaint);
 			canvas.drawText(mLabelsList.get(i), 20, y, mPaint);
 		}
+
+		if (Project.DEBUG) {
+			mPaint.setColor(0x90707070);
+			canvas.drawCircle(mCenterPoint[0], mCenterPoint[1], mZoomRadius,
+					mPaint);
+			mPaint.setColor(0xffffff70);
+			canvas.drawText("" + mZoom, mCenterPoint[0] + 30,
+					mCenterPoint[1] + 30, mPaint);
+		}
+	}
+
+	private float getPointX(int i, int length, int width) {
+		return (float) i / (length - 1) * width;
 	}
 
 	private void canvasDrawLine(Canvas canvas, float x, float y, float x2,
 			float y2, Paint paint) {
 		float xpadding = mScrollX;
 		float ypadding = mScrollY;
-		canvas.drawLine(x + xpadding, y + ypadding, x2 + xpadding, y2
+
+		final float cx = mCenterPoint[0], cy = mCenterPoint[1];
+
+		canvas.drawLine(zoomPoint(x, cx) + xpadding, zoomPoint(y, cy)
+				+ ypadding, zoomPoint(x2, cx) + xpadding, zoomPoint(y2, cy)
 				+ ypadding, paint);
 	}
 
-	private float getPointX(int i, int length, int width) {
-		return (float) i / (length - 1) * width;
+	private float zoomPoint(float a, float b) {
+		return a * mZoom;
 	}
 }

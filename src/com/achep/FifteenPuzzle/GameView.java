@@ -77,7 +77,6 @@ public class GameView extends View implements
 	private boolean mGameOver;
 
 	private ActivityInterface mActivityInterface;
-	private boolean mIsChanged;
 
 	public interface ActivityInterface {
 		public void onGameOver(int steps, long timeMillis, int length);
@@ -174,7 +173,6 @@ public class GameView extends View implements
 		final int halfChipSize = mChipSize / 2;
 		for (int i = 0; i < mChips.length; i++)
 			mChips[i].draw(canvas, halfChipSize);
-		mIsChanged = false;
 	}
 
 	@Override
@@ -368,6 +366,7 @@ public class GameView extends View implements
 				}
 			}
 		}
+		invalidate();
 		return true;
 	}
 
@@ -413,6 +412,7 @@ public class GameView extends View implements
 					handler.postDelayed(this, 10);
 				} else
 					mChips[id].setCoords(coordsEnd);
+				postInvalidate();
 			}
 		};
 		handler.post(runnable);
@@ -442,10 +442,6 @@ public class GameView extends View implements
 				break;
 			}
 		}
-	}
-
-	public boolean isChanged() {
-		return mIsChanged;
 	}
 
 	public long getGameTimeMillis() {
@@ -576,7 +572,6 @@ public class GameView extends View implements
 		}
 
 		private void onSetCoords() {
-			mIsChanged = true;
 			int halfChipSize = mChipSize / 2;
 			solved = Math.abs(coords[0] - perfectCoords[0]) <= halfChipSize
 					&& Math.abs(coords[1] - perfectCoords[1]) <= halfChipSize;

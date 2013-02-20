@@ -109,16 +109,13 @@ public class GameActivity extends Activity implements ActivityInterface {
 				if (!mDraw)
 					return;
 
-				if (mGameView.isChanged())
-					mGameView.postInvalidate();
-				long time = mGameView.getGameTimeMillis();
-				time = Utils.div(time, 1000);
+				long time = Utils.div(mGameView.getGameTimeMillis(), 1000);
 				if (time != timeOld) {
 					mTitleText.setText(titleLabel + Utils.getFormatedTime(time));
 					timeOld = time;
 				}
 
-				mHandler.postDelayed(this, 15);
+				mHandler.postDelayed(this, 400);
 			}
 		});
 	}
@@ -199,6 +196,7 @@ public class GameActivity extends Activity implements ActivityInterface {
 
 		@Override
 		protected void onPostExecute(String str) {
+			mGameView.postInvalidate();
 			mShuffleButton.setVisibility(View.VISIBLE);
 			mShuffleProgress.setVisibility(View.GONE);
 		}
