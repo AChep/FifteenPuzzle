@@ -20,6 +20,7 @@ import java.util.Random;
 
 import com.achep.FifteenPuzzle.preferences.PrefPuzzleLengthPicker;
 import com.achep.FifteenPuzzle.preferences.Settings;
+import com.achep.FifteenPuzzle.utils.Utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;

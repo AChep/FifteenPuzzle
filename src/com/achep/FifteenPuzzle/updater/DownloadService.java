@@ -9,10 +9,10 @@ import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
 
-import com.achep.FifteenPuzzle.NotificationUtils;
 import com.achep.FifteenPuzzle.R;
-import com.achep.FifteenPuzzle.Toast;
 import com.achep.FifteenPuzzle.preferences.Settings;
+import com.achep.FifteenPuzzle.utils.NotificationUtils;
+import com.achep.FifteenPuzzle.widget.Toast;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -80,7 +80,7 @@ public class DownloadService extends Service {
 					.setTextViewText(
 							R.id.eta,
 							"ETA: "
-									+ com.achep.FifteenPuzzle.Utils
+									+ com.achep.FifteenPuzzle.utils.Utils
 											.getFormatedTimeFromMillis((long) (100f
 													/ progressF * deltaTime - deltaTime)));
 			mDownloadingRVs.setTextViewText(R.id.progresstext, progressI + "%");

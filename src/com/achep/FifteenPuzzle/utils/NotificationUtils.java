@@ -14,7 +14,9 @@
  * limitations under the License.
  */
 
-package com.achep.FifteenPuzzle;
+package com.achep.FifteenPuzzle.utils;
+
+import com.achep.FifteenPuzzle.R;
 
 import android.app.Notification;
 import android.app.PendingIntent;

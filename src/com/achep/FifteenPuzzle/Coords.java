@@ -16,40 +16,7 @@
 
 package com.achep.FifteenPuzzle;
 
-public class Utils {
-
-	public static int alignToRange(int value, int min, int max) {
-		return value < min ? min : value > max ? max : value;
-	}
-
-	public static long div(long a, int b) {
-		return (a - a % b) / b;
-	};
-
-	public static double pifagor(float x, float y, float x2, float y2) {
-		return Math.sqrt(Math.pow(x - x2, 2) + Math.pow(y - y2, 2));
-	}
-
-	public static String fixTwoZero(long x) {
-		return x < 10 ? "0" + x : Long.toString(x);
-	}
-
-	public static String fixThreeZero(long x) {
-		return x < 10 ? "00" + x : x < 100 ? "0" + x : Long.toString(x);
-	}
-
-	public static String getFormatedTime(long s) {
-		return Utils.fixTwoZero(Utils.div(s, 60) % 60) + ":"
-				+ Utils.fixTwoZero(s % 60);
-	}
-
-	public static String getFormatedTimeFromMillis(long s) {
-		return getFormatedTime(div(s, 1000));
-	}
-
-}
-
-class Coords {
+public class Coords {
 
 	/**
 	 * Output array requires length >= 2x

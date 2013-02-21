@@ -54,39 +54,34 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int notification_icon_background_tile=0x7f020014;
     }
     public static final class id {
-        public static final int back=0x7f0a0000;
-        public static final int button=0x7f0a0017;
-        public static final int clear=0x7f0a000d;
-        public static final int content=0x7f0a0005;
-        public static final int content_panel=0x7f0a0004;
-        public static final int date=0x7f0a0015;
-        public static final int date_sort=0x7f0a000f;
-        public static final int dismiss=0x7f0a000b;
-        public static final int download=0x7f0a0002;
-        public static final int eta=0x7f0a0019;
-        public static final int game_view=0x7f0a0009;
-        public static final int graph=0x7f0a000c;
-        public static final int icon=0x7f0a0016;
+        public static final int action_bar=0x7f0a0000;
+        public static final int button=0x7f0a0011;
+        public static final int content=0x7f0a0003;
+        public static final int content_panel=0x7f0a0002;
+        public static final int date=0x7f0a000f;
+        public static final int date_sort=0x7f0a0008;
+        public static final int dismiss=0x7f0a0006;
+        public static final int eta=0x7f0a0013;
+        public static final int game_view=0x7f0a0004;
+        public static final int icon=0x7f0a0010;
         public static final int iconpref=0x01010000;
-        public static final int list_view=0x7f0a0012;
-        public static final int max=0x7f0a001d;
-        public static final int min=0x7f0a001b;
-        public static final int progressbar=0x7f0a0001;
-        public static final int progresstext=0x7f0a001a;
-        public static final int reset=0x7f0a001f;
-        public static final int results_panel=0x7f0a000e;
-        public static final int rezult=0x7f0a000a;
-        public static final int seek_bar=0x7f0a001e;
-        public static final int settings=0x7f0a0008;
-        public static final int shuffle=0x7f0a0007;
-        public static final int steps_sort=0x7f0a0011;
-        public static final int summary1=0x7f0a0013;
-        public static final int summary2=0x7f0a0014;
-        public static final int text=0x7f0a0018;
-        public static final int time_sort=0x7f0a0010;
-        public static final int title=0x7f0a0006;
-        public static final int value=0x7f0a001c;
-        public static final int version=0x7f0a0003;
+        public static final int list_view=0x7f0a000b;
+        public static final int max=0x7f0a0018;
+        public static final int min=0x7f0a0016;
+        public static final int progressbar=0x7f0a0015;
+        public static final int progresstext=0x7f0a0014;
+        public static final int reset=0x7f0a001a;
+        public static final int results_panel=0x7f0a0007;
+        public static final int rezult=0x7f0a0005;
+        public static final int seek_bar=0x7f0a0019;
+        public static final int steps_sort=0x7f0a000a;
+        public static final int summary1=0x7f0a000d;
+        public static final int summary2=0x7f0a000e;
+        public static final int text=0x7f0a0012;
+        public static final int time_sort=0x7f0a0009;
+        public static final int title=0x7f0a000c;
+        public static final int value=0x7f0a0017;
+        public static final int version=0x7f0a0001;
     }
     public static final class layout {
         public static final int activity_auto_updater=0x7f030000;
@@ -104,6 +99,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int action_bar_download_new_version=0x7f08000e;
         /**  ActionBar 
  ActionBar 
+ ActionBar 
          */
         public static final int action_bar_new_game=0x7f08000c;
         public static final int action_bar_settings=0x7f08000d;
@@ -111,6 +107,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int action_bar_statistic_graph=0x7f08000f;
         public static final int app_name=0x7f080000;
         /**  Updater 
+ Updater 
  Updater 
          */
         public static final int auto_updater=0x7f080011;
@@ -124,6 +121,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int auto_updater_notification_summary=0x7f080019;
         public static final int download_service_install_please_toast=0x7f08000b;
         /**  Download Service 
+ Download Service 
  Download Service 
          */
         public static final int download_service_label=0x7f080006;
@@ -162,6 +160,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
          */
         public static final int settings_statistic2=0x7f080023;
         /**  Statistic 
+ Statistic 
  Statistic 
          */
         public static final int stats=0x7f08001a;

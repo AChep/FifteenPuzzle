@@ -19,14 +19,14 @@ package com.achep.FifteenPuzzle.stats;
 import java.util.ArrayList;
 
 import com.achep.FifteenPuzzle.R;
-import com.achep.FifteenPuzzle.Toast;
 import com.achep.FifteenPuzzle.preferences.PrefPuzzleLengthPicker;
 import com.achep.FifteenPuzzle.preferences.Settings;
+import com.achep.FifteenPuzzle.widget.ActionBar;
+import com.achep.FifteenPuzzle.widget.Toast;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.database.Cursor;
@@ -35,7 +35,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnLongClickListener;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -49,6 +48,7 @@ public class StatsActivity extends Activity implements OnClickListener {
 	private ImageView mClearButton;
 	private ImageView mGraphButton;
 	private ProgressBar mProgressBar;
+	private ActionBar mActionBar;
 
 	private ListView mListView;
 	private StatsData mStatsData;
@@ -70,93 +70,23 @@ public class StatsActivity extends Activity implements OnClickListener {
 		mDateSort = (TextView) findViewById(R.id.date_sort);
 		mDateSort.setOnClickListener(this);
 
-		mProgressBar = (ProgressBar) findViewById(R.id.progressbar);
-		mGraphButton = (ImageView) findViewById(R.id.graph);
-		mGraphButton.setOnClickListener(new OnClickListener() {
+		mActionBar = (ActionBar) findViewById(R.id.action_bar);
+		mActionBar.setTitle(getTitle().toString());
+		mActionBar.setPopUpPattern(this);
 
-			@Override
-			public void onClick(View v) {
-				GraphsView gv = new GraphsView(StatsActivity.this);
+		mProgressBar = mActionBar.newProgressBar();
 
-				Resources res = getResources();
-				gv.addPoints(mStatsData.getTimeSecs(), 0xffff0000,
-						res.getString(R.string.stats_time));
-				gv.addPoints(mStatsData.getSteps(), 0xff00ff00,
-						res.getString(R.string.stats_steps));
+		mGraphButton = mActionBar.newImageButton(
+				R.string.action_bar_statistic_graph,
+				R.drawable.ic_actionbar_graph);
+		mGraphButton.setOnClickListener(this);
+		mGraphButton.setVisibility(View.GONE);
 
-				new AlertDialog.Builder(StatsActivity.this)
-						.setIcon(android.R.drawable.ic_dialog_info)
-						.setTitle(R.string.stats_graph_title).setView(gv)
-						.setNegativeButton(android.R.string.cancel, null)
-						.show();
-			}
-		});
-		mGraphButton.setOnLongClickListener(new OnLongClickListener() {
-
-			@Override
-			public boolean onLongClick(View v) {
-				Toast.show(StatsActivity.this,
-						R.string.action_bar_statistic_graph);
-				return true;
-			}
-		});
-		mClearButton = (ImageView) findViewById(R.id.clear);
-		mClearButton.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View arg0) {
-				// Build confirm dialog
-				new AlertDialog.Builder(StatsActivity.this)
-						.setIcon(android.R.drawable.ic_dialog_alert)
-						.setTitle(R.string.stats_drop_title)
-						.setMessage(R.string.stats_drop_message)
-						.setPositiveButton(android.R.string.ok,
-								new DialogInterface.OnClickListener() {
-
-									@Override
-									public void onClick(DialogInterface dialog,
-											int which) {
-										// Drop the database
-										final DBHelper dbHelper = new DBHelper(
-												StatsActivity.this);
-										final SQLiteDatabase db = dbHelper
-												.getWritableDatabase();
-										DBHelper.dropTable(db);
-										db.close();
-
-										// Make message
-										Toast.showLong(
-												StatsActivity.this,
-												R.string.stats_dropped_sucessfully_toast);
-
-										// Finish activity
-										StatsActivity.this.finish();
-									}
-
-								})
-						.setNegativeButton(android.R.string.cancel, null)
-						.show();
-			}
-		});
-		mClearButton.setOnLongClickListener(new OnLongClickListener() {
-
-			@Override
-			public boolean onLongClick(View v) {
-
-				Toast.show(StatsActivity.this,
-						R.string.action_bar_statistic_clear);
-				return true;
-			}
-		});
-		// Set back button pop-up pattern
-		findViewById(R.id.back).setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View arg0) {
-				startActivity(new Intent(StatsActivity.this, Settings.class));
-				finish();
-			}
-		});
+		mClearButton = mActionBar.newImageButton(
+				R.string.action_bar_statistic_clear,
+				R.drawable.ic_actionbar_delete);
+		mClearButton.setOnClickListener(this);
+		mClearButton.setVisibility(View.GONE);
 
 		// Async data loading...
 		new LoadDatabaseStats().execute();
@@ -164,20 +94,66 @@ public class StatsActivity extends Activity implements OnClickListener {
 
 	@Override
 	public void onClick(View v) {
-		if (mStatsData == null)
-			return;
+		if (v.equals(mGraphButton)) {
+			GraphsView gv = new GraphsView(StatsActivity.this);
 
-		int sort = 0;
-		if (v.equals(mTimeSort)) {
-			sort = StatsData.SORT_BY_TIME;
-		} else if (v.equals(mStepsSort)) {
-			sort = StatsData.SORT_BY_STEPS;
-		} else if (v.equals(mDateSort)) {
-			sort = StatsData.SORT_BY_DATE;
-		} else
-			return;
+			Resources res = getResources();
+			gv.addPoints(mStatsData.getTimeSecs(), 0xffff0000,
+					res.getString(R.string.stats_time));
+			gv.addPoints(mStatsData.getSteps(), 0xff00ff00,
+					res.getString(R.string.stats_steps));
 
-		new SortStats().execute(sort);
+			new AlertDialog.Builder(StatsActivity.this)
+					.setIcon(android.R.drawable.ic_dialog_info)
+					.setTitle(R.string.stats_graph_title).setView(gv)
+					.setNegativeButton(android.R.string.cancel, null).show();
+		} else if (v.equals(mClearButton)) {
+			// Build confirm dialog
+			new AlertDialog.Builder(StatsActivity.this)
+					.setIcon(android.R.drawable.ic_dialog_alert)
+					.setTitle(R.string.stats_drop_title)
+					.setMessage(R.string.stats_drop_message)
+					.setPositiveButton(android.R.string.ok,
+							new DialogInterface.OnClickListener() {
+
+								@Override
+								public void onClick(DialogInterface dialog,
+										int which) {
+									// Drop the database
+									final DBHelper dbHelper = new DBHelper(
+											StatsActivity.this);
+									final SQLiteDatabase db = dbHelper
+											.getWritableDatabase();
+									DBHelper.dropTable(db);
+									db.close();
+
+									// Make message
+									Toast.showLong(
+											StatsActivity.this,
+											R.string.stats_dropped_sucessfully_toast);
+
+									// Finish activity
+									StatsActivity.this.finish();
+								}
+
+							}).setNegativeButton(android.R.string.cancel, null)
+					.show();
+		} else {
+			if (mStatsData == null)
+				return;
+
+			int sort = 0;
+			if (v.equals(mTimeSort)) {
+				sort = StatsData.SORT_BY_TIME;
+			} else if (v.equals(mStepsSort)) {
+				sort = StatsData.SORT_BY_STEPS;
+			} else if (v.equals(mDateSort)) {
+				sort = StatsData.SORT_BY_DATE;
+			} else
+				return;
+
+			new SortStats().execute(sort);
+		}
 	}
 
 	private void setListViewAdapter(int sort) {

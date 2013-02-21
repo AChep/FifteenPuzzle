@@ -4,6 +4,8 @@ import com.achep.FifteenPuzzle.GameView.ActivityInterface;
 import com.achep.FifteenPuzzle.preferences.Settings;
 import com.achep.FifteenPuzzle.stats.DBHelper;
 import com.achep.FifteenPuzzle.updater.AsyncCheckVersion;
+import com.achep.FifteenPuzzle.utils.Utils;
+import com.achep.FifteenPuzzle.widget.ActionBar;
 
 import android.app.Activity;
 import android.content.ContentValues;
@@ -19,7 +21,6 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnLongClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -27,12 +28,15 @@ import android.widget.PopupWindow;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-public class GameActivity extends Activity implements ActivityInterface {
+public class GameActivity extends Activity implements ActivityInterface,
+		OnClickListener {
 
 	private GameView mGameView;
+
+	private ActionBar mActionBar;
 	private ImageView mShuffleButton;
-	private ProgressBar mShuffleProgress;
-	private TextView mTitleText;
+	private ImageView mSettingsButton;
+	private ProgressBar mProgressBar;
 
 	private Handler mHandler;
 	private boolean mDraw;
@@ -46,44 +50,21 @@ public class GameActivity extends Activity implements ActivityInterface {
 		mGameView = (GameView) findViewById(R.id.game_view);
 		mGameView.setActivityInterface(this);
 
-		mTitleText = (TextView) findViewById(R.id.title);
-		mShuffleButton = (ImageView) findViewById(R.id.shuffle);
-		mShuffleButton.setOnClickListener(new OnClickListener() {
+		mActionBar = (ActionBar) findViewById(R.id.action_bar);
+		mActionBar.setTitle(getTitle().toString());
 
-			@Override
-			public void onClick(View arg0) {
-				new ShuffleChips().execute("");
-			}
-		});
-		mShuffleButton.setOnLongClickListener(new OnLongClickListener() {
+		mShuffleButton = mActionBar.newImageButton(
+				R.string.action_bar_new_game, R.drawable.ic_actionbar_refresh);
+		mShuffleButton.setOnClickListener(this);
 
-			@Override
-			public boolean onLongClick(View v) {
-				Toast.show(GameActivity.this, R.string.action_bar_new_game);
-				return true;
-			}
-		});
-		mShuffleProgress = (ProgressBar) findViewById(R.id.progressbar);
-		final ImageView settingsButton = (ImageView) findViewById(R.id.settings);
-		settingsButton.setOnClickListener(new OnClickListener() {
+		mProgressBar = mActionBar.newProgressBar();
+		mProgressBar.setVisibility(View.GONE);
 
-			@Override
-			public void onClick(View arg0) {
-				startActivity(new Intent(GameActivity.this, Settings.class)
-						.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
-			}
-		});
-		settingsButton.setOnLongClickListener(new OnLongClickListener() {
-
-			@Override
-			public boolean onLongClick(View v) {
-				Toast.show(GameActivity.this, R.string.action_bar_settings);
-				return true;
-			}
-		});
+		mSettingsButton = mActionBar.newImageButton(
+				R.string.action_bar_settings, R.drawable.ic_actionbar_settings);
+		mSettingsButton.setOnClickListener(this);
 
 		mHandler = new Handler();
-
 		new AsyncCheckVersion().execute(this);
 	}
 
@@ -105,7 +86,8 @@ public class GameActivity extends Activity implements ActivityInterface {
 
 				long time = Utils.div(mGameView.getGameTimeMillis(), 1000);
 				if (time != timeOld) {
-					mTitleText.setText(titleLabel + Utils.getFormatedTime(time));
+					mActionBar.setTitle(titleLabel
+							+ Utils.getFormatedTime(time));
 					timeOld = time;
 				}
 
@@ -125,6 +107,16 @@ public class GameActivity extends Activity implements ActivityInterface {
 		super.onDestroy();
 
 		mGameView.recycleBitmaps();
+	}
+
+	@Override
+	public void onClick(View v) {
+		if (v.equals(mShuffleButton)) {
+			new ShuffleChips().execute();
+		} else if (v.equals(mSettingsButton)) {
+			startActivity(new Intent(GameActivity.this, Settings.class)
+					.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+		}
 	}
 
 	@Override
@@ -173,27 +165,26 @@ public class GameActivity extends Activity implements ActivityInterface {
 		db.close();
 	}
 
-	private class ShuffleChips extends AsyncTask<String, String, String> {
+	private class ShuffleChips extends AsyncTask<Void, Void, Void> {
 
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
 			mShuffleButton.setVisibility(View.GONE);
-			mShuffleProgress.setVisibility(View.VISIBLE);
+			mProgressBar.setVisibility(View.VISIBLE);
 		}
 
 		@Override
-		protected String doInBackground(String... aurl) {
+		protected Void doInBackground(Void... avoid) {
 			mGameView.newGame();
 			return null;
 		}
 
 		@Override
-		protected void onPostExecute(String str) {
+		protected void onPostExecute(Void str) {
 			mGameView.postInvalidate();
 			mShuffleButton.setVisibility(View.VISIBLE);
-			mShuffleProgress.setVisibility(View.GONE);
+			mProgressBar.setVisibility(View.GONE);
 		}
 	}
-
 }

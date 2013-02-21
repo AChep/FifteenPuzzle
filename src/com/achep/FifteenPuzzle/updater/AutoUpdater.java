@@ -17,27 +17,26 @@
 package com.achep.FifteenPuzzle.updater;
 
 import com.achep.FifteenPuzzle.R;
-import com.achep.FifteenPuzzle.Toast;
+import com.achep.FifteenPuzzle.widget.ActionBar;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnLongClickListener;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
 public class AutoUpdater extends Activity implements OnClickListener {
 
+	private ActionBar mActionBar;
 	private ImageView mDownloadButton;
-	private RelativeLayout mBackButton;
-	private TextView mChangelog;
 	private ProgressBar mProgressBar;
+
+	private TextView mChangelog;
 	private ScrollView mChangelogPanel;
 
 	private String mVersionName;
@@ -53,24 +52,20 @@ public class AutoUpdater extends Activity implements OnClickListener {
 			final TextView newVersion = (TextView) findViewById(R.id.version);
 			newVersion.setText(mVersionName);
 
-			mDownloadButton = (ImageView) findViewById(R.id.download);
-			mDownloadButton.setOnLongClickListener(new OnLongClickListener() {
+			mActionBar = (ActionBar) findViewById(R.id.action_bar);
+			mActionBar.setTitle(getTitle().toString());
+			mActionBar.setPopUpPattern(this);
 
-				@Override
-				public boolean onLongClick(View v) {
-					Toast.show(AutoUpdater.this,
-							R.string.action_bar_download_new_version);
-					return true;
-				}
-			});
-			mBackButton = (RelativeLayout) findViewById(R.id.back);
-			mChangelog = (TextView) findViewById(R.id.content);
-			mProgressBar = (ProgressBar) findViewById(R.id.progressbar);
-			mChangelogPanel = (ScrollView) findViewById(R.id.content_panel);
-
-			// OnClickListeners
+			mDownloadButton = mActionBar.newImageButton(
+					R.string.action_bar_download_new_version,
+					R.drawable.ic_actionbar_download);
 			mDownloadButton.setOnClickListener(this);
-			mBackButton.setOnClickListener(this);
+			mDownloadButton.setVisibility(View.GONE);
+
+			mProgressBar = mActionBar.newProgressBar();
+
+			mChangelog = (TextView) findViewById(R.id.content);
+			mChangelogPanel = (ScrollView) findViewById(R.id.content_panel);
 
 			// Time cap
 			mChangelog.setText("Function isn't availabel yet.");
@@ -87,11 +82,9 @@ public class AutoUpdater extends Activity implements OnClickListener {
 
 	@Override
 	public void onClick(View v) {
-		if (v == mDownloadButton) {
+		if (v.equals(mDownloadButton)) {
 			startService(new Intent(this, DownloadService.class)
 					.setAction(mVersionName));
-		} else if (v == mBackButton) {
-			finish();
 		}
 	}
 

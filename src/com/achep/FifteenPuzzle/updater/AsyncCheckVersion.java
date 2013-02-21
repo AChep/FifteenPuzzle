@@ -16,9 +16,9 @@
 
 package com.achep.FifteenPuzzle.updater;
 
-import com.achep.FifteenPuzzle.NotificationUtils;
-import com.achep.FifteenPuzzle.Project;
 import com.achep.FifteenPuzzle.R;
+import com.achep.FifteenPuzzle.utils.NotificationUtils;
+import com.achep.FifteenPuzzle.utils.Project;
 
 import android.app.Notification;
 import android.app.NotificationManager;

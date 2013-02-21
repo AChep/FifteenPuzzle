@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.achep.FifteenPuzzle;
+package com.achep.FifteenPuzzle.widget;
 
 import android.content.Context;
 

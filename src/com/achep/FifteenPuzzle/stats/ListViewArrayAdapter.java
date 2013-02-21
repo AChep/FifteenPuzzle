@@ -22,7 +22,7 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 import com.achep.FifteenPuzzle.R;
-import com.achep.FifteenPuzzle.Utils;
+import com.achep.FifteenPuzzle.utils.Utils;
 
 import android.app.Activity;
 import android.view.LayoutInflater;

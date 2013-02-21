@@ -18,8 +18,8 @@ package com.achep.FifteenPuzzle.stats;
 
 import java.util.ArrayList;
 
-import com.achep.FifteenPuzzle.Project;
-import com.achep.FifteenPuzzle.Utils;
+import com.achep.FifteenPuzzle.utils.Project;
+import com.achep.FifteenPuzzle.utils.Utils;
 
 import android.content.Context;
 import android.graphics.Canvas;

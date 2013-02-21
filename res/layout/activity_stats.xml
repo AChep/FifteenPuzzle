@@ -18,73 +18,11 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-    <LinearLayout
+    <com.achep.FifteenPuzzle.widget.ActionBar
+        android:id="@+id/action_bar"
         android:layout_width="fill_parent"
         android:layout_height="@dimen/action_bar_height"
-        android:background="@color/action_bar_background" >
-
-        <RelativeLayout
-            android:id="@+id/back"
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:background="@drawable/image_view_selector" >
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
-                android:gravity="center_vertical"
-                android:src="@drawable/ic_actionbar_back" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
-                android:gravity="center_vertical"
-                android:paddingBottom="8dip"
-                android:paddingLeft="4dip"
-                android:paddingTop="8dip"
-                android:src="@drawable/ic_launcher" />
-        </RelativeLayout>
-
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:gravity="center_vertical"
-            android:text="@string/stats"
-            android:textAppearance="?android:textAppearanceMedium" />
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:gravity="center_vertical|right"
-            android:paddingRight="4dip" >
-
-            <ProgressBar
-                android:id="@+id/progressbar"
-                android:layout_width="@dimen/action_bar_height"
-                android:layout_height="fill_parent"
-                android:padding="8dip"
-                android:scaleType="center" />
-
-            <ImageView
-                android:id="@+id/graph"
-                android:layout_width="@dimen/action_bar_height"
-                android:layout_height="fill_parent"
-                android:background="@drawable/image_view_selector"
-                android:scaleType="center"
-                android:src="@drawable/ic_actionbar_graph"
-                android:visibility="gone" />
-
-            <ImageView
-                android:id="@+id/clear"
-                android:layout_width="@dimen/action_bar_height"
-                android:layout_height="fill_parent"
-                android:background="@drawable/image_view_selector"
-                android:scaleType="center"
-                android:src="@drawable/ic_actionbar_delete"
-                android:visibility="gone" />
-        </LinearLayout>
-    </LinearLayout>
+        android:background="@color/action_bar_background" />
 
     <ImageView
         android:layout_width="fill_parent"

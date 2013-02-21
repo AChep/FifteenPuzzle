@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.achep.FifteenPuzzle;
+package com.achep.FifteenPuzzle.utils;
 
 public class Project {
 	public static final boolean DEBUG = false;
