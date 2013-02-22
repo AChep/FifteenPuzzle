@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.achep.FifteenPuzzle"
-    android:versionCode="30"
-    android:versionName="2.53" >
+    android:versionCode="31"
+    android:versionName="2.6" >
 
     <!-- Auto Updater Permissions -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -33,7 +33,7 @@
             android:name=".preferences.Settings"
             android:label="@string/settings"
             android:launchMode="singleInstance"
-            android:theme="@style/Settings" />
+            android:theme="@style/SettingsActivity" />
         <activity
             android:name=".stats.StatsActivity"
             android:label="@string/stats"
@@ -47,9 +47,21 @@
         </activity>
         <activity
             android:name=".updater.AutoUpdater"
+            android:excludeFromRecents="true"
             android:label="@string/auto_updater"
             android:launchMode="singleInstance"
             android:theme="@style/GameActivity" />
+        <activity
+            android:name=".rollback.RollbackActivity"
+            android:label="@string/rollback"
+            android:launchMode="singleInstance"
+            android:theme="@style/RollbackActivity" >
+            <intent-filter>
+                <action android:name="com.achep.FifteenPuzzle.RollbackActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
 
         <service
             android:name=".updater.DownloadService"

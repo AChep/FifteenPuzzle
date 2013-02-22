@@ -7,7 +7,9 @@
         <item name="android:windowBackground">@drawable/activity_background</item>
     </style>
 
-    <style name="Settings" parent="BaseTheme"></style>
+    <style name="SettingsActivity" parent="BaseTheme"></style>
+
+    <style name="RollbackActivity" parent="BaseTheme"></style>
 
     <!-- Status bar notifications styles -->
     <style name="TextAppearance_StatusBar_EventContent_Title">

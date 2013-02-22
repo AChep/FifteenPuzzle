@@ -49,7 +49,7 @@ public class ListViewArrayAdapter extends ArrayAdapter<String> {
 			int[] times, int[] steps, int[] dates, int sort) {
 		super(context, R.layout.list_view_adapter_stats, usernames);
 		this.context = context;
-		
+
 		mUsernames = usernames;
 		mSortType = sort;
 
@@ -61,7 +61,7 @@ public class ListViewArrayAdapter extends ArrayAdapter<String> {
 		mSteps = new String[times.length];
 		mDates = new String[times.length];
 		for (int i = 0; i < times.length; i++) {
-			mTimes[i] = Utils.getFormatedTime(times[i]);
+			mTimes[i] = Utils.timeGetFormatedTimeFromSeconds(times[i]);
 			mSteps[i] = Integer.toString(steps[i]);
 
 			if (dates[i] != 0) {

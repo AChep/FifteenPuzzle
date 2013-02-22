@@ -148,7 +148,7 @@ public class GraphsView extends View {
 
 		double radius = 1f;
 		for (int i = 0; i < points; i++) {
-			double length = Utils.pifagor(event.getX(i), event.getY(i),
+			double length = Utils.mathPifagor(event.getX(i), event.getY(i),
 					mCenterPoint[0], mCenterPoint[1]);
 			if (length > radius)
 				radius = length;

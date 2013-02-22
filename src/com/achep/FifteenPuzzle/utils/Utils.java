@@ -18,33 +18,35 @@ package com.achep.FifteenPuzzle.utils;
 
 public class Utils {
 
-	public static int alignToRange(int value, int min, int max) {
+	/**
+	 * Aligns value to provided range
+	 */
+	public static int mathAlignToRange(int value, int min, int max) {
 		return value < min ? min : value > max ? max : value;
 	}
 
-	public static long div(long a, int b) {
+	public static long mathDiv(long a, int b) {
 		return (a - a % b) / b;
 	};
 
-	public static double pifagor(float x, float y, float x2, float y2) {
+	/**
+	 * Returns length between two points
+	 */
+	public static double mathPifagor(float x, float y, float x2, float y2) {
 		return Math.sqrt(Math.pow(x - x2, 2) + Math.pow(y - y2, 2));
 	}
 
-	public static String fixTwoZero(long x) {
+	private static String timeFixTwoZero(long x) {
 		return x < 10 ? "0" + x : Long.toString(x);
 	}
 
-	public static String fixThreeZero(long x) {
-		return x < 10 ? "00" + x : x < 100 ? "0" + x : Long.toString(x);
+	public static String timeGetFormatedTimeFromSeconds(long s) {
+		return Utils.timeFixTwoZero(Utils.mathDiv(s, 60) % 60) + ":"
+				+ Utils.timeFixTwoZero(s % 60);
 	}
 
-	public static String getFormatedTime(long s) {
-		return Utils.fixTwoZero(Utils.div(s, 60) % 60) + ":"
-				+ Utils.fixTwoZero(s % 60);
-	}
-
-	public static String getFormatedTimeFromMillis(long s) {
-		return getFormatedTime(div(s, 1000));
+	public static String timeGetFormatedTimeFromMillis(long s) {
+		return timeGetFormatedTimeFromSeconds(mathDiv(s, 1000));
 	}
 
 }

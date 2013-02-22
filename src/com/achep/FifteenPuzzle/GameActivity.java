@@ -2,6 +2,7 @@ package com.achep.FifteenPuzzle;
 
 import com.achep.FifteenPuzzle.GameView.ActivityInterface;
 import com.achep.FifteenPuzzle.preferences.Settings;
+import com.achep.FifteenPuzzle.rollback.RollbackActivity;
 import com.achep.FifteenPuzzle.stats.DBHelper;
 import com.achep.FifteenPuzzle.updater.AsyncCheckVersion;
 import com.achep.FifteenPuzzle.utils.Utils;
@@ -51,16 +52,16 @@ public class GameActivity extends Activity implements ActivityInterface,
 		mGameView.setActivityInterface(this);
 
 		mActionBar = (ActionBar) findViewById(R.id.action_bar);
-		mActionBar.setTitle(getTitle().toString());
+		mActionBar.actionBarSetTitle(getTitle());
 
-		mShuffleButton = mActionBar.newImageButton(
+		mShuffleButton = mActionBar.actionBarInitAndAddImageButton(
 				R.string.action_bar_new_game, R.drawable.ic_actionbar_refresh);
 		mShuffleButton.setOnClickListener(this);
 
-		mProgressBar = mActionBar.newProgressBar();
+		mProgressBar = mActionBar.actionBarInitAndAddProgressBar();
 		mProgressBar.setVisibility(View.GONE);
 
-		mSettingsButton = mActionBar.newImageButton(
+		mSettingsButton = mActionBar.actionBarInitAndAddImageButton(
 				R.string.action_bar_settings, R.drawable.ic_actionbar_settings);
 		mSettingsButton.setOnClickListener(this);
 
@@ -84,10 +85,10 @@ public class GameActivity extends Activity implements ActivityInterface,
 				if (!mDraw)
 					return;
 
-				long time = Utils.div(mGameView.getGameTimeMillis(), 1000);
+				long time = Utils.mathDiv(mGameView.getGameTimeMillis(), 1000);
 				if (time != timeOld) {
-					mActionBar.setTitle(titleLabel
-							+ Utils.getFormatedTime(time));
+					mActionBar.actionBarSetTitle(titleLabel
+							+ Utils.timeGetFormatedTimeFromSeconds(time));
 					timeOld = time;
 				}
 
@@ -121,7 +122,7 @@ public class GameActivity extends Activity implements ActivityInterface,
 
 	@Override
 	public void onGameOver(int steps, long timeMillis, int length) {
-		int time = (int) Utils.div(timeMillis, 1000);
+		int time = (int) Utils.mathDiv(timeMillis, 1000);
 
 		final LayoutInflater inflater = (LayoutInflater) this
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -134,7 +135,7 @@ public class GameActivity extends Activity implements ActivityInterface,
 
 		TextView rezultText = (TextView) ll.findViewById(R.id.rezult);
 		rezultText.setText(getResources().getString(R.string.game_time) + ": "
-				+ Utils.getFormatedTime(time) + "\n"
+				+ Utils.timeGetFormatedTimeFromSeconds(time) + "\n"
 				+ getResources().getString(R.string.game_steps) + ": " + steps);
 		ll.findViewById(R.id.dismiss).setOnClickListener(new OnClickListener() {
 
@@ -158,8 +159,9 @@ public class GameActivity extends Activity implements ActivityInterface,
 		cv.put(DBHelper.LENGTH, length);
 		cv.put(DBHelper.TIME, time);
 		cv.put(DBHelper.STEPS, steps);
-		cv.put(DBHelper.DATE_MINS, (int) Utils.div(
-				Utils.div(System.currentTimeMillis(), 1000), 60));
+		cv.put(DBHelper.DATE_MINS,
+				(int) Utils.mathDiv(
+						Utils.mathDiv(System.currentTimeMillis(), 1000), 60));
 
 		db.insert(DBHelper.TABLE_NAME, null, cv);
 		db.close();

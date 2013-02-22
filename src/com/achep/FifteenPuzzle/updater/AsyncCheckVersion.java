@@ -40,7 +40,8 @@ public class AsyncCheckVersion extends AsyncTask<Context, Void, String> {
 	@Override
 	protected String doInBackground(Context... context) {
 		mContext = context[0];
-		String manifest = Utils.downloadText(mContext, URL_MASTER_MANIFEST);
+		String manifest = Utils.internetDownloadText(mContext,
+				URL_MASTER_MANIFEST);
 		if (manifest == null)
 			return null;
 

@@ -18,11 +18,23 @@ package com.achep.FifteenPuzzle.widget;
 
 import android.content.Context;
 
+/**
+ * Makes work with Toast messages a bit faster
+ * 
+ * @author achep
+ */
 public class Toast {
+
+	/**
+	 * Creates and shows simple Toast from String resource. Length: SHORT
+	 */
 	public static void show(Context context, int res) {
 		makeAndShow(context, res, android.widget.Toast.LENGTH_SHORT);
 	}
 
+	/**
+	 * Creates and shows simple Toast from String resource. Length: LONG
+	 */
 	public static void showLong(Context context, int res) {
 		makeAndShow(context, res, android.widget.Toast.LENGTH_LONG);
 	}

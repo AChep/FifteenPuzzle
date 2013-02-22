@@ -44,15 +44,21 @@ public class ActionBar extends LinearLayout {
 	}
 
 	public ActionBar(Context context, AttributeSet attrs) {
-		this(context, attrs, 0);
+		super(context, attrs);
+		
+		initialize(context);
 	}
 
-	// TODO: What the fuck?!
 	@SuppressLint("NewApi")
 	public ActionBar(Context context, AttributeSet attrs, int styles) {
 		super(context, attrs, styles);
+		
+		initialize(context);
+	}
 
+	private void initialize(Context context) {
 		mHeight = (int) getResources().getDimension(R.dimen.action_bar_height);
+		double density = getResources().getDisplayMetrics().density;
 
 		// Initialize navigating part
 		mNavigateLayout = new RelativeLayout(context);
@@ -60,8 +66,8 @@ public class ActionBar extends LinearLayout {
 		appIcon.setImageResource(R.drawable.ic_launcher);
 		RelativeLayout.LayoutParams appIconLp = new RelativeLayout.LayoutParams(
 				LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-		appIconLp.leftMargin = density(4);
-		appIconLp.topMargin = (appIconLp.bottomMargin = density(8));
+		appIconLp.leftMargin = density(4, density);
+		appIconLp.topMargin = (appIconLp.bottomMargin = density(8, density));
 		appIconLp.addRule(RelativeLayout.CENTER_VERTICAL);
 		appIcon.setLayoutParams(appIconLp);
 		mNavigateLayout.addView(appIcon);
@@ -81,7 +87,10 @@ public class ActionBar extends LinearLayout {
 				LayoutParams.MATCH_PARENT));
 	}
 
-	public void setPopUpPattern(final Activity activity) {
+	/**
+	 * Sets pop-up android pattern.
+	 */
+	public void actionBarSetPopUpPattern(final Activity activity) {
 		OnClickListener listener = new OnClickListener() {
 
 			@Override
@@ -105,32 +114,44 @@ public class ActionBar extends LinearLayout {
 				LayoutParams.WRAP_CONTENT, mHeight));
 	}
 
-	public void setTitle(String title) {
+	/**
+	 * Sets title label
+	 */
+	public void actionBarSetTitle(CharSequence title) {
 		mTitleText.setText(title);
 	}
 
-	public ProgressBar newProgressBar() {
+	/**
+	 * Returns and adds to action bar new ProgressBar. Warning: Don't set
+	 * LayoutParams to output view!
+	 */
+	public ProgressBar actionBarInitAndAddProgressBar() {
 		ProgressBar pb = new ProgressBar(getContext());
 		mActionsBar.addView(prepareView(pb));
 		return pb;
 	}
 
-	public ImageView newImageButton(final int stringRes, final int imageRes) {
+	/**
+	 * Returns and adds to action bar new ImageView with toast info and icon.
+	 * Warning: Don't set OnLongClick listener and LayoutParams to output view!
+	 */
+	public ImageView actionBarInitAndAddImageButton(final int stringRes,
+			final int imageRes) {
 		ImageView imageView = new ImageView(getContext());
 
 		imageView.setImageResource(imageRes);
 		imageView.setScaleType(ScaleType.CENTER);
 		imageView.setBackgroundResource(R.drawable.image_view_selector);
 
-		prepareView(imageView);
-		imageView.setOnLongClickListener(new OnLongClickListener() {
+		prepareView(imageView).setOnLongClickListener(
+				new OnLongClickListener() {
 
-			@Override
-			public boolean onLongClick(View v) {
-				Toast.show(getContext(), stringRes);
-				return true;
-			}
-		});
+					@Override
+					public boolean onLongClick(View v) {
+						Toast.show(getContext(), stringRes);
+						return true;
+					}
+				});
 
 		mActionsBar.addView(imageView);
 		return imageView;
@@ -152,6 +173,10 @@ public class ActionBar extends LinearLayout {
 	}
 
 	private int density(int a) {
-		return (int) (getResources().getDisplayMetrics().density * a);
+		return density(a, getResources().getDisplayMetrics().density);
+	}
+
+	private int density(int a, double density) {
+		return (int) (density * a);
 	}
 }

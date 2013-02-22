@@ -71,18 +71,18 @@ public class StatsActivity extends Activity implements OnClickListener {
 		mDateSort.setOnClickListener(this);
 
 		mActionBar = (ActionBar) findViewById(R.id.action_bar);
-		mActionBar.setTitle(getTitle().toString());
-		mActionBar.setPopUpPattern(this);
+		mActionBar.actionBarSetTitle(getTitle().toString());
+		mActionBar.actionBarSetPopUpPattern(this);
 
-		mProgressBar = mActionBar.newProgressBar();
+		mProgressBar = mActionBar.actionBarInitAndAddProgressBar();
 
-		mGraphButton = mActionBar.newImageButton(
+		mGraphButton = mActionBar.actionBarInitAndAddImageButton(
 				R.string.action_bar_statistic_graph,
 				R.drawable.ic_actionbar_graph);
 		mGraphButton.setOnClickListener(this);
 		mGraphButton.setVisibility(View.GONE);
 
-		mClearButton = mActionBar.newImageButton(
+		mClearButton = mActionBar.actionBarInitAndAddImageButton(
 				R.string.action_bar_statistic_clear,
 				R.drawable.ic_actionbar_delete);
 		mClearButton.setOnClickListener(this);

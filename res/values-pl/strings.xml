@@ -23,7 +23,7 @@
 
     <!-- Updater -->
     <string name="auto_updater">Automatyczne aktualizacje</string>
-    <string name="auto_updater_changelog">Lista zmian\:</string>
+    <string name="auto_updater_changelog">Lista zmian:</string>
     <string name="auto_updater_downloading_dialog">Pobieranie...</string>
     <string name="auto_updater_downloading_error1">Nie udało się nawiązać połączenia.</string>
     <string name="auto_updater_downloading_error2">Nie udało się otworzyć strumienia wejściowego.</string>
@@ -41,6 +41,8 @@
     <string name="stats_drop_title">Wyczyść statystykę</string>
     <string name="stats_drop_message">Usuwa wszystkie dane! Nie może być cofnięte!</string>
     <string name="stats_dropped_sucessfully_toast">Tabela wyników została wyczyszczona.</string>
+    
+    <!-- Settings -->
     <string name="settings">Ustawienia</string>
     <string name="settings_statistic2">Twoje najlepsze wyniki!</string>
     <string name="settings_statistic">Statystyki</string>

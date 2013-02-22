@@ -22,26 +22,32 @@ import java.io.File;
 import java.io.InputStreamReader;
 import java.net.URL;
 
+import com.achep.FifteenPuzzle.utils.Project;
+
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Environment;
 
+/**
+ * Internet and I/O utilities.
+ * 
+ * @author achep
+ * 
+ */
 public class Utils {
 
-	public static boolean connectedToInternet(Context context) {
-		ConnectivityManager cm = (ConnectivityManager) context
-				.getSystemService(Context.CONNECTIVITY_SERVICE);
-		NetworkInfo netInfo = cm.getActiveNetworkInfo();
-		return netInfo != null && netInfo.isConnectedOrConnecting() ? true
-				: false;
-	}
-
-	public static File getPathToFolder(String folder) {
-		final String cardStatus = Environment.getExternalStorageState();
+	/**
+	 * Returns file with project's folder (Path from Project.DATA_FOLDER).
+	 */
+	public static File getProjectFolder() {
+		String cardStatus = Environment.getExternalStorageState();
 		if (cardStatus.equals(Environment.MEDIA_MOUNTED)) {
 			final File rootDirectory = new File(Environment
-					.getExternalStorageDirectory().getPath() + folder);
+					.getExternalStorageDirectory().getPath()
+					+ Project.DATA_FOLDER);
 			if (!rootDirectory.exists())
 				rootDirectory.mkdirs();
 			return rootDirectory;
@@ -49,18 +55,42 @@ public class Utils {
 			return null;
 	}
 
-	public static String downloadText(Context context, String url) {
-		if (!connectedToInternet(context))
+	/**
+	 * Installs / updates application
+	 */
+	public static void installApplication(Context context, File app) {
+		Intent intent = new Intent(Intent.ACTION_VIEW);
+		intent.setDataAndType(Uri.fromFile(app),
+				"application/vnd.android.package-archive");
+		context.startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+	}
+
+	/**
+	 * Returns TRUE of you're connected to Internet and FALSE else.
+	 */
+	public static boolean isConnectedToInternet(Context context) {
+		ConnectivityManager cm = (ConnectivityManager) context
+				.getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkInfo netInfo = cm.getActiveNetworkInfo();
+		return netInfo != null && netInfo.isConnectedOrConnecting() ? true
+				: false;
+	}
+
+	/**
+	 * Downloads text by providing URL address
+	 * 
+	 * @return String text or Null if failed.
+	 */
+	public static String internetDownloadText(Context context, String url) {
+		if (!isConnectedToInternet(context))
 			return null;
 		try {
 			BufferedReader bufferReader = new BufferedReader(
 					new InputStreamReader(new URL(url).openStream()));
 
 			ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-			int i;
-			while ((i = bufferReader.read()) != -1) {
+			for (int i; (i = bufferReader.read()) != -1;)
 				byteArrayOutputStream.write(i);
-			}
 
 			bufferReader.close();
 			return byteArrayOutputStream.toString();

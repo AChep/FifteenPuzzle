@@ -22,9 +22,15 @@
     <string name="action_bar_statistic_graph">Показать график</string>
     <string name="action_bar_statistic_clear">Очистить статистику</string>
 
+    <!-- Rollback -->
+    <string name="rollback">Откатка</string>
+    <string name="rollback_error_project_folder">Ошибка чтения папки проекта с хранилища.</string>
+    <string name="rollback_error_project_folder_empty">Извините, но предыдущих версий пока нет.</string>
+    <string name="rollback_error_damaged_file">Поврежденный файл.</string>
+
     <!-- Updater -->
     <string name="auto_updater">Авто-обновление</string>
-    <string name="auto_updater_changelog">Список изменений\:</string>
+    <string name="auto_updater_changelog">Список изменений:</string>
     <string name="auto_updater_downloading_dialog">Идет загрузка...</string>
     <string name="auto_updater_downloading_error1">Ошибка открытия соединения.</string>
     <string name="auto_updater_downloading_error2">Ошибка открытия входящего потока.</string>
@@ -65,5 +71,7 @@
     <string name="settings_other_about_feedback">Обратная связь</string>
     <string name="settings_other_about_github2">Посетить страницу проекта на GitHub</string>
     <string name="settings_other_about_github">GitHub</string>
+    <string name="settings_other_about_rollback2">Возврат к предыдущим версиям игры</string>
+    <string name="settings_other_about_rollback">Откатка</string>
 
 </resources>

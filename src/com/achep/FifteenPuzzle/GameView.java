@@ -279,7 +279,7 @@ public class GameView extends View implements
 				mQuickSwipe = false;
 
 			// Fix of the swapping puzzle on slowly phones
-			int xy = Utils.alignToRange(
+			int xy = Utils.mathAlignToRange(
 					mTouchCoordsReal[mMotionData[MOTION_DATA_ORIENTATION]],
 					mMotionData[MOTION_DATA_MIN], mMotionData[MOTION_DATA_MAX]);
 

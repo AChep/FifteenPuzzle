@@ -53,16 +53,16 @@ public class AutoUpdater extends Activity implements OnClickListener {
 			newVersion.setText(mVersionName);
 
 			mActionBar = (ActionBar) findViewById(R.id.action_bar);
-			mActionBar.setTitle(getTitle().toString());
-			mActionBar.setPopUpPattern(this);
+			mActionBar.actionBarSetTitle(getTitle().toString());
+			mActionBar.actionBarSetPopUpPattern(this);
 
-			mDownloadButton = mActionBar.newImageButton(
+			mDownloadButton = mActionBar.actionBarInitAndAddImageButton(
 					R.string.action_bar_download_new_version,
 					R.drawable.ic_actionbar_download);
 			mDownloadButton.setOnClickListener(this);
 			mDownloadButton.setVisibility(View.GONE);
 
-			mProgressBar = mActionBar.newProgressBar();
+			mProgressBar = mActionBar.actionBarInitAndAddProgressBar();
 
 			mChangelog = (TextView) findViewById(R.id.content);
 			mChangelogPanel = (ScrollView) findViewById(R.id.content_panel);

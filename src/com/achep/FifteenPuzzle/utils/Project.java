@@ -17,5 +17,14 @@
 package com.achep.FifteenPuzzle.utils;
 
 public class Project {
+
+	/**
+	 * Is debug mode enabled? Enable it to see a bit more info.
+	 */
 	public static final boolean DEBUG = false;
+
+	/**
+	 * Path to project's data folder. Better if you won't touch it
+	 */
+	public static final String DATA_FOLDER = "/Android/data/com.achep.FifteenPuzzles/";
 }

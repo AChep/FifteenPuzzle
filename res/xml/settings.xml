@@ -52,6 +52,12 @@
                     android:action="android.intent.action.VIEW"
                     android:data="https://github.com/AChep/FifteenPuzzle" />
             </com.achep.FifteenPuzzle.preferences.PrefIcon>
+            <com.achep.FifteenPuzzle.preferences.PrefIcon
+                android:summary="@string/settings_other_about_rollback2"
+                android:title="@string/settings_other_about_rollback"
+                this:icon="@drawable/ic_settings_rollback" >
+                <intent android:action="com.achep.FifteenPuzzle.RollbackActivity" />
+            </com.achep.FifteenPuzzle.preferences.PrefIcon>
         </PreferenceScreen>
     </PreferenceCategory>
 

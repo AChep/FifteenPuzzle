@@ -10,7 +10,6 @@ import java.net.URL;
 import java.net.URLConnection;
 
 import com.achep.FifteenPuzzle.R;
-import com.achep.FifteenPuzzle.preferences.Settings;
 import com.achep.FifteenPuzzle.utils.NotificationUtils;
 import com.achep.FifteenPuzzle.widget.Toast;
 
@@ -21,7 +20,6 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.IBinder;
 import android.widget.RemoteViews;
@@ -81,7 +79,7 @@ public class DownloadService extends Service {
 							R.id.eta,
 							"ETA: "
 									+ com.achep.FifteenPuzzle.utils.Utils
-											.getFormatedTimeFromMillis((long) (100f
+											.timeGetFormatedTimeFromMillis((long) (100f
 													/ progressF * deltaTime - deltaTime)));
 			mDownloadingRVs.setTextViewText(R.id.progresstext, progressI + "%");
 			mDownloadingRVs.setProgressBar(R.id.progressbar, 100, progressI,
@@ -92,7 +90,7 @@ public class DownloadService extends Service {
 		@Override
 		protected String doInBackground(Void... void_) {
 			Resources res = getResources();
-			if (Utils.connectedToInternet(DownloadService.this)) {
+			if (Utils.isConnectedToInternet(DownloadService.this)) {
 				URL url = null;
 				try {
 					url = new URL(
@@ -118,8 +116,7 @@ public class DownloadService extends Service {
 				FileOutputStream output = null;
 				try {
 					output = new FileOutputStream(new File(
-							Utils.getPathToFolder(Settings.SDCARD_FOLDER),
-							mVersionName + ".apk"));
+							Utils.getProjectFolder(), mVersionName + ".apk"));
 				} catch (FileNotFoundException e) {
 					// TODO: Do something
 					return "3";
@@ -161,11 +158,9 @@ public class DownloadService extends Service {
 			if (error != null) {
 				showErrorNotify();
 			} else {
-				Intent intent = new Intent(Intent.ACTION_VIEW);
-				intent.setDataAndType(Uri.fromFile(new File(Utils
-						.getPathToFolder(Settings.SDCARD_FOLDER), mVersionName
-						+ ".apk")), "application/vnd.android.package-archive");
-				startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+				Utils.installApplication(DownloadService.this,
+						new File(Utils.getProjectFolder(), mVersionName
+								+ ".apk"));
 
 				// Show toast message
 				Toast.showLong(DownloadService.this,
