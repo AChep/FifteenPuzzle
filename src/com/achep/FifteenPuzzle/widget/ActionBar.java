@@ -68,9 +68,10 @@ public class ActionBar extends LinearLayout {
 		ImageView appIcon = new ImageView(context);
 		appIcon.setImageResource(R.drawable.ic_launcher);
 		RelativeLayout.LayoutParams appIconLp = new RelativeLayout.LayoutParams(
-				mHeight, mHeight);
+				mHeight, LayoutParams.WRAP_CONTENT);
 		appIconLp.leftMargin = horizontalPadding;
 		appIconLp.topMargin = verticalPadding;
+		appIconLp.bottomMargin = verticalPadding;
 		appIconLp.addRule(RelativeLayout.CENTER_VERTICAL);
 		mNavigateLayout.addView(appIcon, appIconLp);
 

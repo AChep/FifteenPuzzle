@@ -9,8 +9,7 @@ package com.achep.FifteenPuzzle;
 
 public final class R {
     public static final class anim {
-        public static final int game_successful_congratulations_label_in=0x7f040000;
-        public static final int widget_list_view_panel_in=0x7f040001;
+        public static final int widget_list_view_panel_in=0x7f040000;
     }
     public static final class attr {
         /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
