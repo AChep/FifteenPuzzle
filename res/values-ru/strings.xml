@@ -10,11 +10,16 @@
     <!-- Download Service -->
     <string name="download_service_label">Сервис загрузки обновления</string>
     <string name="download_service_notification_error_text">Ошибка загрузки новой версии!</string>
-    <string name="download_service_notification_success_text">Приложение успешно обновлено!</string>
     <string name="download_service_notification_downloading_text">Загрузка новой версии...</string>
     <string name="download_service_notification_downloading_info">Подготовка...</string>
+    <string name="download_service_notification_downloading_eta">Осталось:</string>
     <string name="download_service_install_please_toast">Пожалуйста, нажмите кнопку \"Установить\" для установки новой версии</string>
 
+    <!-- Success solved -->
+    <string name="game_gameover_awesome">Великолепно!</string>
+    <string name="game_gameover_results">Ваши результаты:\n\u0009время: %1$s\n\u0009ходы\u0020\u0020: %2$s</string>
+    <string name="game_gameover_user">Игрок</string>
+    
     <!-- ActionBar -->
     <string name="action_bar_new_game">Новая игра</string>
     <string name="action_bar_settings">Настройки</string>
@@ -23,9 +28,9 @@
     <string name="action_bar_statistic_clear">Очистить статистику</string>
 
     <!-- Rollback -->
-    <string name="rollback">Откатка</string>
+    <string name="rollback">Предыдущие версии</string>
     <string name="rollback_error_project_folder">Ошибка чтения папки проекта с хранилища.</string>
-    <string name="rollback_error_project_folder_empty">Извините, но предыдущих версий пока нет.</string>
+    <string name="rollback_error_project_folder_empty">Предыдущие версии не были обнаружены.</string>
     <string name="rollback_error_damaged_file">Поврежденный файл.</string>
 
     <!-- Updater -->
@@ -36,8 +41,8 @@
     <string name="auto_updater_downloading_error2">Ошибка открытия входящего потока.</string>
     <string name="auto_updater_downloading_error3">Ошибка создания файла.</string>
     <string name="auto_updater_downloading_error4">Ошибка загрузки.</string>
-    <string name="auto_updater_downloading_error_connection">Пожалуйста, сначала включите Интернет соединение.</string>
-    <string name="auto_updater_notification_summary">Новая версия Пятнашек доступна для загрузки!</string>
+    <string name="auto_updater_downloading_error_connection">Пожалуйста, проверьте Интернет соединение</string>
+    <string name="auto_updater_notification_summary">Доступно обновление!</string>
 
     <!-- Statistic -->
     <string name="stats">Статистика</string>
@@ -54,7 +59,7 @@
     <string name="settings_statistic">Статистика</string>
     <string name="settings">Настройки</string>
     <string name="settings_category">Настройки</string>
-    <string name="settings_nickname_default">Маг</string>
+    <string name="settings_nickname_default">Волшебник</string>
     <string name="settings_nickname3">Введите новое имя пользователя</string>
     <string name="settings_nickname2">Текущее имя пользователя:</string>
     <string name="settings_nickname">Имя пользователя</string>

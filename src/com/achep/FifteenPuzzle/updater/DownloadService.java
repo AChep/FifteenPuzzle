@@ -56,11 +56,15 @@ public class DownloadService extends Service {
 
 		private int mFileSize = 0;
 		private long mStartTime = 0;
+		private String mEtaLabel;
 
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
 			showDownloadingNotify();
+			mEtaLabel = getResources().getString(
+					R.string.download_service_notification_downloading_eta)
+					+ " ";
 		}
 
 		@Override
@@ -77,7 +81,7 @@ public class DownloadService extends Service {
 			mDownloadingRVs
 					.setTextViewText(
 							R.id.eta,
-							"ETA: "
+							mEtaLabel
 									+ com.achep.FifteenPuzzle.utils.Utils
 											.timeGetFormatedTimeFromMillis((long) (100f
 													/ progressF * deltaTime - deltaTime)));
@@ -209,7 +213,7 @@ public class DownloadService extends Service {
 		n.contentView = mDownloadingRVs;
 		n.contentIntent = PendingIntent.getActivity(this, 0, new Intent(this,
 				AutoUpdater.class), Intent.FLAG_ACTIVITY_NEW_TASK);
-		n.icon = R.drawable.ic_statusbar_new_version;
+		n.icon = android.R.drawable.stat_sys_download;
 		n.tickerText = contentText;
 		n.flags = Notification.FLAG_ONGOING_EVENT;
 

@@ -16,6 +16,9 @@
 
 package com.achep.FifteenPuzzle.stats;
 
+import com.achep.FifteenPuzzle.utils.Utils;
+
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -32,7 +35,7 @@ public class DBHelper extends SQLiteOpenHelper {
 	public static final String TIME = "time";
 	public static final String STEPS = "steps";
 	public static final String DATE_MINS = "date";
-	
+
 	private static final String CREATE_TABLE = "create table " + TABLE_NAME
 			+ " ( " + ID + " integer primary key autoincrement, " + NICKNAME
 			+ " TEXT, " + LENGTH + " INTEGER, " + TIME + " INTEGER, " + STEPS
@@ -55,8 +58,32 @@ public class DBHelper extends SQLiteOpenHelper {
 		}
 	}
 
+	/**
+	 * Drop current database
+	 */
 	public static void dropTable(SQLiteDatabase sqLiteDatabase) {
 		sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
 		sqLiteDatabase.execSQL(CREATE_TABLE);
+	}
+
+	/**
+	 * Put new score to database
+	 */
+	public static void insert(Context context, String username, int length,
+			int time, int steps) {
+		DBHelper dbOpenHelper = new DBHelper(context);
+		SQLiteDatabase db = dbOpenHelper.getWritableDatabase();
+		ContentValues cv = new ContentValues();
+
+		cv.put(DBHelper.NICKNAME, username);
+		cv.put(DBHelper.LENGTH, length);
+		cv.put(DBHelper.TIME, time);
+		cv.put(DBHelper.STEPS, steps);
+		cv.put(DBHelper.DATE_MINS,
+				(int) Utils.mathDiv(
+						Utils.mathDiv(System.currentTimeMillis(), 1000), 60));
+
+		db.insert(DBHelper.TABLE_NAME, null, cv);
+		db.close();
 	}
 }

@@ -9,7 +9,6 @@
 
     <!-- Download Service -->
     <string name="download_service_label">Usługa pobierania</string>
-    <string name="download_service_notification_error_text">Pobieranie nowej wersji nieudane!</string>
     <string name="download_service_notification_success_text">Aplikacja została zaktualizowana!</string>
     <string name="download_service_notification_downloading_text">Pobieranie nowej wersji...</string>
     <string name="download_service_notification_downloading_info">Przygotowywanie...</string>

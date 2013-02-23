@@ -23,7 +23,6 @@ import com.achep.FifteenPuzzle.updater.Utils;
 import com.achep.FifteenPuzzle.widget.Toast;
 
 import android.app.ListActivity;
-import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;

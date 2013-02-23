@@ -2,19 +2,17 @@ package com.achep.FifteenPuzzle;
 
 import com.achep.FifteenPuzzle.GameView.ActivityInterface;
 import com.achep.FifteenPuzzle.preferences.Settings;
-import com.achep.FifteenPuzzle.rollback.RollbackActivity;
 import com.achep.FifteenPuzzle.stats.DBHelper;
 import com.achep.FifteenPuzzle.updater.AsyncCheckVersion;
 import com.achep.FifteenPuzzle.utils.Utils;
 import com.achep.FifteenPuzzle.widget.ActionBar;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.ContentValues;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
@@ -23,10 +21,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class GameActivity extends Activity implements ActivityInterface,
@@ -121,50 +121,59 @@ public class GameActivity extends Activity implements ActivityInterface,
 	}
 
 	@Override
-	public void onGameOver(int steps, long timeMillis, int length) {
-		int time = (int) Utils.mathDiv(timeMillis, 1000);
+	public void onGameOver(final int steps, long timeMillis, final int length) {
+		final int time = (int) Utils.mathDiv(timeMillis, 1000);
+		final SharedPreferences sp = PreferenceManager
+				.getDefaultSharedPreferences(this);
 
-		final LayoutInflater inflater = (LayoutInflater) this
-				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		LinearLayout ll = (LinearLayout) inflater.inflate(
-				R.layout.activity_game_congraz, null, false);
+		RelativeLayout root = (RelativeLayout) LayoutInflater.from(this)
+				.inflate(R.layout.popupwindow_gameover, null);
 
-		final PopupWindow pw = new PopupWindow(ll, LayoutParams.MATCH_PARENT,
+		TextView result = (TextView) root.findViewById(R.id.results);
+		result.setText(this.getResources().getString(
+				R.string.game_gameover_results,
+				Utils.timeGetFormatedTimeFromSeconds(time), steps + ""));
+
+		final String usernameSettings = sp.getString(
+				Settings.Keys.PREF_USER_NAME,
+				getResources().getString(R.string.settings_nickname_default));
+		final EditText username = (EditText) root.findViewById(R.id.username);
+		username.setText(usernameSettings);
+
+		final PopupWindow pw = new PopupWindow(root, LayoutParams.MATCH_PARENT,
 				LayoutParams.MATCH_PARENT, true);
 		pw.showAtLocation(mGameView, Gravity.CENTER, 0, 0);
 
-		TextView rezultText = (TextView) ll.findViewById(R.id.rezult);
-		rezultText.setText(getResources().getString(R.string.game_time) + ": "
-				+ Utils.timeGetFormatedTimeFromSeconds(time) + "\n"
-				+ getResources().getString(R.string.game_steps) + ": " + steps);
-		ll.findViewById(R.id.dismiss).setOnClickListener(new OnClickListener() {
+		Button dismiss = (Button) root.findViewById(R.id.dismiss);
+		dismiss.setOnClickListener(new OnClickListener() {
 
+			@SuppressLint("NewApi")
 			@Override
-			public void onClick(View arg0) {
+			public void onClick(View v) {
+				final String usernameCurrent = username.getText().toString();
+				if (!usernameSettings.equals(usernameCurrent)) {
+					SharedPreferences.Editor spe = sp.edit();
+					spe.putString(Settings.Keys.PREF_USER_NAME, usernameCurrent);
+					if (Build.VERSION.SDK_INT < Build.VERSION_CODES.GINGERBREAD) {
+						// Froyobread-
+						spe.commit();
+					} else {
+						// Gingerbread+
+						spe.apply();
+					}
+				}
+				new Thread() {
+					@Override
+					public void run() {
+						DBHelper.insert(GameActivity.this, usernameCurrent,
+								length, time, steps);
+					}
+				}.run();
+
+				// Exit
 				pw.dismiss();
 			}
 		});
-
-		final SharedPreferences dsprefs = PreferenceManager
-				.getDefaultSharedPreferences(this);
-		String userName = dsprefs.getString(Settings.Keys.PREF_USER_NAME,
-				getResources().getString(R.string.settings_nickname_default));
-
-		// Put scores to database
-		DBHelper dbOpenHelper = new DBHelper(GameActivity.this);
-		SQLiteDatabase db = dbOpenHelper.getWritableDatabase();
-		ContentValues cv = new ContentValues();
-
-		cv.put(DBHelper.NICKNAME, userName);
-		cv.put(DBHelper.LENGTH, length);
-		cv.put(DBHelper.TIME, time);
-		cv.put(DBHelper.STEPS, steps);
-		cv.put(DBHelper.DATE_MINS,
-				(int) Utils.mathDiv(
-						Utils.mathDiv(System.currentTimeMillis(), 1000), 60));
-
-		db.insert(DBHelper.TABLE_NAME, null, cv);
-		db.close();
 	}
 
 	private class ShuffleChips extends AsyncTask<Void, Void, Void> {

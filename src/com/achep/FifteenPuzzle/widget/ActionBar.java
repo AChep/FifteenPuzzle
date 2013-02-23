@@ -45,39 +45,47 @@ public class ActionBar extends LinearLayout {
 
 	public ActionBar(Context context, AttributeSet attrs) {
 		super(context, attrs);
-		
+
 		initialize(context);
 	}
 
 	@SuppressLint("NewApi")
 	public ActionBar(Context context, AttributeSet attrs, int styles) {
 		super(context, attrs, styles);
-		
+
 		initialize(context);
 	}
 
 	private void initialize(Context context) {
 		mHeight = (int) getResources().getDimension(R.dimen.action_bar_height);
-		double density = getResources().getDisplayMetrics().density;
+
+		int horizontalPadding = density(4);
+		int verticalPadding = horizontalPadding * 2;
 
 		// Initialize navigating part
 		mNavigateLayout = new RelativeLayout(context);
+		mNavigateLayout.setPadding(0, 0, horizontalPadding, 0);
 		ImageView appIcon = new ImageView(context);
 		appIcon.setImageResource(R.drawable.ic_launcher);
 		RelativeLayout.LayoutParams appIconLp = new RelativeLayout.LayoutParams(
-				LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-		appIconLp.leftMargin = density(4, density);
-		appIconLp.topMargin = (appIconLp.bottomMargin = density(8, density));
+				mHeight, mHeight);
+		appIconLp.leftMargin = horizontalPadding;
+		appIconLp.topMargin = verticalPadding;
 		appIconLp.addRule(RelativeLayout.CENTER_VERTICAL);
-		appIcon.setLayoutParams(appIconLp);
-		mNavigateLayout.addView(appIcon);
-		addView(mNavigateLayout, newLayoutParams());
+		mNavigateLayout.addView(appIcon, appIconLp);
 
 		// Title text
 		mTitleText = new TextView(context);
 		mTitleText.setTextAppearance(context,
 				android.R.style.TextAppearance_Medium);
-		addView(mTitleText, newLayoutParams());
+		RelativeLayout.LayoutParams titleTextLp = new RelativeLayout.LayoutParams(
+				LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+		titleTextLp.addRule(RelativeLayout.CENTER_VERTICAL);
+		titleTextLp.leftMargin = mHeight + horizontalPadding;
+		mNavigateLayout.addView(mTitleText, titleTextLp);
+
+		// Add navigating part to main view
+		addView(mNavigateLayout, newLayoutParams());
 
 		// Icons and actions
 		mActionsBar = new LinearLayout(context);
@@ -173,10 +181,6 @@ public class ActionBar extends LinearLayout {
 	}
 
 	private int density(int a) {
-		return density(a, getResources().getDisplayMetrics().density);
-	}
-
-	private int density(int a, double density) {
-		return (int) (density * a);
+		return (int) (a * getResources().getDisplayMetrics().density);
 	}
 }

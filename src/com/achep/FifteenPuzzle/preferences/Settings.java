@@ -30,7 +30,7 @@ import android.widget.Toast;
 
 public class Settings extends PreferenceActivity implements
 		OnPreferenceChangeListener {
-	
+
 	public static final String SHARED_PREFERENCES_FILE = "preferences2";
 
 	public static class Keys {

@@ -15,4 +15,8 @@
         android:toXDelta="0"
         android:toYDelta="0" />
 
+    <rotate
+        android:fromDegrees="0"
+        android:toDegrees="35" />
+
 </set>
