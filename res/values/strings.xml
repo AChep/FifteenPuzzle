@@ -38,6 +38,7 @@
     <!-- Updater -->
     <string name="auto_updater">Auto-Updater</string>
     <string name="auto_updater_changelog">Changelog:</string>
+    <string name="auto_updater_changelog_failed">Downloading changelog failed.</string>
     <string name="auto_updater_downloading_dialog">Downloading...</string>
     <string name="auto_updater_downloading_error1">Failed to open connection.</string>
     <string name="auto_updater_downloading_error2">Failed to open input stream.</string>

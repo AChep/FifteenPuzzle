@@ -38,6 +38,7 @@
     <!-- Updater -->
     <string name="auto_updater">Авто-обновление</string>
     <string name="auto_updater_changelog">Список изменений:</string>
+    <string name="auto_updater_changelog_failed">Ошибка загрузки списка изменений.</string>
     <string name="auto_updater_downloading_dialog">Идет загрузка...</string>
     <string name="auto_updater_downloading_error1">Ошибка открытия соединения.</string>
     <string name="auto_updater_downloading_error2">Ошибка открытия входящего потока.</string>

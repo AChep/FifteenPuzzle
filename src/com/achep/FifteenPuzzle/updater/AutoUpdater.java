@@ -21,6 +21,8 @@ import com.achep.FifteenPuzzle.widget.ActionBar;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager.NameNotFoundException;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -67,14 +69,8 @@ public class AutoUpdater extends Activity implements OnClickListener {
 			mChangelog = (TextView) findViewById(R.id.content);
 			mChangelogPanel = (ScrollView) findViewById(R.id.content_panel);
 
-			// Time cap
-			mChangelog.setText("Function isn't availabel yet.");
-			mChangelogPanel.setVisibility(View.VISIBLE);
-			mChangelogPanel.startAnimation(AnimationUtils.loadAnimation(this,
-					R.anim.widget_list_view_panel_in));
-
-			mProgressBar.setVisibility(View.GONE);
-			mDownloadButton.setVisibility(View.VISIBLE);
+			// Download changelog
+			new DownloadAndSetChangelog().execute();
 		} else {
 			finish();
 		}
@@ -88,4 +84,42 @@ public class AutoUpdater extends Activity implements OnClickListener {
 		}
 	}
 
+	private class DownloadAndSetChangelog extends AsyncTask<Void, Void, String> {
+
+		@Override
+		protected String doInBackground(Void... avoid) {
+			String changelog = Utils
+					.internetDownloadText(AutoUpdater.this,
+							"https://raw.github.com/AChep/FifteenPuzzle/master/res/raw/changelog.txt");
+			if (changelog == null)
+				return null;
+
+			String versionName = null;
+			try {
+				versionName = getPackageManager().getPackageInfo(
+						AutoUpdater.this.getPackageName(), 0).versionName;
+			} catch (NameNotFoundException e1) {
+				return null;
+			}
+			int a = changelog.indexOf("## " + versionName);
+			if (a == -1)
+				return changelog;
+			return changelog.substring(0, a);
+		}
+
+		@Override
+		protected void onPostExecute(String changelog) {
+			if (changelog == null) {
+				changelog = getResources().getString(
+						R.string.auto_updater_changelog_failed);
+			}
+
+			mChangelog.setText(changelog);
+			mChangelogPanel.setVisibility(View.VISIBLE);
+			mChangelogPanel.startAnimation(AnimationUtils.loadAnimation(
+					AutoUpdater.this, R.anim.widget_list_view_panel_in));
+			mProgressBar.setVisibility(View.GONE);
+			mDownloadButton.setVisibility(View.VISIBLE);
+		}
+	}
 }

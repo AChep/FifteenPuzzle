@@ -30,8 +30,6 @@ import android.os.AsyncTask;
 
 public class AsyncCheckVersion extends AsyncTask<Context, Void, String> {
 
-	private static final String URL_MASTER_MANIFEST = "https://raw.github.com/AChep/FifteenPuzzle/master/AndroidManifest.xml";
-
 	private static final String MANIFEST_VERSION_CODE_PART = "android:versionCode=\"";
 	private static final String MANIFEST_VERSION_NAME_PART = "android:versionName=\"";
 
@@ -40,8 +38,9 @@ public class AsyncCheckVersion extends AsyncTask<Context, Void, String> {
 	@Override
 	protected String doInBackground(Context... context) {
 		mContext = context[0];
-		String manifest = Utils.internetDownloadText(mContext,
-				URL_MASTER_MANIFEST);
+		String manifest = Utils
+				.internetDownloadText(mContext,
+						"https://raw.github.com/AChep/FifteenPuzzle/master/AndroidManifest.xml");
 		if (manifest == null)
 			return null;
 
