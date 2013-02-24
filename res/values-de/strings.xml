@@ -1,0 +1,84 @@
+<resources>
+
+    <string name="app_name">Fünfzehn Puzzles</string>
+    <string name="game_time">Zeit</string>
+    <string name="game_steps">Schritte</string>
+    <string name="game_congraz_title">Glückwunsch!</string>
+    <string name="game_congraz_message">Du hast es gelöst!</string>
+    <string name="pref_number_picker_base_reset">Werte zurücksetzen</string>
+
+    <!-- Download Service -->
+    <string name="download_service_label">Download Service</string>
+    <string name="download_service_notification_success_text">Die App wurde erfolgreich upgedated!</string>
+    <string name="download_service_notification_downloading_text">Lade neue Version herunter...</string>
+    <string name="download_service_notification_downloading_info">Vorbereitung...</string>
+    <string name="download_service_notification_downloading_eta">Verbleibende Zeit:</string>
+    <string name="download_service_install_please_toast">Bitte, drücke die \"Installieren\" Taste um die neue version zu installieren</string>
+
+    <!-- Success solved -->
+    <string name="game_gameover_awesome">Gut gemacht!</string>
+    <string name="game_gameover_results">Dein Ergenbis ist:\n\u0009time\u0020\u0020: %1$s\n\u0009steps: %2$s</string>
+    <string name="game_gameover_user">Benutzer</string>
+    <string name="game_gameover_share_dialog_title">Teilen</string>
+    <string name="game_gameover_share_body">Ich habe ein Puzzle in %1$s und mit %2$s Schritten gelöst! Download Fünfzehn Puzzles!</string>
+
+    <!-- ActionBar -->
+    <string name="action_bar_new_game">Neues Spiel</string>
+    <string name="action_bar_settings">Einstellungen</string>
+    <string name="action_bar_download_new_version">Neue Version herunterladen</string>
+    <string name="action_bar_statistic_graph">Zeige Grafik</string>
+    <string name="action_bar_statistic_clear">Lösche Statistik</string>
+
+    <!-- Rollback -->
+    <string name="rollback">Downgrade</string>
+    <string name="rollback_error_project_folder">Problem beim lesen der Ordners im Speicher.</string>
+    <string name="rollback_error_project_folder_empty">Es gibt keine ältere Version.</string>
+    <string name="rollback_error_damaged_file">Beschädigte Datei.</string>
+
+    <!-- Updater -->
+    <string name="auto_updater">Automatischer-Updater</string>
+    <string name="auto_updater_changelog">Changelog:</string>
+    <string name="auto_updater_downloading_dialog">Lade herunter...</string>
+    <string name="auto_updater_downloading_error1">Fehler beim herstellen einer Verbindung.</string>
+    <string name="auto_updater_downloading_error2">Fehler beim öffnen des Input-Streams.</string>
+    <string name="auto_updater_downloading_error3">Fehler beim erstellen der Ausgabe-Datei.</string>
+    <string name="auto_updater_downloading_error4">Download gescheitert.</string>
+    <string name="auto_updater_downloading_error_connection">Bitte aktiviere deine Internetverbuíndung zuerst.</string>
+    <string name="auto_updater_notification_summary">Ein Update ist verfügbar!</string>
+
+    <!-- Statistic -->
+    <string name="stats">Statistik</string>
+    <string name="stats_time">@string/game_time</string>
+    <string name="stats_steps">@string/game_steps</string>
+    <string name="stats_username_and_date">Benutzername\nDatum</string>
+    <string name="stats_graph_title">Ergebnise in einer Grafik</string>
+    <string name="stats_drop_title">Statistik löschen</string>
+    <string name="stats_drop_message">Dieser Schritt löscht alle Ergebnisse! Die Daten können nicht wiederhergestellt werden!</string>
+    <string name="stats_dropped_sucessfully_toast">Ergebnis-Datenbank wurde erfolgreich gelöscht.</string>
+
+    <!-- Settings -->
+    <string name="settings">Einstellungen</string>
+    <string name="settings_statistic2">Deine besten Ergebnisse!</string>
+    <string name="settings_statistic">Statistiken</string>
+    <string name="settings_category">Einstellungen</string>
+    <string name="settings_nickname_default">Zauberer</string>
+    <string name="settings_nickname3">Gib deinen neuen Benutzernamen ein</string>
+    <string name="settings_nickname2">Jetziger Benutzername ist</string>
+    <string name="settings_nickname">Benutzername</string>
+    <string name="settings_puzzle_length2">Wähle die Anzahl pro Chips pro Reihe</string>
+    <string name="settings_puzzle_length">Anzahl der Chips</string>
+    <string name="settings_category_other">Sonstiges</string>
+    <string name="settings_other_about2">Feedback und zusätzliche Informationen</string>
+    <string name="settings_other_about">Über</string>
+    <string name="settings_other_about_version">Jetzige Version</string>
+    <string name="settings_other_about_copyright2">Artem Chepurnoy 2012-2013</string>
+    <string name="settings_other_about_copyright">Copyright</string>
+    <string name="settings_other_about_feedback_failed">Es ist kein Email-Dienst installiert.</string>
+    <string name="settings_other_about_feedback2">Schreibe deine Vorschläge und Bug-Berichte</string>
+    <string name="settings_other_about_feedback">Feedback</string>
+    <string name="settings_other_about_github2">Besuche die Projekt-Seite auf GitHub</string>
+    <string name="settings_other_about_github">GitHub</string>
+    <string name="settings_other_about_rollback2">Zu einer Vorherigen Version zurückkehren</string>
+    <string name="settings_other_about_rollback">Downgrade</string>
+
+</resources>
