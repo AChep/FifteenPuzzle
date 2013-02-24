@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.achep.FifteenPuzzle"
-    android:versionCode="36"
-    android:versionName="2.75" >
+    android:versionCode="37"
+    android:versionName="2.751" >
 
     <!-- Auto Updater Permissions -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />

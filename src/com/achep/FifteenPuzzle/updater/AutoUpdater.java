@@ -104,7 +104,7 @@ public class AutoUpdater extends Activity implements OnClickListener {
 			int a = changelog.indexOf("## " + versionName);
 			if (a == -1)
 				return changelog;
-			return changelog.substring(0, a);
+			return changelog.substring(0, a - 1);
 		}
 
 		@Override
