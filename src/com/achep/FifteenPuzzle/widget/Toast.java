@@ -26,22 +26,28 @@ import android.content.Context;
 public class Toast {
 
 	/**
-	 * Creates and shows simple Toast from String resource. Length: SHORT
+	 * Make and show a standard toast that just contains a text view from string
+	 * resource.
 	 */
 	public static void show(Context context, int res) {
-		makeAndShow(context, res, android.widget.Toast.LENGTH_SHORT);
+		makeRes(context, res, android.widget.Toast.LENGTH_SHORT).show();
 	}
 
 	/**
-	 * Creates and shows simple Toast from String resource. Length: LONG
+	 * Make and show a standard toast that just contains a text view from string
+	 * resource.
 	 */
 	public static void showLong(Context context, int res) {
-		makeAndShow(context, res, android.widget.Toast.LENGTH_LONG);
+		makeRes(context, res, android.widget.Toast.LENGTH_LONG).show();
 	}
 
-	private static void makeAndShow(Context context, int res, int length) {
-		android.widget.Toast.makeText(context,
-				context.getResources().getString(res),
-				android.widget.Toast.LENGTH_SHORT).show();
+	/**
+	 * Make a standard toast that just contains a text view from string
+	 * resource.
+	 */
+	public static android.widget.Toast makeRes(Context context, int res,
+			int length) {
+		return android.widget.Toast.makeText(context, context.getResources()
+				.getString(res), length);
 	}
 }

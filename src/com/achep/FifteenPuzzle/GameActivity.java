@@ -1,5 +1,7 @@
 package com.achep.FifteenPuzzle;
 
+import java.util.Random;
+
 import com.achep.FifteenPuzzle.GameView.ActivityInterface;
 import com.achep.FifteenPuzzle.preferences.Settings;
 import com.achep.FifteenPuzzle.stats.DBHelper;
@@ -138,6 +140,7 @@ public class GameActivity extends Activity implements ActivityInterface,
 				timeFormated, steps + ""));
 
 		ImageView cake = (ImageView) root.findViewById(R.id.cake);
+		cake.setImageResource(R.drawable.ic_game_cake + new Random().nextInt(3));
 		cake.startAnimation(AnimationUtils.loadAnimation(this,
 				R.anim.popupwindow_gameover_cake));
 
@@ -170,7 +173,7 @@ public class GameActivity extends Activity implements ActivityInterface,
 				LayoutParams.MATCH_PARENT, true);
 		pw.showAtLocation(mGameView, Gravity.CENTER, 0, 0);
 
-		Button dismiss = (Button) root.findViewById(R.id.dismiss);
+		ImageView dismiss = (ImageView) root.findViewById(R.id.dismiss);
 		dismiss.setOnClickListener(new OnClickListener() {
 
 			@SuppressLint("NewApi")

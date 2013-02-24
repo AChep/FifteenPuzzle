@@ -157,7 +157,15 @@ public class ActionBar extends LinearLayout {
 
 					@Override
 					public boolean onLongClick(View v) {
-						Toast.show(getContext(), stringRes);
+						android.widget.Toast toast = Toast.makeRes(
+								getContext(), stringRes,
+								android.widget.Toast.LENGTH_SHORT);
+						toast.setGravity(
+								Gravity.CENTER_HORIZONTAL,
+								getResources().getDisplayMetrics().widthPixels / 4,
+								-getResources().getDisplayMetrics().heightPixels
+										/ 2 + density(96));
+						toast.show();
 						return true;
 					}
 				});

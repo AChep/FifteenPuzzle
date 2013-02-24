@@ -19,12 +19,17 @@ package com.achep.FifteenPuzzle.utils;
 public class Project {
 
 	/**
-	 * Is debug mode enabled? Enable it to see a bit more info.
+	 * Official release build
 	 */
-	public static final boolean DEBUG = false;
+	public static final boolean RELEASE_BUILD = false;
 
 	/**
-	 * Path to project's data folder. Better if you won't touch it
+	 * Enable it to see a bit more info.
+	 */
+	public static final boolean DEBUG = RELEASE_BUILD ? !RELEASE_BUILD : false;
+
+	/**
+	 * Path to project's data folder
 	 */
 	public static final String DATA_FOLDER = "/Android/data/com.achep.FifteenPuzzles/";
 }

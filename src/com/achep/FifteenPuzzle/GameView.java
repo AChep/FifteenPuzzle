@@ -66,9 +66,9 @@ public class GameView extends View implements
 	private boolean mTouchable = true;
 	private int[] mTouchCoordsReal = new int[2];
 
-	private long mTouchDownTime;
+	//private long mTouchDownTime;
 	private int[] mTouchDownCoordsReal = new int[2];
-	private boolean mQuickSwipe;
+	//private boolean mQuickSwipe;
 
 	private int[] mMotionData;
 
@@ -256,10 +256,10 @@ public class GameView extends View implements
 				}
 			}
 
-			mTouchDownTime = System.currentTimeMillis();
+			//mTouchDownTime = System.currentTimeMillis();
 			mTouchDownCoordsReal[0] = mTouchCoordsReal[0];
 			mTouchDownCoordsReal[1] = mTouchCoordsReal[1];
-			mQuickSwipe = true;
+			//mQuickSwipe = true;
 
 			// Push it to drawing
 			event.setAction(MotionEvent.ACTION_MOVE);
@@ -274,9 +274,9 @@ public class GameView extends View implements
 			if (mMotionData[MOTION_DATA_ORIENTATION] == MOTION_DATA_NOTHING)
 				return false; // Just stop it
 
-			if (Math.abs(mTouchDownCoordsReal[0] - mTouchCoordsReal[0]) > 10
-					|| Math.abs(mTouchDownCoordsReal[1] - mTouchCoordsReal[1]) > 10)
-				mQuickSwipe = false;
+			//if (Math.abs(mTouchDownCoordsReal[0] - mTouchCoordsReal[0]) > 10
+			//		|| Math.abs(mTouchDownCoordsReal[1] - mTouchCoordsReal[1]) > 10)
+			//	mQuickSwipe = false;
 
 			// Fix of the swapping puzzle on slowly phones
 			int xy = Utils.mathAlignToRange(
@@ -316,8 +316,8 @@ public class GameView extends View implements
 			int xyconst = 0;
 
 			// Quick click as swipe
-			boolean quickSwipe = mQuickSwipe
-					&& System.currentTimeMillis() - mTouchDownTime <= 200;
+			//boolean quickSwipe = mQuickSwipe
+			//		&& System.currentTimeMillis() - mTouchDownTime <= 200;
 
 			final int[] chipCoords2 = new int[2];
 			final int[] trackStable = mTrack.clone();

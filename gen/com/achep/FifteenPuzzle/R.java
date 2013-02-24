@@ -38,25 +38,28 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int ic_actionbar_settings=0x7f020007;
         public static final int ic_actionbar_user=0x7f020008;
         public static final int ic_game_cake=0x7f020009;
-        public static final int ic_game_share=0x7f02000a;
-        public static final int ic_launcher=0x7f02000b;
-        public static final int ic_settings_about=0x7f02000c;
-        public static final int ic_settings_cloud=0x7f02000d;
-        public static final int ic_settings_copyright=0x7f02000e;
-        public static final int ic_settings_github=0x7f02000f;
-        public static final int ic_settings_rollback=0x7f020010;
-        public static final int ic_settings_stats=0x7f020011;
-        public static final int ic_statusbar_new_version=0x7f020012;
-        public static final int image_view_selector=0x7f020013;
-        public static final int image_view_selector_background_transition=0x7f020014;
-        public static final int imageview_disabled_holo_dark=0x7f02001c;
-        public static final int imageview_focused_holo_dark=0x7f02001b;
-        public static final int imageview_longpressed_holo=0x7f020019;
-        public static final int imageview_pressed_holo_dark=0x7f02001a;
-        public static final int list_view_background_dark=0x7f020015;
-        public static final int notification_icon_background=0x7f020016;
-        public static final int notification_icon_background_tile=0x7f020017;
-        public static final int popupwindow_gameover_background=0x7f020018;
+        public static final int ic_game_cake2=0x7f02000a;
+        public static final int ic_game_cake3=0x7f02000b;
+        public static final int ic_game_forward=0x7f02000c;
+        public static final int ic_game_share=0x7f02000d;
+        public static final int ic_launcher=0x7f02000e;
+        public static final int ic_settings_about=0x7f02000f;
+        public static final int ic_settings_cloud=0x7f020010;
+        public static final int ic_settings_copyright=0x7f020011;
+        public static final int ic_settings_github=0x7f020012;
+        public static final int ic_settings_rollback=0x7f020013;
+        public static final int ic_settings_stats=0x7f020014;
+        public static final int ic_statusbar_new_version=0x7f020015;
+        public static final int image_view_selector=0x7f020016;
+        public static final int image_view_selector_background_transition=0x7f020017;
+        public static final int imageview_disabled_holo_dark=0x7f02001f;
+        public static final int imageview_focused_holo_dark=0x7f02001e;
+        public static final int imageview_longpressed_holo=0x7f02001c;
+        public static final int imageview_pressed_holo_dark=0x7f02001d;
+        public static final int list_view_background_dark=0x7f020018;
+        public static final int notification_icon_background=0x7f020019;
+        public static final int notification_icon_background_tile=0x7f02001a;
+        public static final int popupwindow_gameover_background=0x7f02001b;
     }
     public static final class id {
         public static final int action_bar=0x7f0a0000;
@@ -66,7 +69,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int content_panel=0x7f0a0002;
         public static final int date=0x7f0a000d;
         public static final int date_sort=0x7f0a0006;
-        public static final int dismiss=0x7f0a0018;
+        public static final int dismiss=0x7f0a0016;
         public static final int eta=0x7f0a0011;
         public static final int game_view=0x7f0a0004;
         public static final int icon=0x7f0a000e;
@@ -77,7 +80,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int progressbar=0x7f0a0013;
         public static final int progresstext=0x7f0a0012;
         public static final int reset=0x7f0a001d;
-        public static final int results=0x7f0a0016;
+        public static final int results=0x7f0a0017;
         public static final int results_panel=0x7f0a0005;
         public static final int seek_bar=0x7f0a001c;
         public static final int share=0x7f0a0015;
@@ -87,7 +90,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int text=0x7f0a0010;
         public static final int time_sort=0x7f0a0007;
         public static final int title=0x7f0a000a;
-        public static final int username=0x7f0a0017;
+        public static final int username=0x7f0a0018;
         public static final int value=0x7f0a001a;
         public static final int version=0x7f0a0001;
     }
@@ -108,6 +111,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         /**  ActionBar 
  ActionBar 
  ActionBar 
+ ActionBar 
          */
         public static final int action_bar_new_game=0x7f080011;
         public static final int action_bar_settings=0x7f080012;
@@ -115,6 +119,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int action_bar_statistic_graph=0x7f080014;
         public static final int app_name=0x7f080000;
         /**  Updater 
+ Updater 
  Updater 
  Updater 
          */
@@ -131,6 +136,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         /**  Download Service 
  Download Service 
  Download Service 
+ Download Service 
          */
         public static final int download_service_label=0x7f080006;
         public static final int download_service_notification_downloading_eta=0x7f08000a;
@@ -141,6 +147,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int game_congraz_message=0x7f080004;
         public static final int game_congraz_title=0x7f080003;
         /**  Success solved 
+ Success solved 
  Success solved 
          */
         public static final int game_gameover_awesome=0x7f08000c;
@@ -153,12 +160,14 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int pref_number_picker_base_reset=0x7f080005;
         /**  Rollback 
  Rollback 
+ Rollback 
          */
         public static final int rollback=0x7f080016;
         public static final int rollback_error_damaged_file=0x7f080019;
         public static final int rollback_error_project_folder=0x7f080017;
         public static final int rollback_error_project_folder_empty=0x7f080018;
         /**  Settings 
+ Settings 
  Settings 
          */
         public static final int settings=0x7f08002b;
@@ -187,6 +196,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
          */
         public static final int settings_statistic2=0x7f08002c;
         /**  Statistic 
+ Statistic 
  Statistic 
  Statistic 
          */
