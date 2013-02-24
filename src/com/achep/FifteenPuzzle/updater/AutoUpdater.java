@@ -24,6 +24,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.animation.AnimationUtils;
@@ -94,6 +95,8 @@ public class AutoUpdater extends Activity implements OnClickListener {
 			if (changelog == null)
 				return null;
 
+			Log.d("", "		String ve");
+			
 			String versionName = null;
 			try {
 				versionName = getPackageManager().getPackageInfo(
@@ -101,7 +104,7 @@ public class AutoUpdater extends Activity implements OnClickListener {
 			} catch (NameNotFoundException e1) {
 				return null;
 			}
-			int a = changelog.indexOf("## " + versionName);
+			int a = changelog.indexOf("## " + versionName + ";");
 			if (a == -1)
 				return changelog;
 			return changelog.substring(0, a - 1);
@@ -115,9 +118,11 @@ public class AutoUpdater extends Activity implements OnClickListener {
 			}
 
 			mChangelog.setText(changelog);
+			
 			mChangelogPanel.setVisibility(View.VISIBLE);
 			mChangelogPanel.startAnimation(AnimationUtils.loadAnimation(
 					AutoUpdater.this, R.anim.widget_list_view_panel_in));
+			
 			mProgressBar.setVisibility(View.GONE);
 			mDownloadButton.setVisibility(View.VISIBLE);
 		}

@@ -1,5 +1,2 @@
-## 2.751
-- Fixed changelog verions
-
-## 2.75
+## 2.752;
 - Added lovely changelog
