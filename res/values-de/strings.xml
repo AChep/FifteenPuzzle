@@ -17,7 +17,7 @@
 
     <!-- Success solved -->
     <string name="game_gameover_awesome">Gut gemacht!</string>
-    <string name="game_gameover_results">Dein Ergenbis ist:\n\u0009time\u0020\u0020: %1$s\n\u0009steps: %2$s</string>
+    <string name="game_gameover_results">Dein Ergenbis ist:\n\u0009Zeit\u0020\u0020: %1$s\n\u0009Schritte: %2$s</string>
     <string name="game_gameover_user">Benutzer</string>
     <string name="game_gameover_share_dialog_title">Teilen</string>
     <string name="game_gameover_share_body">Ich habe ein Puzzle in %1$s und mit %2$s Schritten gelöst! Download Fünfzehn Puzzles!</string>
@@ -65,7 +65,7 @@
     <string name="settings_nickname3">Gib deinen neuen Benutzernamen ein</string>
     <string name="settings_nickname2">Jetziger Benutzername ist</string>
     <string name="settings_nickname">Benutzername</string>
-    <string name="settings_puzzle_length2">Wähle die Anzahl pro Chips pro Reihe</string>
+    <string name="settings_puzzle_length2">Wähle die Anzahl der Chips pro Reihe</string>
     <string name="settings_puzzle_length">Anzahl der Chips</string>
     <string name="settings_category_other">Sonstiges</string>
     <string name="settings_other_about2">Feedback und zusätzliche Informationen</string>
