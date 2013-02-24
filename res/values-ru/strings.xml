@@ -6,12 +6,15 @@
     <string name="game_congraz_title">Поздравляем!</string>
     <string name="game_congraz_message">Вы собрали этот пазл!</string>
     <string name="pref_number_picker_base_reset">Сбросить значение</string>
+    
+    <!-- Changelog -->
+    <string name="changelog">Список изменений</string>
 
     <!-- Download Service -->
     <string name="download_service_label">Сервис загрузки обновления</string>
     <string name="download_service_notification_error_text">Ошибка загрузки новой версии!</string>
-    <string name="download_service_notification_downloading_text">Загрузка новой версии...</string>
-    <string name="download_service_notification_downloading_info">Подготовка...</string>
+    <string name="download_service_notification_downloading_text">Загрузка новой версии…</string>
+    <string name="download_service_notification_downloading_info">Подготовка…</string>
     <string name="download_service_notification_downloading_eta">Осталось:</string>
     <string name="download_service_install_please_toast">Пожалуйста, нажмите кнопку Установить в следующем окне</string>
 
@@ -39,7 +42,7 @@
     <string name="auto_updater">Авто-обновление</string>
     <string name="auto_updater_changelog">Список изменений:</string>
     <string name="auto_updater_changelog_failed">Ошибка загрузки списка изменений.</string>
-    <string name="auto_updater_downloading_dialog">Идет загрузка...</string>
+    <string name="auto_updater_downloading_dialog">Идет загрузка…</string>
     <string name="auto_updater_downloading_error1">Ошибка открытия соединения.</string>
     <string name="auto_updater_downloading_error2">Ошибка открытия входящего потока.</string>
     <string name="auto_updater_downloading_error3">Ошибка создания файла.</string>
@@ -71,8 +74,8 @@
     <string name="settings_category_other">Прочее</string>
     <string name="settings_other_about2">Поддержка и дополнительная информация</string>
     <string name="settings_other_about">О программе</string>
-    <string name="settings_other_about_version">Текущая версия</string>
-    <string name="settings_other_about_copyright2">Артем Чепурной 2012-2013</string>
+    <string name="settings_other_about_version">Версия / Изменения</string>
+    <string name="settings_other_about_copyright2">Артем Чепурной 2012–2013</string>
     <string name="settings_other_about_copyright">Авторское право</string>
     <string name="settings_other_about_feedback_failed">Почтовый клиент не установлен.</string>
     <string name="settings_other_about_feedback2">Ваши пожелания и отчеты о ошибках</string>

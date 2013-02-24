@@ -27,9 +27,9 @@
             android:summary="@string/settings_other_about2"
             android:title="@string/settings_other_about" >
             <Preference
-                android:enabled="false"
                 android:key="pref_about_current_version"
-                android:title="@string/settings_other_about_version" />
+                android:title="@string/settings_other_about_version" >
+        <intent android:action="com.achep.FifteenPuzzle.ChangelogActivity" /></Preference>
 
             <com.achep.FifteenPuzzle.preferences.PrefIcon
                 android:summary="@string/settings_other_about_copyright2"

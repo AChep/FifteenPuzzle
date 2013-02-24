@@ -1,6 +1,7 @@
 <resources>
 
     <style name="BaseTheme" parent="android:Theme"></style>
+    <style name="BaseDialogTheme" parent="android:Theme.Dialog"></style>
 
     <style name="GameActivity" parent="BaseTheme">
         <item name="android:windowNoTitle">true</item>
@@ -10,6 +11,8 @@
     <style name="SettingsActivity" parent="BaseTheme"></style>
 
     <style name="RollbackActivity" parent="BaseTheme"></style>
+
+    <style name="ChangelogActivity" parent="BaseDialogTheme"></style>
 
     <!-- Status bar notifications styles -->
     <style name="TextAppearance_StatusBar_EventContent_Title">

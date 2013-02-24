@@ -29,7 +29,7 @@ import android.preference.PreferenceActivity;
 import android.widget.Toast;
 
 public class Settings extends PreferenceActivity implements
-		OnPreferenceChangeListener {
+		OnPreferenceChangeListener, OnPreferenceClickListener {
 
 	public static final String SHARED_PREFERENCES_FILE = "preferences2";
 
@@ -43,6 +43,8 @@ public class Settings extends PreferenceActivity implements
 	}
 
 	private EditTextPreference mPrefUserName;
+	private Preference mPrefAboutCurrentVersion;
+	private Preference mPrefAboutFeedback;
 
 	@SuppressWarnings("deprecation")
 	@Override
@@ -54,50 +56,20 @@ public class Settings extends PreferenceActivity implements
 		mPrefUserName.setOnPreferenceChangeListener(this);
 		updateUserNamePreference(mPrefUserName.getText());
 
-		Preference prefCurrentVersion = (Preference) findPreference(Keys.PREF_ABOUT_CURRENT_VERSION);
+		mPrefAboutCurrentVersion = (Preference) findPreference(Keys.PREF_ABOUT_CURRENT_VERSION);
+		String versionName = null;
 		try {
-			prefCurrentVersion
-					.setSummary(getResources().getString(R.string.app_name)
-							+ " "
-							+ getPackageManager().getPackageInfo(
-									getPackageName(), 0).versionName);
+			versionName = getPackageManager().getPackageInfo(getPackageName(),
+					0).versionName;
 		} catch (NameNotFoundException e) {
+			versionName = "Something went wrong";
 		}
-		Preference prefFeedback = (Preference) findPreference(Keys.PREF_ABOUT_FEEDBACK);
-		prefFeedback
-				.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+		mPrefAboutCurrentVersion.setSummary(getResources().getString(
+				R.string.app_name)
+				+ " " + versionName);
 
-					@Override
-					public boolean onPreferenceClick(Preference preference) {
-						Intent i = new Intent(Intent.ACTION_SEND);
-						i.setType("message/rfc822");
-						i.putExtra(Intent.EXTRA_EMAIL,
-								new String[] { "artemchep@gmail.com" });
-						i.putExtra(Intent.EXTRA_SUBJECT,
-								"[APP FEEDBACK] Fifteen Puzzles");
-						StringBuilder body = new StringBuilder();
-						body.append("Device model: "
-								+ android.os.Build.MANUFACTURER + " "
-								+ android.os.Build.PRODUCT + "\n");
-						body.append("Android version: "
-								+ android.os.Build.VERSION.SDK + "\n");
-						body.append("CPU: " + android.os.Build.CPU_ABI
-								+ "\n\nDear developer, ");
-						i.putExtra(Intent.EXTRA_TEXT, body.toString());
-						try {
-							startActivity(Intent.createChooser(i,
-									"Send mail..."));
-						} catch (android.content.ActivityNotFoundException ex) {
-							Toast.makeText(
-									Settings.this,
-									getResources()
-											.getString(
-													R.string.settings_other_about_feedback_failed),
-									Toast.LENGTH_SHORT).show();
-						}
-						return true;
-					}
-				});
+		mPrefAboutFeedback = (Preference) findPreference(Keys.PREF_ABOUT_FEEDBACK);
+		mPrefAboutFeedback.setOnPreferenceClickListener(this);
 	}
 
 	@Override
@@ -113,6 +85,34 @@ public class Settings extends PreferenceActivity implements
 		mPrefUserName.setSummary(getResources().getString(
 				R.string.settings_nickname2)
 				+ " " + text);
+	}
+
+	@Override
+	public boolean onPreferenceClick(Preference preference) {
+		if (preference.equals(mPrefAboutFeedback)) {
+			Intent i = new Intent(Intent.ACTION_SEND);
+			i.setType("message/rfc822");
+			i.putExtra(Intent.EXTRA_EMAIL,
+					new String[] { "artemchep@gmail.com" });
+			i.putExtra(Intent.EXTRA_SUBJECT, "[APP FEEDBACK] Fifteen Puzzles");
+			@SuppressWarnings("deprecation")
+			String body = "Device model: " + android.os.Build.MANUFACTURER
+					+ " " + android.os.Build.PRODUCT + "\nAndroid version: "
+					+ android.os.Build.VERSION.SDK + "\nCPU: "
+					+ android.os.Build.CPU_ABI + "\n\nDear developer, ";
+			i.putExtra(Intent.EXTRA_TEXT, body);
+			try {
+				startActivity(Intent.createChooser(i, "Send mail..."));
+			} catch (android.content.ActivityNotFoundException ex) {
+				Toast.makeText(
+						this,
+						getResources().getString(
+								R.string.settings_other_about_feedback_failed),
+						Toast.LENGTH_SHORT).show();
+			}
+			return true;
+		}
+		return false;
 	}
 
 }

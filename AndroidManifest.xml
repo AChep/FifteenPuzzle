@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.achep.FifteenPuzzle"
-    android:versionCode="38"
-    android:versionName="2.752" >
+    android:versionCode="39"
+    android:versionName="2.76" >
 
     <!-- Auto Updater Permissions -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -34,6 +34,17 @@
             android:label="@string/settings"
             android:launchMode="singleInstance"
             android:theme="@style/SettingsActivity" />
+        <activity
+            android:name=".preferences.ChangelogActivity"
+            android:label="@string/changelog"
+            android:launchMode="singleInstance"
+            android:theme="@style/ChangelogActivity" >
+            <intent-filter>
+                <action android:name="com.achep.FifteenPuzzle.ChangelogActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".stats.StatsActivity"
             android:label="@string/stats"

@@ -1,2 +1,7 @@
+## 2.76;
+- Added changelog to settings (About / Version)
+- Replaced "..." with an "…" character
+- Replaced "-" with an "–" character
+
 ## 2.752;
 - Added lovely changelog

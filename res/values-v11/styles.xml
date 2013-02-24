@@ -7,6 +7,9 @@
     <style name="BaseTheme" parent="android:Theme.Holo">
         <!-- API 11 theme customizations can go here. -->
     </style>
+    <style name="BaseDialogTheme" parent="android:Theme.Holo.Dialog">
+        <!-- API 11 theme customizations can go here. -->
+    </style>
 
     <style name="Widget_ProgressBar_Horizontal" parent="android:Widget.Holo.ProgressBar.Horizontal"></style>
 

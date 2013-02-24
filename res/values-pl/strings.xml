@@ -10,8 +10,8 @@
     <!-- Download Service -->
     <string name="download_service_label">Usługa pobierania</string>
     <string name="download_service_notification_success_text">Aplikacja została zaktualizowana!</string>
-    <string name="download_service_notification_downloading_text">Pobieranie nowej wersji...</string>
-    <string name="download_service_notification_downloading_info">Przygotowywanie...</string>
+    <string name="download_service_notification_downloading_text">Pobieranie nowej wersji…</string>
+    <string name="download_service_notification_downloading_info">Przygotowywanie…</string>
 
     <!-- ActionBar -->
     <string name="action_bar_new_game">Nowa gra</string>
@@ -23,7 +23,7 @@
     <!-- Updater -->
     <string name="auto_updater">Automatyczne aktualizacje</string>
     <string name="auto_updater_changelog">Lista zmian:</string>
-    <string name="auto_updater_downloading_dialog">Pobieranie...</string>
+    <string name="auto_updater_downloading_dialog">Pobieranie…</string>
     <string name="auto_updater_downloading_error1">Nie udało się nawiązać połączenia.</string>
     <string name="auto_updater_downloading_error2">Nie udało się otworzyć strumienia wejściowego.</string>
     <string name="auto_updater_downloading_error3">Nie udało się utworzyć pliku.</string>
@@ -56,7 +56,7 @@
     <string name="settings_other_about2">Wsparcie i dodatkowe informacje</string>
     <string name="settings_other_about">O aplikacji</string>
     <string name="settings_other_about_version">Obecna wersja</string>
-    <string name="settings_other_about_copyright2">Artem Chepurnoy 2012-2013</string>
+    <string name="settings_other_about_copyright2">Artem Chepurnoy 2012–2013</string>
     <string name="settings_other_about_copyright">Copyright</string>
     <string name="settings_other_about_feedback_failed">Nie ma zainstalowanych klientów poczty elektronicznej.</string>
     <string name="settings_other_about_feedback2">Wprowadź swoje sugestie i raporty błędów</string>

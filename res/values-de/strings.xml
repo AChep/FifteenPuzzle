@@ -10,8 +10,8 @@
     <!-- Download Service -->
     <string name="download_service_label">Download Service</string>
     <string name="download_service_notification_success_text">Die App wurde erfolgreich upgedated!</string>
-    <string name="download_service_notification_downloading_text">Lade neue Version herunter...</string>
-    <string name="download_service_notification_downloading_info">Vorbereitung...</string>
+    <string name="download_service_notification_downloading_text">Lade neue Version herunter…</string>
+    <string name="download_service_notification_downloading_info">Vorbereitung…</string>
     <string name="download_service_notification_downloading_eta">Verbleibende Zeit:</string>
     <string name="download_service_install_please_toast">Bitte, drücke die \"Installieren\" Taste um die neue version zu installieren</string>
 
@@ -38,7 +38,7 @@
     <!-- Updater -->
     <string name="auto_updater">Automatischer-Updater</string>
     <string name="auto_updater_changelog">Changelog:</string>
-    <string name="auto_updater_downloading_dialog">Lade herunter...</string>
+    <string name="auto_updater_downloading_dialog">Lade herunter…</string>
     <string name="auto_updater_downloading_error1">Fehler beim herstellen einer Verbindung.</string>
     <string name="auto_updater_downloading_error2">Fehler beim öffnen des Input-Streams.</string>
     <string name="auto_updater_downloading_error3">Fehler beim erstellen der Ausgabe-Datei.</string>
@@ -71,7 +71,7 @@
     <string name="settings_other_about2">Feedback und zusätzliche Informationen</string>
     <string name="settings_other_about">Über</string>
     <string name="settings_other_about_version">Jetzige Version</string>
-    <string name="settings_other_about_copyright2">Artem Chepurnoy 2012-2013</string>
+    <string name="settings_other_about_copyright2">Artem Chepurnoy 2012–2013</string>
     <string name="settings_other_about_copyright">Copyright</string>
     <string name="settings_other_about_feedback_failed">Es ist kein Email-Dienst installiert.</string>
     <string name="settings_other_about_feedback2">Schreibe deine Vorschläge und Bug-Berichte</string>
