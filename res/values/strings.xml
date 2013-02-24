@@ -19,6 +19,8 @@
     <string name="game_gameover_awesome">Awesome!</string>
     <string name="game_gameover_results">Your results are:\n\u0009time\u0020\u0020: %1$s\n\u0009steps: %2$s</string>
     <string name="game_gameover_user">User</string>
+    <string name="game_gameover_share_dialog_title">Share</string>
+    <string name="game_gameover_share_body">I solved a puzzle for %1$s / %2$s steps! Download Fifteen Puzzle</string>
 
     <!-- ActionBar -->
     <string name="action_bar_new_game">New game</string>
@@ -42,7 +44,7 @@
     <string name="auto_updater_downloading_error3">Failed to create output file.</string>
     <string name="auto_updater_downloading_error4">Download failed.</string>
     <string name="auto_updater_downloading_error_connection">Please enable your Internet connection first.</string>
-    <string name="auto_updater_notification_summary">New version of Fifteen Puzzle is available</string>
+    <string name="auto_updater_notification_summary">Update is available!</string>
 
     <!-- Statistic -->
     <string name="stats">Statistic</string>

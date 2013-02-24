@@ -19,6 +19,8 @@
     <string name="game_gameover_awesome">Великолепно!</string>
     <string name="game_gameover_results">Ваши результаты:\n\u0009время: %1$s\n\u0009ходы\u0020\u0020: %2$s</string>
     <string name="game_gameover_user">Игрок</string>
+    <string name="game_gameover_share_dialog_title">Поделиться</string>
+    <string name="game_gameover_share_body">Я сложил головоломку за %1$s / %2$s шагов! Загрузить Пятнашки</string>
     
     <!-- ActionBar -->
     <string name="action_bar_new_game">Новая игра</string>

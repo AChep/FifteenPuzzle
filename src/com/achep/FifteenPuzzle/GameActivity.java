@@ -11,6 +11,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -21,6 +22,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -123,16 +125,40 @@ public class GameActivity extends Activity implements ActivityInterface,
 	@Override
 	public void onGameOver(final int steps, long timeMillis, final int length) {
 		final int time = (int) Utils.mathDiv(timeMillis, 1000);
+		final String timeFormated = Utils.timeGetFormatedTimeFromSeconds(time);
 		final SharedPreferences sp = PreferenceManager
 				.getDefaultSharedPreferences(this);
+		final Resources res = getResources();
 
 		RelativeLayout root = (RelativeLayout) LayoutInflater.from(this)
 				.inflate(R.layout.popupwindow_gameover, null);
 
 		TextView result = (TextView) root.findViewById(R.id.results);
-		result.setText(this.getResources().getString(
-				R.string.game_gameover_results,
-				Utils.timeGetFormatedTimeFromSeconds(time), steps + ""));
+		result.setText(res.getString(R.string.game_gameover_results,
+				timeFormated, steps + ""));
+
+		ImageView cake = (ImageView) root.findViewById(R.id.cake);
+		cake.startAnimation(AnimationUtils.loadAnimation(this,
+				R.anim.popupwindow_gameover_cake));
+
+		ImageView share = (ImageView) root.findViewById(R.id.share);
+		share.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				String shareBody = "#fifteenpuzzle \n"
+						+ res.getString(R.string.game_gameover_share_body,
+								timeFormated, steps + "")
+						+ " http://goo.gl/J9oOi";
+				Intent sharingIntent = new Intent(
+						android.content.Intent.ACTION_SEND).setType(
+						"text/plain").putExtra(
+						android.content.Intent.EXTRA_TEXT, shareBody);
+				startActivity(Intent.createChooser(sharingIntent, res
+						.getString(R.string.game_gameover_share_dialog_title)));
+
+			}
+		});
 
 		final String usernameSettings = sp.getString(
 				Settings.Keys.PREF_USER_NAME,
@@ -162,13 +188,8 @@ public class GameActivity extends Activity implements ActivityInterface,
 						spe.apply();
 					}
 				}
-				new Thread() {
-					@Override
-					public void run() {
-						DBHelper.insert(GameActivity.this, usernameCurrent,
-								length, time, steps);
-					}
-				}.run();
+				DBHelper.insert(GameActivity.this, usernameCurrent, length,
+						time, steps);
 
 				// Exit
 				pw.dismiss();

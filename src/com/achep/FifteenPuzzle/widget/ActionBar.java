@@ -64,7 +64,6 @@ public class ActionBar extends LinearLayout {
 
 		// Initialize navigating part
 		mNavigateLayout = new RelativeLayout(context);
-		mNavigateLayout.setPadding(0, 0, horizontalPadding, 0);
 		ImageView appIcon = new ImageView(context);
 		appIcon.setImageResource(R.drawable.ic_launcher);
 		RelativeLayout.LayoutParams appIconLp = new RelativeLayout.LayoutParams(
@@ -79,6 +78,7 @@ public class ActionBar extends LinearLayout {
 		mTitleText = new TextView(context);
 		mTitleText.setTextAppearance(context,
 				android.R.style.TextAppearance_Medium);
+		mTitleText.setPadding(0, 0, verticalPadding, 0);
 		RelativeLayout.LayoutParams titleTextLp = new RelativeLayout.LayoutParams(
 				LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 		titleTextLp.addRule(RelativeLayout.CENTER_VERTICAL);
