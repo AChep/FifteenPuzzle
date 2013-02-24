@@ -162,16 +162,17 @@ public class DownloadService extends Service {
 			if (error != null) {
 				showErrorNotify();
 			} else {
-				Utils.installApplication(DownloadService.this,
-						new File(Utils.getProjectFolder(), mVersionName
-								+ ".apk"));
-
 				// Show toast message
 				Toast.showLong(DownloadService.this,
 						R.string.download_service_install_please_toast);
 
 				// We're updated now!
 				cancelNotify();
+
+				// Install app
+				Utils.installApplication(DownloadService.this,
+						new File(Utils.getProjectFolder(), mVersionName
+								+ ".apk"));
 			}
 
 			// Die, potato!

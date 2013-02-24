@@ -13,7 +13,7 @@
     <string name="download_service_notification_downloading_text">Загрузка новой версии...</string>
     <string name="download_service_notification_downloading_info">Подготовка...</string>
     <string name="download_service_notification_downloading_eta">Осталось:</string>
-    <string name="download_service_install_please_toast">Пожалуйста, нажмите кнопку \"Установить\" для установки новой версии</string>
+    <string name="download_service_install_please_toast">Пожалуйста, нажмите кнопку Установить в следующем окне</string>
 
     <!-- Success solved -->
     <string name="game_gameover_awesome">Великолепно!</string>
