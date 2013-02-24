@@ -51,12 +51,13 @@ public class DownloadService extends Service {
 		return null;
 	}
 
-	private class AsyncDownloadAndInstall extends
-			AsyncTask<Void, Float, String> {
+	private class AsyncDownloadAndInstall extends AsyncTask<Void, Void, String> {
 
 		private int mFileSize = 0;
 		private long mStartTime = 0;
 		private String mEtaLabel;
+
+		private long mLoopOldTime;
 
 		@Override
 		protected void onPreExecute() {
@@ -65,30 +66,6 @@ public class DownloadService extends Service {
 			mEtaLabel = getResources().getString(
 					R.string.download_service_notification_downloading_eta)
 					+ " ";
-		}
-
-		@Override
-		protected void onProgressUpdate(Float... progress) {
-			if (mStartTime == 0)
-				mStartTime = getCurrentTimeMillis();
-
-			int progressI = (int) progress[0].floatValue();
-			float progressF = progress[0].floatValue();
-			int deltaTime = (int) (getCurrentTimeMillis() - mStartTime);
-			if (deltaTime < 1000)
-				return;
-
-			mDownloadingRVs
-					.setTextViewText(
-							R.id.eta,
-							mEtaLabel
-									+ com.achep.FifteenPuzzle.utils.Utils
-											.timeGetFormatedTimeFromMillis((long) (100f
-													/ progressF * deltaTime - deltaTime)));
-			mDownloadingRVs.setTextViewText(R.id.progresstext, progressI + "%");
-			mDownloadingRVs.setProgressBar(R.id.progressbar, 100, progressI,
-					false);
-			pushNotify(mDownloadingNotify);
 		}
 
 		@Override
@@ -134,7 +111,26 @@ public class DownloadService extends Service {
 						total += count;
 						output.write(data, 0, count);
 
-						publishProgress((total * 100) / (float) mFileSize);
+						long currentTime = getCurrentTimeMillis();
+						if (currentTime - mLoopOldTime > 500) {
+							mLoopOldTime = currentTime;
+							if (mStartTime == 0)
+								mStartTime = currentTime;
+
+							int deltaTime = (int) (currentTime - mStartTime);
+							float progress = (total * 100) / (float) mFileSize;
+
+							String eta = mEtaLabel
+									+ com.achep.FifteenPuzzle.utils.Utils
+											.timeGetFormatedTimeFromMillis((long) (100f
+													/ progress * deltaTime - deltaTime));
+							mDownloadingRVs.setTextViewText(R.id.eta, eta);
+							mDownloadingRVs.setTextViewText(R.id.progresstext,
+									Math.round(progress) + "%");
+							mDownloadingRVs.setProgressBar(R.id.progressbar,
+									100, Math.round(progress), false);
+							pushNotify(mDownloadingNotify);
+						}
 					}
 				} catch (IOException e) {
 					// TODO: Do something

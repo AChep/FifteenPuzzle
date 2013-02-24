@@ -33,6 +33,8 @@ public class RollbackActivity extends ListActivity {
 	private File[] mApps;
 	private boolean[] mDamagedApps;
 
+	private String mDamagedAppLabel;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -54,28 +56,46 @@ public class RollbackActivity extends ListActivity {
 		}
 		mDamagedApps = new boolean[mApps.length];
 
-		String[] apkNames = new String[mApps.length];
-		String errorIsntApp = getResources().getString(
+		mDamagedAppLabel = getResources().getString(
 				R.string.rollback_error_damaged_file);
-		for (int i = 0; i < apkNames.length; i++) {
+		String appName = getResources().getString(R.string.app_name);
+
+		String[] appsNames = new String[mApps.length];
+		for (int i = 0; i < appsNames.length; i++) {
 			if (mApps[i].isDirectory()) {
-				apkNames[i] = errorIsntApp;
-				mDamagedApps[i] = true;
+				// Directory
+				setDamagedApp(i, appsNames);
 				continue;
 			}
-			apkNames[i] = mApps[i].getName();
-			int length = apkNames[i].length();
-			if (!apkNames[i].substring(length - 4, length).equals(".apk")) {
-				apkNames[i] = errorIsntApp;
-				mDamagedApps[i] = true;
+			String name = mApps[i].getName();
+			int j = 0, length = name.length();
+			for (j = length - 1; j >= 0; j--) {
+				if (name.charAt(j) == ' ')
+					break;
+			}
+			if (j == 0) {
+				// No space
+				setDamagedApp(i, appsNames);
 				continue;
 			}
-			apkNames[i] = apkNames[i].substring(0, length - 4);
+			name = name.substring(j, length);
+			length = name.length();
+			if (!name.substring(length - 4, length).equals(".apk")) {
+				// Isn't *.apk
+				setDamagedApp(i, appsNames);
+				continue;
+			}
+			appsNames[i] = appName + name.substring(0, length - 4);
 
 		}
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-				android.R.layout.simple_list_item_1, apkNames);
+				android.R.layout.simple_list_item_1, appsNames);
 		setListAdapter(adapter);
+	}
+
+	private void setDamagedApp(int i, String[] appsNames) {
+		appsNames[i] = mDamagedAppLabel;
+		mDamagedApps[i] = true;
 	}
 
 	@Override
