@@ -1,0 +1,88 @@
+<resources>
+
+    <string name="app_name">Fifteen Puzzles</string>
+    <string name="game_time">Idő</string>
+    <string name="game_steps">Lépés</string>
+    <string name="game_congraz_title">Gratulálunk!</string>
+    <string name="game_congraz_message">Ezt megoldottad!</string>
+    <string name="pref_number_picker_base_reset">Visszaállítás</string>
+
+    <!-- Changelog -->
+    <string name="changelog">Változások</string>
+
+    <!-- Download Service -->
+    <string name="download_service_label">Letöltés</string>
+    <string name="download_service_notification_success_text">Alkalmazás frissítve!</string>
+    <string name="download_service_notification_downloading_text">Új verzió letöltése…</string>
+    <string name="download_service_notification_downloading_info">Folyamatban…</string>
+    <string name="download_service_notification_downloading_eta">ETA:</string>
+    <string name="download_service_install_please_toast">Kérlek nyomd meg az \"Install\" gombot a telepítéshez</string>
+
+    <!-- Success solved -->
+    <string name="game_gameover_awesome">Szuper!</string>
+    <string name="game_gameover_results">A te eredményed:\n\u0009idő\u0020\u0020: %1$s\n\u0009lépés: %2$s</string>
+    <string name="game_gameover_user">Név</string>
+    <string name="game_gameover_share_dialog_title">Megosztás</string>
+    <string name="game_gameover_share_body">Megoldottam a kirakóst %1$s / %2$s lépésből! Fifteen Puzzle letöltése</string>
+
+    <!-- ActionBar -->
+    <string name="action_bar_new_game">Új játék</string>
+    <string name="action_bar_settings">Beállítások</string>
+    <string name="action_bar_download_new_version">Új verzió letöltése</string>
+    <string name="action_bar_statistic_graph">Grafikon</string>
+    <string name="action_bar_statistic_clear">Statisztika törlése</string>
+
+    <!-- Rollback -->
+    <string name="rollback">Verzió leminősítés</string>
+    <string name="rollback_error_project_folder">Hiba az alkalmazás könyvtárának olvasásakor.</string>
+    <string name="rollback_error_project_folder_empty">Nincs régebbi verzió.</string>
+    <string name="rollback_error_damaged_file">Sérült file.</string>
+
+    <!-- Updater -->
+    <string name="auto_updater">Auto-Frissítő</string>
+    <string name="auto_updater_changelog">Változások:</string>
+    <string name="auto_updater_changelog_failed">Változások letöltése nem sikerült.</string>
+    <string name="auto_updater_downloading_dialog">Letöltés…</string>
+    <string name="auto_updater_downloading_error1">Hiba a kapcsolat megnyitásakor.</string>
+    <string name="auto_updater_downloading_error2">Hiba a bejövő adatokban.</string>
+    <string name="auto_updater_downloading_error3">Hiba a file létrehozása közben.</string>
+    <string name="auto_updater_downloading_error4">Hiba a letöltés közben.</string>
+    <string name="auto_updater_downloading_error_connection">Először engedélyezd az adatkapcsolatot.</string>
+    <string name="auto_updater_notification_summary">Frissítés elérhető!</string>
+
+    <!-- Statistic -->
+    <string name="stats">Statisztika</string>
+    <string name="stats_time">@string/game_time</string>
+    <string name="stats_steps">@string/game_steps</string>
+    <string name="stats_username_and_date">Név\nDátum</string>
+    <string name="stats_graph_title">Eredmény grafikonon</string>
+    <string name="stats_drop_title">Statisztika törlése</string>
+    <string name="stats_drop_message">Minden eredmény törlődni fog! Nem lehet visszavonni utána!</string>
+    <string name="stats_dropped_sucessfully_toast">A pontok sikeresen törölve.</string>
+
+    <!-- Settings -->
+    <string name="settings">Beállítások</string>
+    <string name="settings_statistic2">Legjobb pontjaid!</string>
+    <string name="settings_statistic">Statisztika</string>
+    <string name="settings_category">Beállítások</string>
+    <string name="settings_nickname_default">Játékos</string>
+    <string name="settings_nickname3">Írd be az új nevedet</string>
+    <string name="settings_nickname2">A neved most:</string>
+    <string name="settings_nickname">Játékos</string>
+    <string name="settings_puzzle_length2">Kő per sor</string>
+    <string name="settings_puzzle_length">Kövek száma</string>
+    <string name="settings_category_other">Egyéb</string>
+    <string name="settings_other_about2">Visszajelzés és egyéb információk</string>
+    <string name="settings_other_about">Névjegy</string>
+    <string name="settings_other_about_version">Verzió / Változások</string>
+    <string name="settings_other_about_copyright2">Artem Chepurnoy 2012–2013</string>
+    <string name="settings_other_about_copyright">Copyright</string>
+    <string name="settings_other_about_feedback_failed">Nincs email kliens telepítve.</string>
+    <string name="settings_other_about_feedback2">Küldd el a javaslatodat és a hibákat</string>
+    <string name="settings_other_about_feedback">Visszajelzés</string>
+    <string name="settings_other_about_github2">Nézd meg a GitHub oldalt</string>
+    <string name="settings_other_about_github">GitHub</string>
+    <string name="settings_other_about_rollback2">Vissza az alkalmazás régebbi verziójra</string>
+    <string name="settings_other_about_rollback">Verzió leminősítés</string>
+
+</resources>
