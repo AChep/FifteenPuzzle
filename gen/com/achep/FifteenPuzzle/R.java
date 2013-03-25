@@ -117,6 +117,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
  ActionBar 
  ActionBar 
  ActionBar 
+ ActionBar 
          */
         public static final int action_bar_new_game=0x7f090012;
         public static final int action_bar_settings=0x7f090013;
@@ -124,6 +125,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int action_bar_statistic_graph=0x7f090015;
         public static final int app_name=0x7f090000;
         /**  Updater 
+ Updater 
  Updater 
  Updater 
  Updater 
@@ -140,10 +142,12 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int auto_updater_notification_summary=0x7f090024;
         /**  Changelog 
  Changelog 
+ Changelog 
          */
         public static final int changelog=0x7f090006;
         public static final int download_service_install_please_toast=0x7f09000c;
         /**  Download Service 
+ Download Service 
  Download Service 
  Download Service 
  Download Service 
@@ -159,6 +163,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         /**  Success solved 
  Success solved 
  Success solved 
+ Success solved 
          */
         public static final int game_gameover_awesome=0x7f09000d;
         public static final int game_gameover_results=0x7f09000e;
@@ -171,12 +176,14 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         /**  Rollback 
  Rollback 
  Rollback 
+ Rollback 
          */
         public static final int rollback=0x7f090017;
         public static final int rollback_error_damaged_file=0x7f09001a;
         public static final int rollback_error_project_folder=0x7f090018;
         public static final int rollback_error_project_folder_empty=0x7f090019;
         /**  Settings 
+ Settings 
  Settings 
  Settings 
          */
@@ -206,6 +213,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
          */
         public static final int settings_statistic2=0x7f09002e;
         /**  Statistic 
+ Statistic 
  Statistic 
  Statistic 
  Statistic 

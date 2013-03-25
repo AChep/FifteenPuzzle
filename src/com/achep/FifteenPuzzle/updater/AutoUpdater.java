@@ -91,7 +91,7 @@ public class AutoUpdater extends Activity implements OnClickListener {
 		protected String doInBackground(Void... avoid) {
 			String changelog = Utils
 					.internetDownloadText(AutoUpdater.this,
-							"https://raw.github.com/AChep/FifteenPuzzle/master/res/raw/changelog.txt");
+							"https://raw.github.com/AChep/FifteenPuzzle/froyo/res/raw/changelog.txt");
 			if (changelog == null)
 				return null;
 

@@ -40,7 +40,7 @@ public class AsyncCheckVersion extends AsyncTask<Context, Void, String> {
 		mContext = context[0];
 		String manifest = Utils
 				.internetDownloadText(mContext,
-						"https://raw.github.com/AChep/FifteenPuzzle/master/AndroidManifest.xml");
+						"https://raw.github.com/AChep/FifteenPuzzle/froyo/AndroidManifest.xml");
 		if (manifest == null)
 			return null;
 

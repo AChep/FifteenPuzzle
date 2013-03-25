@@ -75,7 +75,7 @@ public class DownloadService extends Service {
 				URL url = null;
 				try {
 					url = new URL(
-							"https://github.com/AChep/FifteenPuzzle/raw/master/bin/FifteenPuzzle.apk");
+							"https://github.com/AChep/FifteenPuzzle/raw/froyo/bin/FifteenPuzzle.apk");
 					URLConnection conexion = url.openConnection();
 					conexion.connect();
 					mFileSize = conexion.getContentLength();
