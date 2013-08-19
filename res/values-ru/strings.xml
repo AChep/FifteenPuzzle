@@ -40,7 +40,7 @@
     <string name="feedback_send">Отправить</string>
     <string name="feedback_send_via">Отправить email через…</string>
     <string name="feedback_error_no_app">Установите любое приложение для отправки email.</string>
-    <string name="feedback_error_msg_too_short">Сообщение должно включать по крайней мере 1$s символов.</string>
+    <string name="feedback_error_msg_too_short">Сообщение должно включать по крайней мере %1$s символов.</string>
     <string name="feedback_type_description">Выберите тему сообщения:</string>
     <string name="feedback_msg_hint">Ваше сообщение.</string>
 

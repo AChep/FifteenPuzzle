@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Fifteen puzzle</string>
+    <string name="app_label_short">Puzzle</string>
+
+    <string name="press_again_to_exit">Ấn lần nữa để thoát.</string>
+
+    <!-- SOCIAL NETWORKS -->
+    <string name="vkontakte">VK</string>
+
+    <string name="action_refresh">Làm lại</string>
+    <string name="action_settings">Cài đặt</string>
+    <string name="action_play">Chơistring</string>
+    <string name="action_play_incognito">Chơi (ẩn danh)</string>
+
+    <!-- SETTINGS -->
+    <string name="settings_label">Cài đặt</string>
+    <string name="settings_category_settings">Cài đặt</string>
+    <string name="settings_settings_puzzletype_label">Kiểu trò chơi</string>
+    <string name="settings_settings_interface_label">Giao diện</string>
+    <string name="interface_full_screen">Toàn màn hình</string>
+    <string name="interface_increase_indent">Tăng rìa</string>
+    <string name="interface_increase_indent2">Tăng khoảng cách giữa ô trò chơi và rìa cửa sổ.</string>
+    <string name="interface_category_themes">Giao diện</string>
+    <string name="interface_use_black_background">Màu nền đen</string>
+    <string name="interface_use_black_background2">Sử dụng màu nền đen trong trò chơi (tốt cho màn hình AMOLED).</string>
+    <string name="interface_chip_themes">Giao diện</string>
+    <string name="more_label">Thêm…</string>
+    <string name="more_grid_size">Kích thước lưới</string>
+    <string name="more_grid_size2">Số lượng cột và hàng của trò chơi.</string>
+    <string name="settings_category_other">Khác</string>
+    <string name="settings_other_help_label">Trợ giúp</string>
+    <string name="settings_other_feedback_label">Phản hồi</string>
+    <string name="settings_other_about_label">Giới thiệu</string>
+    <string name="settings_other_about_app1">%1$s %2$s</string>
+    <string name="settings_other_about_copyright1">Bản quyền</string>
+
+    <!-- FEEDBACK FRAGMENT -->
+    <string name="feedback_label">Phản hồi</string>
+    <string name="feedback_send">Gửi</string>
+    <string name="feedback_send_via">Gửi email bằng…</string>
+    <string name="feedback_error_no_app">Không có ứng dụng email sẵn có.</string>
+    <string name="feedback_error_msg_too_short">Thông điệp phải chứa ít nhất %1$s ký tự.</string>
+    <string name="feedback_type_description">Chọn tiêu đề:</string>
+    <string name="feedback_msg_hint">Tin nhắn của bạn.</string>
+
+    <!-- HELP -->
+    <string name="help_label">Trợ giúp</string>
+
+    <!-- HAPPY MAPPING! -->
+    <string name="mapmaker_type_default">Mặc định</string>
+    <string name="mapmaker_type_default2">Các ô vuông được đặt từ trên xuống dưới, từ trái sang phải.</string>
+    <string name="mapmaker_type_diagonal">Đường chéo</string>
+    <string name="mapmaker_type_diagonal2">Các ô vuông được đặt theo đường chéo.</string>
+    <string name="mapmaker_type_circular">Vòng tròn</string>
+    <string name="mapmaker_type_circular2">Các ô vuông được đặt theo đường tròn.</string>
+    <string name="mapmaker_type_random">Ngẫu nhiên</string>
+    <string name="mapmaker_type_random2">Các ô vuông được đặt ngẫu nhiên</string>
+    <string name="game_over_track_creator">Kiểu trò chơi: %1$s</string>
+    <string name="game_over_result_text">Bạn đã hoàn thành trò chơi trong %1$s với %2$s bước!</string>
+    <string name="game_canceled">Trò chơi hiện tại đã bị hủy.</string>
+
+    <!-- SHARE RESULTS -->
+    <string name="share">Chỉa sẻ</string>
+    <string name="share_msg_text">%1$s\nTôi đã hoàn thành trò chơi trong %2$s chỉ với %3$s bước!</string>
+    <string name="share_via">Chia sẻ wau…</string>
+
+    <!-- QUICK TOUR AT FIRST START -->
+    <string name="tour_dismiss">OK</string>
+    <string name="tour_next">Tiếp</string>
+    <string name="tour_wait">Đợi</string>
+    <string name="tour_start_game">Chào mừng!</string>
+    <string name="tour_start_game2">Ấn nút để chơi với chế độ ghi lại thông số.</string>
+    <string name="tour_incognito_mode">Chế độ chơi ẩn danh.</string>
+    <string name="tour_incognito_mode2">Chọn chế độ này nếu bạn chỉ muốn tập luyện.</string>
+    <string name="tour_how_to_play">Chơi như thế nào?</string>
+    <string name="tour_how_to_play2">Sắp xếp các ô vuông từ thứ tự ban đầu càng nhanh càng tốt, bằng cách chuyển chúng đi hoặc ấn vào chúng.\n\nMẹo: đặt hai hay nhiều ngón tay lên màn hình để bật chế độ xem trước.</string>
+
+</resources>

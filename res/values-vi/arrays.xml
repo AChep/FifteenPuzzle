@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- FEEDBACK -->
+    <string-array name="feedback_types">
+        <item>Lỗi</item>
+        <item>Gợi ý</item>
+        <item>Khác</item>
+    </string-array>
+
+    <!-- FULL SCREEN -->
+    <string-array name="full_screen_modes">
+        <item>Không bao giờ</item>
+        <item>Chỉ khi màn hình ngang</item>
+        <item>Luôn luôn</item>
+    </string-array>
+
+    <!-- CHIP'S THEMES -->
+    <string-array name="chip_themes">
+        <item>Elegance</item>
+        <item>Marine</item>
+        <item>Coffee</item>
+    </string-array>
+
+</resources>

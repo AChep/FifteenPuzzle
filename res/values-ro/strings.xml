@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Fifteen puzzle</string>
+    <string name="app_label_short">Puzzle</string>
+
+    <string name="press_again_to_exit">Apasa inca o data sa iesi.</string>
+
+    <!-- SOCIAL NETWORKS -->
+    <string name="vkontakte">VK</string>
+
+    <string name="action_refresh">Reimprospateaza</string>
+    <string name="action_settings">Setari</string>
+    <string name="action_play">Joaca</string>
+    <string name="action_play_incognito">Joaca (mod incognito)</string>
+
+    <!-- SETTINGS -->
+    <string name="settings_label">Setari</string>
+    <string name="settings_category_settings">Setari</string>
+    <string name="settings_settings_puzzletype_label">Tip Puzzle</string>
+    <string name="settings_settings_interface_label">Interfata</string>
+    <string name="interface_full_screen">Ecran complet</string>
+    <string name="interface_increase_indent">Marire margine</string>
+    <string name="interface_increase_indent2">Mareste distanta dintre marginile ecranului si puzzle.</string>
+    <string name="interface_category_themes">Teme</string>
+    <string name="interface_use_black_background">Fundal negru</string>
+    <string name="interface_use_black_background2">Foloseste fundal negru in joc (bun pentru ecran AMOLED).</string>
+    <string name="interface_chip_themes">Teme</string>
+    <string name="more_label">Mai multe…</string>
+    <string name="more_grid_size">Marime grila</string>
+    <string name="more_grid_size2">Numarul de coloane si randuri in joc.</string>
+    <string name="settings_category_other">Altele</string>
+    <string name="settings_other_help_label">Ajutor</string>
+    <string name="settings_other_feedback_label">Feedback</string>
+    <string name="settings_other_about_label">Despre</string>
+    <string name="settings_other_about_app1">%1$s %2$s</string>
+    <string name="settings_other_about_copyright1">Autor</string>
+
+    <!-- FEEDBACK FRAGMENT -->
+    <string name="feedback_label">Feedback</string>
+    <string name="feedback_send">Trimite</string>
+    <string name="feedback_send_via">Trimite email via…</string>
+    <string name="feedback_error_no_app">Nu sunt aplicatii de trimitere email disponibile.</string>
+    <string name="feedback_error_msg_too_short">Mesajul trebuie sa contina cel putin %1$s caractere.</string>
+    <string name="feedback_type_description">Alege subiectul mesajului:</string>
+    <string name="feedback_msg_hint">Mesajul tau.</string>
+
+    <!-- HELP -->
+    <string name="help_label">Ajutor</string>
+
+    <!-- HAPPY MAPPING! -->
+    <string name="mapmaker_type_default">Normal</string>
+    <string name="mapmaker_type_default2">Piesele sunt asezate de la stanga sus catre marginea de jos.</string>
+    <string name="mapmaker_type_diagonal">Diagonal</string>
+    <string name="mapmaker_type_diagonal2">Piesele sunt asezate diagonal.</string>
+    <string name="mapmaker_type_circular">Circular</string>
+    <string name="mapmaker_type_circular2">Piesele sunt asezate circular.</string>
+    <string name="mapmaker_type_random">Aleatoriu</string>
+    <string name="mapmaker_type_random2">Piesele sunt asezate aleatoriu.</string>
+    <string name="game_over_track_creator">Tip puzzle: %1$s</string>
+    <string name="game_over_result_text">Ai completat puzzle-ul in %1$s, cu doar %2$s mutari!</string>
+    <string name="game_canceled">Jocul curent este anulat.</string>
+
+    <!-- SHARE RESULTS -->
+    <string name="share">Partajare</string>
+    <string name="share_msg_text">%1$s\nAm completat puzzle-ul in %2$s, cu doar %3$s mutari!</string>
+    <string name="share_via">Partajare via…</string>
+
+    <!-- QUICK TOUR AT FIRST START -->
+    <string name="tour_dismiss">OK</string>
+    <string name="tour_next">Urmatorul</string>
+    <string name="tour_wait">Asteapta</string>
+    <string name="tour_start_game">Bun venit!</string>
+    <string name="tour_start_game2">Apasa butonul sa joci cu inregistrare de statut.</string>
+    <string name="tour_incognito_mode">Mod Incognito.</string>
+    <string name="tour_incognito_mode2">Joaca in acest mod daca doresti sa te antrenezi.</string>
+    <string name="tour_how_to_play">Cum se joaca?</string>
+    <string name="tour_how_to_play2">Aranjeaza piesele in ordine cat de repede poti, tragandu-le cu degetul sau pur si simplu apasandu-le.\n\nSfat: pune doua sau mai multe degete pe ecran sa activezi modul previzualizare.</string>
+
+</resources>

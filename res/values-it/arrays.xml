@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- FEEDBACK -->
+    <string-array name="feedback_types">
+        <item>Problema</item>
+        <item>Suggerimento</item>
+        <item>Altro</item>
+    </string-array>
+
+    <!-- FULL SCREEN -->
+    <string-array name="full_screen_modes">
+        <item>Mai</item>
+        <item>Solo in modalità ritratto</item>
+        <item>Sempre</item>
+    </string-array>
+
+    <!-- CHIP'S THEMES -->
+    <string-array name="chip_themes">
+        <item>Eleganza</item>
+        <item>Marina</item>
+        <item>Caffè</item>
+    </string-array>
+
+</resources>

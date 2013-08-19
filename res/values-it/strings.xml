@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Fifteen puzzle</string>
+    <string name="app_label_short">Puzzle</string>
+
+    <string name="press_again_to_exit">Premi ancora per uscire.</string>
+
+    <!-- SOCIAL NETWORKS -->
+    <string name="vkontakte">VK</string>
+
+    <string name="action_refresh">Aggiorna</string>
+    <string name="action_settings">Impostazioni</string>
+    <string name="action_play">Gioca</string>
+    <string name="action_play_incognito">Gioca (incognito)</string>
+
+    <!-- SETTINGS -->
+    <string name="settings_label">Impostazioni</string>
+    <string name="settings_category_settings">Impostazioni</string>
+    <string name="settings_settings_puzzletype_label">Tipo di puzzle</string>
+    <string name="settings_settings_interface_label">Interfaccia</string>
+    <string name="interface_full_screen">Schermo pieno</string>
+    <string name="interface_increase_indent">Incrementa identazione</string>
+    <string name="interface_increase_indent2">Incrementa identazione del puzzle dal bordo finestra.</string>
+    <string name="interface_category_themes">Temi</string>
+    <string name="interface_use_black_background">Sfondo nero</string>
+    <string name="interface_use_black_background2">Usa sfondo nero nel gioco (ottimale per display AMOLED).</string>
+    <string name="interface_chip_themes">Tema</string>
+    <string name="more_label">Altro…</string>
+    <string name="more_grid_size">Dimensione griglia</string>
+    <string name="more_grid_size2">Numero di colonne e righe del puzzle.</string>
+    <string name="settings_category_other">Altro</string>
+    <string name="settings_other_help_label">Aiuto</string>
+    <string name="settings_other_feedback_label">Feedback</string>
+    <string name="settings_other_about_label">Info</string>
+    <string name="settings_other_about_app1">%1$s %2$s</string>
+    <string name="settings_other_about_copyright1">Copyright</string>
+
+    <!-- FEEDBACK FRAGMENT -->
+    <string name="feedback_label">Feedback</string>
+    <string name="feedback_send">Invia</string>
+    <string name="feedback_send_via">Invia email tramite…</string>
+    <string name="feedback_error_no_app">Non ci sono applicazioni email disponibili.</string>
+    <string name="feedback_error_msg_too_short">Il messaggio deve contenere almeno %1$s simboli.</string>
+    <string name="feedback_type_description">Scegli il soggetto del messaggio:</string>
+    <string name="feedback_msg_hint">Il tuo messaggio.</string>
+
+    <!-- HELP -->
+    <string name="help_label">Help</string>
+
+    <!-- HAPPY MAPPING! -->
+    <string name="mapmaker_type_default">Predefinito</string>
+    <string name="mapmaker_type_default2">Le tessere sono poste dal bordo sinistra-alto al bordo destra-basso.</string>
+    <string name="mapmaker_type_diagonal">Diagonale</string>
+    <string name="mapmaker_type_diagonal2">Le tessere sono poste diagonalmente.</string>
+    <string name="mapmaker_type_circular">Circolare</string>
+    <string name="mapmaker_type_circular2">Le tessere sono poste circolarmente.</string>
+    <string name="mapmaker_type_random">Casuale</string>
+    <string name="mapmaker_type_random2">Le tessere sono poste in modo casuale.</string>
+    <string name="game_over_track_creator">Tipo di puzzle: %1$s</string>
+    <string name="game_over_result_text">Hai completato il puzzle in %1$s, usando solo %2$s mosse!</string>
+    <string name="game_canceled">Partita in corso cancellata.</string>
+
+    <!-- SHARE RESULTS -->
+    <string name="share">Condividi</string>
+    <string name="share_msg_text">%1$s\nI completato il puzzle in %2$s, usando solo %3$s mosse!</string>
+    <string name="share_via">Condividi tramite…</string>
+
+    <!-- QUICK TOUR AT FIRST START -->
+    <string name="tour_dismiss">OK</string>
+    <string name="tour_next">Prossimo</string>
+    <string name="tour_wait">Attendi</string>
+    <string name="tour_start_game">Benvenuto!</string>
+    <string name="tour_start_game2">Premi il bottone per iniziare la partita con la registratione degli stati.</string>
+    <string name="tour_incognito_mode">Modalità incognito.</string>
+    <string name="tour_incognito_mode2">Gioca in questa modalità se vuoi aumentare le tue abilità.</string>
+    <string name="tour_how_to_play">Come giocare?</string>
+    <string name="tour_how_to_play2">Posiziona le tessere nel loro ordine originale il più velocemente possibile, muovendole o più semplicemente toccandole.\n\nTrucco: tocca con due o più dita lo schermo per abilitare la modalità preview..</string>
+
+</resources>
