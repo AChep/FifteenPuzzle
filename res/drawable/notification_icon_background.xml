@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<bitmap xmlns:android="http://schemas.android.com/apk/res/android"
-    android:height="1.0dip"
-    android:src="@drawable/notification_icon_background_tile"
-    android:tileMode="repeat" />
