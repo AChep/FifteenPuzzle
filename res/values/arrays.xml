@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- FEEDBACK -->
+    <string-array name="feedback_types">
+        <item>Bug</item>
+        <item>Suggestion</item>
+        <item>Other</item>
+    </string-array>
+
+    <!-- FULL SCREEN -->
+    <string-array name="full_screen_modes">
+        <item>Never</item>
+        <item>Only in landscape mode</item>
+        <item>Always</item>
+    </string-array>
+    <string-array name="full_screen_modes2" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <!-- CHIP'S THEMES -->
+    <string-array name="chip_themes">
+        <item>Elegance</item>
+        <item>Marine</item>
+        <item>Coffee</item>
+    </string-array>
+    <string-array name="chip_themes2" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+</resources>

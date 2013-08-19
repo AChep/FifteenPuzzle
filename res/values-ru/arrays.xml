@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- FEEDBACK -->
+    <string-array name="feedback_types">
+        <item>Ошибка</item>
+        <item>Пожелание</item>
+        <item>Другое</item>
+    </string-array>
+
+    <!-- FULL SCREEN -->
+    <string-array name="full_screen_modes">
+        <item>Никогда</item>
+        <item>Только в ландшафтном режиме</item>
+        <item>Всегда</item>
+    </string-array>
+
+    <!-- CHIP'S THEMES -->
+    <string-array name="chip_themes">
+        <item>Элегантная</item>
+        <item>Морская</item>
+        <item>Кофейная</item>
+    </string-array>
+
+</resources>

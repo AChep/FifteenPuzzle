@@ -1,88 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Fifteen Puzzles</string>
-    <string name="game_time">Time</string>
-    <string name="game_steps">Steps</string>
-    <string name="game_congraz_title">Congratulations!</string>
-    <string name="game_congraz_message">You\'ve solved it!</string>
-    <string name="pref_number_picker_base_reset">Reset value</string>
-    
-    <!-- Changelog -->
-    <string name="changelog">Changelog</string>
+    <string name="app_name">Fifteen puzzle</string>
+    <string name="app_label_short">Puzzle</string>
 
-    <!-- Download Service -->
-    <string name="download_service_label">Download service</string>
-    <string name="download_service_notification_success_text">App was successfully updated!</string>
-    <string name="download_service_notification_downloading_text">Downloading new version…</string>
-    <string name="download_service_notification_downloading_info">Preparing…</string>
-    <string name="download_service_notification_downloading_eta">ETA:</string>
-    <string name="download_service_install_please_toast">Please, press \"Install\" button to install new version</string>
+    <string name="press_again_to_exit">Press again to exit.</string>
 
-    <!-- Success solved -->
-    <string name="game_gameover_awesome">Awesome!</string>
-    <string name="game_gameover_results">Your results are:\n\u0009time\u0020\u0020: %1$s\n\u0009steps: %2$s</string>
-    <string name="game_gameover_user">User</string>
-    <string name="game_gameover_share_dialog_title">Share</string>
-    <string name="game_gameover_share_body">I solved a puzzle in %1$s / %2$s steps! Download Fifteen Puzzle</string>
+    <!-- SOCIAL NETWORKS -->
+    <string name="google_plus" translatable="false">Google+</string>
+    <string name="vkontakte">VK</string>
+    <string name="github" translatable="false">GitHub</string>
 
-    <!-- ActionBar -->
-    <string name="action_bar_new_game">New game</string>
-    <string name="action_bar_settings">Settings</string>
-    <string name="action_bar_download_new_version">Download new version</string>
-    <string name="action_bar_statistic_graph">Show graph</string>
-    <string name="action_bar_statistic_clear">Clear statistic</string>
+    <string name="action_refresh">Refresh</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_play">Play</string>
+    <string name="action_play_incognito">Play (incognito)</string>
 
-    <!-- Rollback -->
-    <string name="rollback">Downgrade</string>
-    <string name="rollback_error_project_folder">Error reading project\'s folder from storage.</string>
-    <string name="rollback_error_project_folder_empty">There are no older versions.</string>
-    <string name="rollback_error_damaged_file">Damaged file.</string>
-
-    <!-- Updater -->
-    <string name="auto_updater">Auto-Updater</string>
-    <string name="auto_updater_changelog">Changelog:</string>
-    <string name="auto_updater_changelog_failed">Downloading changelog failed.</string>
-    <string name="auto_updater_downloading_dialog">Downloading…</string>
-    <string name="auto_updater_downloading_error1">Failed to open connection.</string>
-    <string name="auto_updater_downloading_error2">Failed to open input stream.</string>
-    <string name="auto_updater_downloading_error3">Failed to create output file.</string>
-    <string name="auto_updater_downloading_error4">Download failed.</string>
-    <string name="auto_updater_downloading_error_connection">Please enable your Internet connection first.</string>
-    <string name="auto_updater_notification_summary">Update is available!</string>
-
-    <!-- Statistic -->
-    <string name="stats">Statistic</string>
-    <string name="stats_time">@string/game_time</string>
-    <string name="stats_steps">@string/game_steps</string>
-    <string name="stats_username_and_date">Username\nDate</string>
-    <string name="stats_graph_title">Graph of results</string>
-    <string name="stats_drop_title">Clear statistic</string>
-    <string name="stats_drop_message">This action will clear all results! Data can not be restored!</string>
-    <string name="stats_dropped_sucessfully_toast">Scores\' database has been dropped successfully.</string>
-
-    <!-- Settings -->
-    <string name="settings">Settings</string>
-    <string name="settings_statistic2">Your best game scores!</string>
-    <string name="settings_statistic">Statistics</string>
-    <string name="settings_category">Settings</string>
-    <string name="settings_nickname_default">Magician</string>
-    <string name="settings_nickname3">Enter your new user name</string>
-    <string name="settings_nickname2">Current user name is</string>
-    <string name="settings_nickname">User name</string>
-    <string name="settings_puzzle_length2">Pick the number of chips per line</string>
-    <string name="settings_puzzle_length">Number of chips</string>
+    <!-- SETTINGS -->
+    <string name="settings_label">Settings</string>
+    <string name="settings_category_settings">Settings</string>
+    <string name="settings_settings_puzzletype_label">Puzzle type</string>
+    <string name="settings_settings_interface_label">Interface</string>
+    <string name="interface_full_screen">Full screen</string>
+    <string name="interface_increase_indent">Increase indent</string>
+    <string name="interface_increase_indent2">Increase puzzle view\'s indent from window borders.</string>
+    <string name="interface_category_themes">Themes</string>
+    <string name="interface_use_black_background">Black background</string>
+    <string name="interface_use_black_background2">Use black background in game (good for AMOLED screens).</string>
+    <string name="interface_chip_themes">Theme</string>
+    <string name="more_label">More…</string>
+    <string name="more_grid_size">Grid size</string>
+    <string name="more_grid_size2">The number of puzzle\'s columns and rows.</string>
     <string name="settings_category_other">Other</string>
-    <string name="settings_other_about2">Feedback and additional information</string>
-    <string name="settings_other_about">About</string>
-    <string name="settings_other_about_version">Version / Changelog</string>
-    <string name="settings_other_about_copyright2">Artem Chepurnoy 2012–2013</string>
-    <string name="settings_other_about_copyright">Copyright</string>
-    <string name="settings_other_about_feedback_failed">There are no email clients installed.</string>
-    <string name="settings_other_about_feedback2">Post your suggestions and bug-reports</string>
-    <string name="settings_other_about_feedback">Feedback</string>
-    <string name="settings_other_about_github2">Visit project page at GitHub</string>
-    <string name="settings_other_about_github">GitHub</string>
-    <string name="settings_other_about_rollback2">Back to older versions of game</string>
-    <string name="settings_other_about_rollback">Downgrade</string>
+    <string name="settings_other_help_label">Help</string>
+    <string name="settings_other_feedback_label">Feedback</string>
+    <string name="settings_other_about_label">About</string>
+    <string name="settings_other_about_app1">%1$s %2$s</string>
+    <string name="settings_other_about_copyright1">Copyright</string>
+    <string name="settings_other_about_copyright2" translatable="false">Artem Chepurnoy © 2012–2013.</string>
+
+    <!-- FEEDBACK FRAGMENT -->
+    <string name="feedback_label">Feedback</string>
+    <string name="feedback_send">Send</string>
+    <string name="feedback_send_via">Send email via…</string>
+    <string name="feedback_error_no_app">There are no email apps available.</string>
+    <string name="feedback_error_msg_too_short">Message must contain at least %1$s symbols.</string>
+    <string name="feedback_type_description">Choose the message subject:</string>
+    <string name="feedback_msg_hint">Your message.</string>
+
+    <!-- HELP -->
+    <string name="help_label">Help</string>
+
+    <!-- HAPPY MAPPING! -->
+    <string name="mapmaker_type_default">Default</string>
+    <string name="mapmaker_type_default2">Chips are placed from left top edge to right bottom edge.</string>
+    <string name="mapmaker_type_diagonal">Diagonal</string>
+    <string name="mapmaker_type_diagonal2">Chips are placed diagonally.</string>
+    <string name="mapmaker_type_circular">Circular</string>
+    <string name="mapmaker_type_circular2">Chips are placed circular.</string>
+    <string name="mapmaker_type_random">Random</string>
+    <string name="mapmaker_type_random2">Chips are randomly placed.</string>
+    <string name="game_over_track_creator">Puzzle type: %1$s</string>
+    <string name="game_over_result_text">You completed the puzzle in %1$s, using only %2$s steps!</string>
+    <string name="game_canceled">The current game is canceled.</string>
+
+    <!-- SHARE RESULTS -->
+    <string name="share">Share</string>
+    <string name="share_msg_text">%1$s\nI completed the puzzle in %2$s, using only %3$s steps!</string>
+    <string name="share_via">Share via…</string>
+
+    <!-- QUICK TOUR AT FIRST START -->
+    <string name="tour_dismiss">OK</string>
+    <string name="tour_next">Next</string>
+    <string name="tour_wait">Wait</string>
+    <string name="tour_start_game">Welcome!</string>
+    <string name="tour_start_game2">Press the button to start playing with stats recording.</string>
+    <string name="tour_incognito_mode">Incognito mode.</string>
+    <string name="tour_incognito_mode2">Play this mode if you just want to train your skills.</string>
+    <string name="tour_how_to_play">How to play?</string>
+    <string name="tour_how_to_play2">Arrange the chips to their original order as quickly as possible, by moving or simply taping on them.\n\nTip: place two or more fingers on the screen to enable the preview mode.</string>
 
 </resources>
